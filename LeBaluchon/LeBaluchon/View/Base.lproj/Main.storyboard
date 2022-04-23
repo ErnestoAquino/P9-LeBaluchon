@@ -32,7 +32,7 @@
         <!--Weather-->
         <scene sceneID="wgR-Ba-eJE">
             <objects>
-                <viewController id="8Ga-rA-YCt" sceneMemberID="viewController">
+                <viewController id="8Ga-rA-YCt" customClass="WeatherViewController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zrJ-Si-Z8h">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,7 +48,7 @@
         <!--Currency Converter-->
         <scene sceneID="yQq-x5-1YX">
             <objects>
-                <viewController id="8GC-at-hu6" sceneMemberID="viewController">
+                <viewController id="8GC-at-hu6" customClass="CurrencyConverterViewController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i5k-aE-Ci0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,7 +64,7 @@
         <!--Translator-->
         <scene sceneID="t6A-Dk-IwV">
             <objects>
-                <viewController id="DJf-bI-L0d" sceneMemberID="viewController">
+                <viewController id="DJf-bI-L0d" customClass="TranslatorViewController" customModule="LeBaluchon" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QVC-Qz-Ss4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
