@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ETT-Uz-mI7">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="mXH-M7-1hl">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0dn-Zm-clT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tabBarController id="ETT-Uz-mI7" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fbC-rS-j99">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.22756475209999999" green="0.028866715729999999" blue="0.1647150517" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="8GC-at-hu6" kind="relationship" relationship="viewControllers" id="0e6-sF-rjq"/>
+                        <segue destination="DJf-bI-L0d" kind="relationship" relationship="viewControllers" id="YQi-Py-fvn"/>
+                        <segue destination="8Ga-rA-YCt" kind="relationship" relationship="viewControllers" id="FQ5-78-1D6"/>
+                    </connections>
+                </tabBarController>
+            </objects>
+            <point key="canvasLocation" x="-1146" y="-44"/>
+        </scene>
+        <!--Weather-->
+        <scene sceneID="wgR-Ba-eJE">
+            <objects>
+                <viewController id="8Ga-rA-YCt" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zrJ-Si-Z8h">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="lA8-TA-1Vz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Weather" image="Weather" id="RwD-hv-XNp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6eN-Ja-aPe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-175" y="-729"/>
+        </scene>
+        <!--Currency Converter-->
+        <scene sceneID="yQq-x5-1YX">
+            <objects>
+                <viewController id="8GC-at-hu6" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i5k-aE-Ci0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="zel-RM-jmB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Currency Converter" image="EuroSquare" id="f1M-Gq-J7V"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zDY-kh-r9K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-167" y="-44"/>
+        </scene>
+        <!--Translator-->
+        <scene sceneID="t6A-Dk-IwV">
+            <objects>
+                <viewController id="DJf-bI-L0d" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QVC-Qz-Ss4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="9CR-hI-CIS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Translator" image="Translator" id="VjF-RB-50n"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P47-YJ-h64" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-175" y="680"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="EuroSquare" width="12" height="12"/>
+        <image name="Translator" width="18" height="15"/>
+        <image name="Weather" width="19" height="18"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
