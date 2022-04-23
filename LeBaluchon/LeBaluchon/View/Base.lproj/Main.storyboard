@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -37,7 +36,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="lA8-TA-1Vz"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.94514876599999997" green="0.94137936830000002" blue="0.92156523469999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Weather" image="Weather" id="RwD-hv-XNp"/>
                 </viewController>
@@ -52,14 +51,90 @@
                     <view key="view" contentMode="scaleToFill" id="i5k-aE-Ci0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="LVP-op-a9x">
+                                <rect key="frame" x="20" y="64" width="374" height="263"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency Converter" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3n-Cj-mqg">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="29"/>
+                                        <color key="textColor" red="0.31384962799999999" green="0.05028162152" blue="0.2470723987" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JkZ-hu-Dhu">
+                                        <rect key="frame" x="0.0" y="60" width="374" height="34"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Euro" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ok-jk-KqF">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="EuroSign.circle" translatesAutoresizingMaskIntoConstraints="NO" id="pEc-fa-JDN">
+                                                <rect key="frame" x="340" y="0.0" width="34" height="34"/>
+                                                <color key="tintColor" red="0.87922078370000001" green="0.315066874" blue="0.2391568422" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="pEc-fa-JDN" secondAttribute="height" multiplier="1:1" id="1AV-O5-1nM"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="converts to" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UG8-s9-5MQ">
+                                        <rect key="frame" x="0.0" y="119" width="374" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.31384962799999999" green="0.05028162152" blue="0.2470723987" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fJF-HU-Dei">
+                                        <rect key="frame" x="0.0" y="164.5" width="374" height="34"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Dollar" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CE5-U0-lK7">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="DollarSign.circle" translatesAutoresizingMaskIntoConstraints="NO" id="Kss-oa-3wW">
+                                                <rect key="frame" x="340" y="0.0" width="34" height="34"/>
+                                                <color key="tintColor" red="0.87922078370000001" green="0.315066874" blue="0.2391568422" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Kss-oa-3wW" secondAttribute="height" multiplier="1:1" id="Nqu-2B-ItK"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oeo-y6-QFF">
+                                        <rect key="frame" x="0.0" y="223.5" width="374" height="39.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLl-3P-gEv">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="39.5"/>
+                                                <color key="backgroundColor" red="0.87922114129999995" green="0.36628371479999999" blue="0.23914638160000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="tintColor" red="0.31384962799999999" green="0.05028162152" blue="0.2470723987" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="CONVERT">
+                                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="21"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="U4S-kf-SqV">
+                                        <rect key="frame" x="0.0" y="263" width="374" height="0.0"/>
+                                        <color key="tintColor" red="0.87922114129999995" green="0.36628371479999999" blue="0.23914638160000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="zel-RM-jmB"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.94514876599999997" green="0.94137936830000002" blue="0.92156523469999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="zel-RM-jmB" firstAttribute="trailing" secondItem="LVP-op-a9x" secondAttribute="trailing" constant="20" id="bwb-Vx-ptJ"/>
+                            <constraint firstItem="LVP-op-a9x" firstAttribute="top" secondItem="zel-RM-jmB" secondAttribute="top" constant="20" id="kLd-2Y-mhd"/>
+                            <constraint firstItem="LVP-op-a9x" firstAttribute="leading" secondItem="zel-RM-jmB" secondAttribute="leading" constant="20" id="kgF-d5-0la"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Currency Converter" image="EuroSquare" id="f1M-Gq-J7V"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDY-kh-r9K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-167" y="-44"/>
+            <point key="canvasLocation" x="-168.11594202898553" y="-44.196428571428569"/>
         </scene>
         <!--Translator-->
         <scene sceneID="t6A-Dk-IwV">
@@ -69,7 +144,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="9CR-hI-CIS"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.94514876599999997" green="0.94137936830000002" blue="0.92156523469999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Translator" image="Translator" id="VjF-RB-50n"/>
                 </viewController>
@@ -79,11 +154,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="DollarSign.circle" width="13" height="13"/>
+        <image name="EuroSign.circle" width="13" height="13"/>
         <image name="EuroSquare" width="12" height="12"/>
         <image name="Translator" width="18" height="15"/>
         <image name="Weather" width="19" height="18"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
