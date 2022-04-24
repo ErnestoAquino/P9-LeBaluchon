@@ -15,7 +15,11 @@ class TranslatorViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBOutlet weak var frenchTexField: UITextView!
+    
+    @IBAction func dismissKeyBoard(_ sender: UITapGestureRecognizer) {
+        frenchTexField.resignFirstResponder()
+    }
     /*
     // MARK: - Navigation
 
