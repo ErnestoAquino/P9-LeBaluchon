@@ -286,15 +286,27 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9CR-hI-CIS"/>
                         <color key="backgroundColor" red="0.94514876599999997" green="0.94137936830000002" blue="0.92156523469999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="9CR-hI-CIS" firstAttribute="trailing" secondItem="rCM-gX-RBR" secondAttribute="trailing" constant="20" id="356-tu-FMY"/>
                             <constraint firstItem="rCM-gX-RBR" firstAttribute="top" secondItem="9CR-hI-CIS" secondAttribute="top" constant="20" id="aX5-Ip-fLb"/>
                             <constraint firstItem="rCM-gX-RBR" firstAttribute="leading" secondItem="9CR-hI-CIS" secondAttribute="leading" constant="20" id="bOB-uh-uca"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="bvm-fp-RSs" appends="YES" id="gzD-O5-sOY"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Translator" image="Translator" id="VjF-RB-50n"/>
+                    <connections>
+                        <outlet property="frenchTexField" destination="NNP-qv-0QX" id="VEO-QE-2kD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P47-YJ-h64" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="bvm-fp-RSs">
+                    <connections>
+                        <action selector="dismissKeyBoard:" destination="DJf-bI-L0d" id="8wK-rW-L80"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-175.36231884057972" y="670.3125"/>
         </scene>
