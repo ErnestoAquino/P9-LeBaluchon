@@ -169,7 +169,8 @@
                                     </stackView>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="U4S-kf-SqV">
                                         <rect key="frame" x="0.0" y="263.66666666666669" width="388" height="0.0"/>
-                                        <color key="tintColor" red="0.87922114129999995" green="0.36628371479999999" blue="0.23914638160000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" red="0.94515699149999999" green="0.94141882659999998" blue="0.91764307020000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="color" red="0.22756475209999999" green="0.028866715729999999" blue="0.1647150517" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </activityIndicatorView>
                                 </subviews>
                             </stackView>
@@ -197,7 +198,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rCM-gX-RBR">
-                                <rect key="frame" x="20" y="63.999999999999972" width="388" height="444.33333333333326"/>
+                                <rect key="frame" x="20" y="63.999999999999972" width="388" height="484.33333333333326"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translator" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVI-z8-KvK">
                                         <rect key="frame" x="0.0" y="0.0" width="388" height="36"/>
@@ -248,6 +249,10 @@
                                             <fontDescription key="titleFontDescription" type="system" weight="heavy" pointSize="21"/>
                                         </buttonConfiguration>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="ACi-GJ-nvJ">
+                                        <rect key="frame" x="0.0" y="464.33333333333337" width="388" height="20"/>
+                                        <color key="color" red="0.22756475209999999" green="0.028866715729999999" blue="0.1647150517" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </activityIndicatorView>
                                 </subviews>
                             </stackView>
                         </subviews>
