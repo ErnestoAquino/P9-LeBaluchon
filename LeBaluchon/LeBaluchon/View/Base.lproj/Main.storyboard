@@ -153,7 +153,7 @@
                                         <rect key="frame" x="0.0" y="165.33333333333334" width="388" height="32"/>
                                         <segments>
                                             <segment title="USD"/>
-                                            <segment title="MNX"/>
+                                            <segment title="MXN"/>
                                             <segment title="JPY"/>
                                             <segment title="GBP"/>
                                         </segments>
