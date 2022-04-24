@@ -14,7 +14,18 @@ class CurrencyConverterViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
+    @IBOutlet weak var euroTextField: UITextField!
+    
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        euroTextField.resignFirstResponder()
+    }
+    
+    
+    
+    
+    
+    
+    
     /*
     // MARK: - Navigation
 
