@@ -132,7 +132,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Euro" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9ok-jk-KqF">
                                                 <rect key="frame" x="0.0" y="0.0" width="349" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" returnKeyType="go"/>
                                             </textField>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="EuroSign.circle" translatesAutoresizingMaskIntoConstraints="NO" id="pEc-fa-JDN">
                                                 <rect key="frame" x="354" y="0.0" width="34" height="34"/>
@@ -193,15 +193,27 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zel-RM-jmB"/>
                         <color key="backgroundColor" red="0.94514876599999997" green="0.94137936830000002" blue="0.92156523469999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="zel-RM-jmB" firstAttribute="trailing" secondItem="LVP-op-a9x" secondAttribute="trailing" constant="20" id="bwb-Vx-ptJ"/>
                             <constraint firstItem="LVP-op-a9x" firstAttribute="top" secondItem="zel-RM-jmB" secondAttribute="top" constant="20" id="kLd-2Y-mhd"/>
                             <constraint firstItem="LVP-op-a9x" firstAttribute="leading" secondItem="zel-RM-jmB" secondAttribute="leading" constant="20" id="kgF-d5-0la"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="31o-Be-b0H" appends="YES" id="adU-pc-0JV"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Currency Converter" image="EuroSquare" id="f1M-Gq-J7V"/>
+                    <connections>
+                        <outlet property="euroTextField" destination="9ok-jk-KqF" id="UAq-2H-ONj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDY-kh-r9K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="31o-Be-b0H">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="8GC-at-hu6" id="XjT-Ly-2cN"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-168.22429906542055" y="-44.708423326133911"/>
         </scene>
