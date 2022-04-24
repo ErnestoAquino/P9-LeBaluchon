@@ -118,7 +118,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="LVP-op-a9x">
-                                <rect key="frame" x="20" y="64" width="388" height="308.66666666666669"/>
+                                <rect key="frame" x="20" y="64" width="388" height="364.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency Converter" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3n-Cj-mqg">
                                         <rect key="frame" x="0.0" y="0.0" width="388" height="36"/>
@@ -149,25 +149,28 @@
                                         <color key="textColor" red="0.31384962799999999" green="0.05028162152" blue="0.2470723987" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dEc-c2-73r">
+                                        <rect key="frame" x="0.0" y="165.33333333333334" width="388" height="32"/>
+                                        <segments>
+                                            <segment title="USD"/>
+                                            <segment title="MNX"/>
+                                            <segment title="JPY"/>
+                                            <segment title="GBP"/>
+                                        </segments>
+                                        <color key="selectedSegmentTintColor" red="0.87922114129999995" green="0.36628371479999999" blue="0.23914638160000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fJF-HU-Dei">
-                                        <rect key="frame" x="0.0" y="165.33333333333334" width="388" height="34"/>
+                                        <rect key="frame" x="0.0" y="221.33333333333331" width="388" height="34"/>
                                         <subviews>
-                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Dollar" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CE5-U0-lK7">
-                                                <rect key="frame" x="0.0" y="0.0" width="349" height="34"/>
+                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CE5-U0-lK7">
+                                                <rect key="frame" x="0.0" y="0.0" width="388" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="DollarSign.circle" translatesAutoresizingMaskIntoConstraints="NO" id="Kss-oa-3wW">
-                                                <rect key="frame" x="354" y="0.0" width="34" height="34"/>
-                                                <color key="tintColor" red="0.87922078370000001" green="0.315066874" blue="0.2391568422" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="Kss-oa-3wW" secondAttribute="height" multiplier="1:1" id="Nqu-2B-ItK"/>
-                                                </constraints>
-                                            </imageView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oeo-y6-QFF">
-                                        <rect key="frame" x="0.0" y="224.33333333333331" width="388" height="39.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="280.33333333333331" width="388" height="39.333333333333314"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLl-3P-gEv">
                                                 <rect key="frame" x="0.0" y="0.0" width="388" height="39.333333333333336"/>
@@ -181,7 +184,7 @@
                                         </subviews>
                                     </stackView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="U4S-kf-SqV">
-                                        <rect key="frame" x="0.0" y="288.66666666666669" width="388" height="20"/>
+                                        <rect key="frame" x="0.0" y="344.66666666666669" width="388" height="20"/>
                                         <color key="tintColor" red="0.94515699149999999" green="0.94141882659999998" blue="0.91764307020000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="color" red="0.22756475209999999" green="0.028866715729999999" blue="0.1647150517" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </activityIndicatorView>
@@ -200,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDY-kh-r9K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-168.11594202898553" y="-44.196428571428569"/>
+            <point key="canvasLocation" x="-168.22429906542055" y="-44.708423326133911"/>
         </scene>
         <!--Translator-->
         <scene sceneID="t6A-Dk-IwV">
@@ -285,7 +288,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DollarSign.circle" width="13" height="13"/>
         <image name="EuroSign.circle" width="13" height="13"/>
         <image name="EuroSquare" width="12" height="12"/>
         <image name="Translator" width="18" height="15"/>
