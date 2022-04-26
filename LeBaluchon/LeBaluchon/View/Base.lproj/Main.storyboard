@@ -180,6 +180,9 @@
                                                 <buttonConfiguration key="configuration" style="plain" title="CONVERT">
                                                     <fontDescription key="titleFontDescription" type="system" weight="heavy" pointSize="21"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="tappedConvertButton" destination="8GC-at-hu6" eventType="touchUpInside" id="mdB-qZ-lT8"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -205,7 +208,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Currency Converter" image="EuroSquare" id="f1M-Gq-J7V"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="U4S-kf-SqV" id="dlS-oz-e4j"/>
                         <outlet property="euroTextField" destination="9ok-jk-KqF" id="UAq-2H-ONj"/>
+                        <outlet property="resultTextField" destination="CE5-U0-lK7" id="FDc-Vx-uYI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDY-kh-r9K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
