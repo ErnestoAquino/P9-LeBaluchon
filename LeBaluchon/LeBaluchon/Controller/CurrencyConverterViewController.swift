@@ -15,9 +15,16 @@ class CurrencyConverterViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @IBOutlet weak var euroTextField: UITextField!
+    @IBOutlet weak var resultTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         euroTextField.resignFirstResponder()
+    }
+    
+    @IBAction func tappedConvertButton() {
+        CurrencyConverterService.getExchangeRate()
     }
     
     
