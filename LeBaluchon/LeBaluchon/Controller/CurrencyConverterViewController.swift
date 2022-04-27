@@ -11,12 +11,30 @@ class CurrencyConverterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        buttonConvert.round()
     }
     @IBOutlet weak var euroTextField: UITextField!
     @IBOutlet weak var resultTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var currencySegmentedControl: UISegmentedControl!
+    @IBOutlet weak var buttonConvert: UIButton!
+    
+
+    @IBAction func currencySelector() {
+        switch currencySegmentedControl.selectedSegmentIndex {
+        case 0:
+            print("Selected USD")
+        case 1:
+            print("Selected MXN")
+        case 2:
+            print("Selected JYP")
+        case 3:
+            print("Selected GBP")
+        default: break
+            
+        }
+        
+    }
     
     
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
@@ -26,7 +44,6 @@ class CurrencyConverterViewController: UIViewController {
     @IBAction func tappedConvertButton() {
         CurrencyConverterService.getExchangeRate()
     }
-    
     
     
     
