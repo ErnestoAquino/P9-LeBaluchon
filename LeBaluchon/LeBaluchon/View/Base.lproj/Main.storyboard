@@ -158,6 +158,9 @@
                                             <segment title="GBP"/>
                                         </segments>
                                         <color key="selectedSegmentTintColor" red="0.87922114129999995" green="0.36628371479999999" blue="0.23914638160000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <connections>
+                                            <action selector="currencySelector" destination="8GC-at-hu6" eventType="valueChanged" id="5Wf-bc-zSE"/>
+                                        </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fJF-HU-Dei">
                                         <rect key="frame" x="0.0" y="221.33333333333331" width="388" height="34"/>
@@ -209,6 +212,8 @@
                     <tabBarItem key="tabBarItem" title="Currency Converter" image="EuroSquare" id="f1M-Gq-J7V"/>
                     <connections>
                         <outlet property="activityIndicator" destination="U4S-kf-SqV" id="dlS-oz-e4j"/>
+                        <outlet property="buttonConvert" destination="sLl-3P-gEv" id="y09-aO-kZI"/>
+                        <outlet property="currencySegmentedControl" destination="dEc-c2-73r" id="LF1-Kp-Edg"/>
                         <outlet property="euroTextField" destination="9ok-jk-KqF" id="UAq-2H-ONj"/>
                         <outlet property="resultTextField" destination="CE5-U0-lK7" id="FDc-Vx-uYI"/>
                     </connections>
