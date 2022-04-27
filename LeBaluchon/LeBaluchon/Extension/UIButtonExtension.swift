@@ -6,3 +6,11 @@
 //
 
 import Foundation
+import UIKit
+
+extension UIButton {
+    func round() {
+        layer.cornerRadius = 5
+        clipsToBounds = true
+    }
+}
