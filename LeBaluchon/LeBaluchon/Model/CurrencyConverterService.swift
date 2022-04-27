@@ -7,7 +7,92 @@
 
 import Foundation
 
+
+class TestCurrencyConverterService {
+    enum Currency: String {
+        case USD = "USD"
+        case MXN = "MXN"
+        case JPY = "JPY"
+        case GBP = "GBP"
+    }
+
+   
+    
+    private func getExchangeRate(completion: @escaping (ExchangeRate?, Error?) -> ()) {
+        let exchangeRateURL = URL(string: "http://data.fixer.io/api/latest?access_key=e9ef236194e10da371830069d966cc91&base=EUR&symbols=USD,MXN,JPY,GBP")!
+        
+        var request = URLRequest(url: exchangeRateURL)
+        request.httpMethod = "GET"
+        
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: request) { data, response, error in
+//            guard error == nil,
+//                  let data = data,
+//                    let response = response as? H else { return }
+            guard let data = data, let response = response as? HTTPURLResponse else { return }
+            guard response.statusCode != 200 else { return }
+
+            let decoderExchange = JSONDecoder()
+            decoderExchange.keyDecodingStrategy = .convertFromSnakeCase
+            decoderExchange.dateDecodingStrategy = .secondsSince1970
+            
+            if let exchangeRate = try? decoderExchange.decode(ExchangeRate.self, from: data){
+                completion(exchangeRate, error)
+                
+                print("\(exchangeRate.rates)")
+                print (exchangeRate.base)
+                print (exchangeRate.timestamp)
+                
+                
+
+            }
+        }
+        
+        task.resume()
+
+    }
+    
+    
+    func test(){
+        getExchangeRate { exchangeRates, error in
+            
+        }
+    }
+    
+    
+    private func decoderData (data: Data) -> ExchangeRate? {
+        let decoderExchange = JSONDecoder()
+        decoderExchange.keyDecodingStrategy = .convertFromSnakeCase
+        decoderExchange.dateDecodingStrategy = .secondsSince1970
+        
+        if let exchangeRate = try? decoderExchange.decode(ExchangeRate.self, from: data){
+            print("\(exchangeRate.rates)")
+            return exchangeRate
+        }
+        return nil
+    }
+    
+}
+
+
+
+
+
+struct ExchangeRate : Decodable {
+    let success: Bool
+    let timestamp: Date
+    let base: String
+    let rates: [String : Float]
+}
+
+
+
+
+
+
+
 class CurrencyConverterService {
+    
     private static let currencyConverterUrl =
         URL(string: "http://data.fixer.io/api/latest?access_key=e9ef236194e10da371830069d966cc91&base=EUR&symbols=USD,MXN,JPY,GBP")!
     
@@ -90,15 +175,7 @@ class CurrencyConverterService {
        
         task.resume()
     }
+ 
+    
     
 }
-
-
-struct ExchangeRate : Decodable {
-    let success: Bool
-    let timestamp: Date
-    let base: String
-    let rates: [String : Float]
-}
-
-
