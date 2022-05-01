@@ -7,57 +7,58 @@
 
 import UIKit
 
-class CurrencyConverterViewController: UIViewController {
+class CurrencyConverterViewController: UIViewController, CurrencyConverterDelegate {
+
+    let currencyConverter = CurrencyConverterService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.isHidden = true
         buttonConvert.round()
+        currencyConverter.viewDelegate = self
     }
+
     @IBOutlet weak var euroTextField: UITextField!
     @IBOutlet weak var resultTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var currencySegmentedControl: UISegmentedControl!
     @IBOutlet weak var buttonConvert: UIButton!
-    
 
     @IBAction func currencySelector() {
         switch currencySegmentedControl.selectedSegmentIndex {
         case 0:
-            print("Selected USD")
+            currencyConverter.currency = .USD
         case 1:
-            print("Selected MXN")
+            currencyConverter.currency = .MXN
         case 2:
-            print("Selected JYP")
+            currencyConverter.currency = .JPY
         case 3:
-            print("Selected GBP")
+            currencyConverter.currency = .GBP
         default: break
-            
         }
-        
+
     }
-    
-    
+
     @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         euroTextField.resignFirstResponder()
     }
-    
+
     @IBAction func tappedConvertButton() {
-        CurrencyConverterService.getExchangeRate()
+        buttonConvert.isHidden = true
+        activityIndicator.isHidden = false
+        currencyConverter.doConversion(value: euroTextField.text)
+        buttonConvert.isHidden = false
+        activityIndicator.isHidden = false
     }
-    
-    
-    
-    
-    
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func warningMessage(_ message: String) {
+        let alert: UIAlertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(action)
+        present(alert, animated: true)
     }
-    */
 
+    func refreshTextViewWithValue(_ value: String) {
+        resultTextField.text = value
+    }
 }
