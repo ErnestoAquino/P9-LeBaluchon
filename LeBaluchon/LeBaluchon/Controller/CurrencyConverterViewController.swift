@@ -44,11 +44,14 @@ class CurrencyConverterViewController: UIViewController, CurrencyConverterDelega
     }
 
     @IBAction func tappedConvertButton() {
-        buttonConvert.isHidden = true
-        activityIndicator.isHidden = false
+        toogleActivityIndicator(shown: true)
         currencyConverter.doConversion(value: euroTextField.text)
-        buttonConvert.isHidden = false
-        activityIndicator.isHidden = false
+        toogleActivityIndicator(shown: false)
+    }
+
+    private func toogleActivityIndicator(shown: Bool) {
+        buttonConvert.isHidden = shown
+        activityIndicator.isHidden = !shown
     }
 
     func warningMessage(_ message: String) {
