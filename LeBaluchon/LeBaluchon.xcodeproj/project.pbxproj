@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		942ABD10281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942ABD0F281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift */; };
 		9468F5E1281687BE00099300 /* CurrencyConverterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9468F5E0281687BE00099300 /* CurrencyConverterService.swift */; };
 		94ACE4AA281427C000A505E0 /* CurrencyConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACE4A9281427C000A505E0 /* CurrencyConverterViewController.swift */; };
 		94ACE4AC2814285500A505E0 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACE4AB2814285500A505E0 /* WeatherViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		942ABD0F281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterDelegateProtocol.swift; sourceTree = "<group>"; };
 		9468F5E0281687BE00099300 /* CurrencyConverterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterService.swift; sourceTree = "<group>"; };
 		94ACE4A9281427C000A505E0 /* CurrencyConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterViewController.swift; sourceTree = "<group>"; };
 		94ACE4AB2814285500A505E0 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				94ACE4A9281427C000A505E0 /* CurrencyConverterViewController.swift */,
 				94ACE4AB2814285500A505E0 /* WeatherViewController.swift */,
 				94ACE4AD2814289D00A505E0 /* TranslatorViewController.swift */,
+				942ABD0F281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -121,6 +124,7 @@
 				94DD89AC281036EC002B7C52 /* Sources */,
 				94DD89AD281036EC002B7C52 /* Frameworks */,
 				94DD89AE281036EC002B7C52 /* Resources */,
+				9407E834281DA2590082B1A3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -177,6 +181,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9407E834281DA2590082B1A3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		94DD89AC281036EC002B7C52 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -184,6 +208,7 @@
 			files = (
 				94ACE4AA281427C000A505E0 /* CurrencyConverterViewController.swift in Sources */,
 				94ACE4AC2814285500A505E0 /* WeatherViewController.swift in Sources */,
+				942ABD10281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift in Sources */,
 				94DD89B4281036EC002B7C52 /* AppDelegate.swift in Sources */,
 				94DD89B6281036EC002B7C52 /* SceneDelegate.swift in Sources */,
 				94F2586328196AB400A480AE /* UIButtonExtension.swift in Sources */,
