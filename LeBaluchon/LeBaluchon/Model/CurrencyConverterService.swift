@@ -30,13 +30,13 @@ class CurrencyConverterService: CurrencyConverterDelegate {
         task?.cancel()
         task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
-                if let error = error {
-                    print("1. Error: \(error.localizedDescription)")
+                guard error == nil,
+                      let data = data,
+                      let response = response as? HTTPURLResponse,
+                      response.statusCode == 200 else {
+                    completion(nil, nil)
                     return
                 }
-                guard let data = data, let response = response as? HTTPURLResponse else { return }
-                guard response.statusCode == 200 else { return }
-
                 let decoderExchange = JSONDecoder()
                 decoderExchange.keyDecodingStrategy = .convertFromSnakeCase
                 decoderExchange.dateDecodingStrategy = .secondsSince1970
