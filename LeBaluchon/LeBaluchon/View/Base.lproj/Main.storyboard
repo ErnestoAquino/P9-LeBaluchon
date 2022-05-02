@@ -87,6 +87,9 @@
                                             <fontDescription key="titleFontDescription" type="boldSystem" pointSize="17"/>
                                             <color key="baseForegroundColor" red="0.22756475209999999" green="0.028866715729999999" blue="0.1647150517" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="tappedUdateButton" destination="8Ga-rA-YCt" eventType="touchUpInside" id="eRf-Q4-ms4"/>
+                                        </connections>
                                     </button>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="FUB-g7-gcx">
                                         <rect key="frame" x="0.0" y="411.33333333333331" width="388" height="20"/>
@@ -104,6 +107,12 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Weather" image="Weather" id="RwD-hv-XNp"/>
+                    <connections>
+                        <outlet property="activityindicator" destination="FUB-g7-gcx" id="2ZM-gI-fFW"/>
+                        <outlet property="brevalTextField" destination="ebe-wY-0U9" id="KFH-7K-k8E"/>
+                        <outlet property="newYorkTextField" destination="Ly1-2m-oKw" id="m5B-dD-OrH"/>
+                        <outlet property="updateButton" destination="GE9-Dp-Llz" id="MMf-Fw-ckb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6eN-Ja-aPe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

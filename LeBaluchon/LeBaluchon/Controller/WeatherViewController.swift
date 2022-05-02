@@ -11,17 +11,16 @@ class WeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        activityindicator.isHidden = true
+        updateButton.round()
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBOutlet weak var newYorkTextField: UITextView!
+    @IBOutlet weak var brevalTextField: UITextView!
+    @IBOutlet weak var updateButton: UIButton!
+    @IBOutlet weak var activityindicator: UIActivityIndicatorView!
+
+    @IBAction func tappedUdateButton() {
     }
-    */
 
 }
