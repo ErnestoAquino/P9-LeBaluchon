@@ -10,11 +10,11 @@ import Foundation
 class CurrencyConverterService: CurrencyConverterDelegate {
 
     weak var viewDelegate: CurrencyConverterDelegate?
+    let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
     var currency: Currency = .USD
     var moneyToConvert = ""
     private var task: URLSessionDataTask?
-
-    private static let exchangeRateURL = URL(string: "http://data.fixer.io/api/latest?access_key=e9ef236194e10da371830069d966cc91&base=EUR&symbols=USD,MXN,JPY,GBP")!
+//    private static let exchangeRateURL = URL(string: "http://data.fixer.io/api/latest?access_key=e9ef236194e10da371830069d966cc91&base=EUR&symbols=USD,MXN,JPY,GBP")!
     enum Currency: String {
         case USD
         case MXN
@@ -23,9 +23,9 @@ class CurrencyConverterService: CurrencyConverterDelegate {
     }
 
      private  func getExchangeRate(completion: @escaping (ExchangeRate?, Error?) -> Void) {
-         var request = URLRequest(url: CurrencyConverterService.exchangeRateURL)
+         let testUrl = URL(string: createUrl(apiKey))
+         var request = URLRequest(url: testUrl!)
         request.httpMethod = "GET"
-
         let session = URLSession(configuration: .default)
         task?.cancel()
         task = session.dataTask(with: request) { data, response, error in
@@ -68,7 +68,7 @@ class CurrencyConverterService: CurrencyConverterDelegate {
         }
     }
 
-    func calculateConversion(euros: String?, exchangeData: ExchangeRate) -> String {
+    private func calculateConversion(euros: String?, exchangeData: ExchangeRate) -> String {
         var conversionResult = -0.0
 
         guard let euros = euros,
@@ -82,12 +82,20 @@ class CurrencyConverterService: CurrencyConverterDelegate {
         return String(conversionResult)
     }
 
-    func stringWithEurosIsValid(_ value: String?) -> Bool {
+    private func stringWithEurosIsValid(_ value: String?) -> Bool {
         guard let value = value,
               let valueHowDouble = Double(value),
               valueHowDouble > 0,
               valueHowDouble < 1000000 else {return false}
         return true
+    }
+
+    private func createUrl(_ apiKey: String?) -> String {
+        guard let key = apiKey else {
+            return ""
+        }
+        let urlWithKey = "http://data.fixer.io/api/latest?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
+        return urlWithKey
     }
 
     func warningMessage(_ message: String) {
