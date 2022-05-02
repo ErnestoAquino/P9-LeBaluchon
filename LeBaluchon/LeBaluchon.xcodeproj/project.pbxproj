@@ -26,6 +26,7 @@
 		94ACE4A9281427C000A505E0 /* CurrencyConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterViewController.swift; sourceTree = "<group>"; };
 		94ACE4AB2814285500A505E0 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		94ACE4AD2814289D00A505E0 /* TranslatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorViewController.swift; sourceTree = "<group>"; };
+		94C7245B281FB51A00F995AA /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		94DD89B0281036EC002B7C52 /* LeBaluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeBaluchon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94DD89B3281036EC002B7C52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94DD89B5281036EC002B7C52 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		94DD89A7281036EC002B7C52 = {
 			isa = PBXGroup;
 			children = (
+				94C7245B281FB51A00F995AA /* Secrets.xcconfig */,
 				94DD89B2281036EC002B7C52 /* LeBaluchon */,
 				94DD89B1281036EC002B7C52 /* Products */,
 			);
@@ -124,7 +126,7 @@
 				94DD89AC281036EC002B7C52 /* Sources */,
 				94DD89AD281036EC002B7C52 /* Frameworks */,
 				94DD89AE281036EC002B7C52 /* Resources */,
-				9407E834281DA2590082B1A3 /* ShellScript */,
+				94F7DE08281FBB160034CD3F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -182,7 +184,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9407E834281DA2590082B1A3 /* ShellScript */ = {
+		94F7DE08281FBB160034CD3F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -197,7 +199,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -241,6 +243,7 @@
 /* Begin XCBuildConfiguration section */
 		94DD89C2281036EE002B7C52 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94C7245B281FB51A00F995AA /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -301,6 +304,7 @@
 		};
 		94DD89C3281036EE002B7C52 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94C7245B281FB51A00F995AA /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
