@@ -9,10 +9,13 @@ import UIKit
 
 class WeatherViewController: UIViewController {
 
+    let weather = WeatherService()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         activityindicator.isHidden = true
         updateButton.round()
+        weather.viewDelegate = self
     }
 
     @IBOutlet weak var newYorkTextField: UITextView!
@@ -23,4 +26,16 @@ class WeatherViewController: UIViewController {
     @IBAction func tappedUdateButton() {
     }
 
+}
+
+extension WeatherViewController: WeatherProtocol {
+    func refreshNewYorkTextFieldWith(_ value: String) {
+        newYorkTextField.text = value
+    }
+
+    func refreshBrevalTextFieldWith(_ value: String) {
+
+    }
+    func warningMessage(_ message: String) {
+    }
 }
