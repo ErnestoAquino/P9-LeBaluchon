@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol WeatherProtocol: AnyObject {
+    func warningMessage(_ message: String)
+    func refreshNewYorkTextFieldWith(_ value: String)
+    func refreshBrevalTextFieldWith(_ value: String)
+}
