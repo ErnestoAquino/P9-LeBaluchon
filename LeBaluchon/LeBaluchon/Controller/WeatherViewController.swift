@@ -16,6 +16,7 @@ class WeatherViewController: UIViewController {
         activityindicator.isHidden = true
         updateButton.round()
         weather.viewDelegate = self
+//        weather.getWeatherInformation()
     }
 
     @IBOutlet weak var newYorkTextField: UITextView!
@@ -24,6 +25,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var activityindicator: UIActivityIndicatorView!
 
     @IBAction func tappedUdateButton() {
+        weather.getWeatherInformation()
     }
 
 }
@@ -34,7 +36,7 @@ extension WeatherViewController: WeatherProtocol {
     }
 
     func refreshBrevalTextFieldWith(_ value: String) {
-
+        brevalTextField.text = value
     }
     func warningMessage(_ message: String) {
     }
