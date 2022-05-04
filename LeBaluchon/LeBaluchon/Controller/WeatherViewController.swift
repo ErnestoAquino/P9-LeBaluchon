@@ -16,7 +16,7 @@ class WeatherViewController: UIViewController {
         activityindicator.isHidden = true
         updateButton.round()
         weather.viewDelegate = self
-//        weather.getWeatherInformation()
+        weather.getWeatherInformation()
     }
 
     @IBOutlet weak var newYorkTextField: UITextView!
