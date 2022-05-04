@@ -9,8 +9,57 @@ import Foundation
 
 class WeatherService {
     weak var viewDelegate: WeatherProtocol?
-    
+    private let weatherApiKey = Bundle.main.object(forInfoDictionaryKey: "WEATHER_API_KEY")
+    private let breval = City(latitude: "48.9455", longitude: "1.5331")
+    private let newYork = City(latitude: "40.7143", longitude: "-74.006")
+    private let urlWeather = URL(string: "https://api.openweathermap.org/data/2.5/weather")!
 
+    func getWeatherInformation() {
+        let urlWeatherBreval = URL(string: createUrlFor(breval))
+        var request = URLRequest(url: urlWeatherBreval!)
+        request.httpMethod = "GET"
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                guard error == nil,
+                      let data = data,
+                      let response = response as? HTTPURLResponse,
+                      response.statusCode == 200 else { return }
+                print(String(data: data, encoding: .utf8)!)
+                let decoderWeather = JSONDecoder()
+                decoderWeather.keyDecodingStrategy = .convertFromSnakeCase
+                decoderWeather.dateDecodingStrategy = .secondsSince1970
+                guard let weatherInformation = try? decoderWeather.decode(WeatherData.self, from: data) else { return }
+                self.refreshBrevalTextFieldWith(self.createTextForUpadateInformation(weatherInformation))
+                print(weatherInformation)
+            }
+        }
+        task.resume()
+    }
+
+    private func createUrlFor(_ city: City) -> String {
+        guard let key = weatherApiKey else { return "" }
+        let urlWithKey =
+        "https://api.openweathermap.org/data/2.5/weather?lat=\(city.latitude)&lon=\(city.longitude)&appid=\(key)&units=metric"
+        return urlWithKey
+    }
+
+    private func createTextForUpadateInformation(_ weather: WeatherData) -> String {
+        var text = "Sorry, we have a little problem."
+        guard let description = weather.weather?[0].description,
+              let temperatureMin = weather.main?["temp_min"],
+              let temperatureMax = weather.main?["temp_max"],
+              let humidity = weather.main?["humidity"],
+              let windSpeed = weather.wind?["speed"] else {return text}
+
+        text = """
+        \(description.uppercased())
+        \(temperatureMin) °C - \(temperatureMax) °C
+        \(windSpeed) Km/h
+        \(humidity) % Humidity
+        """
+        return text
+    }
 }
 
 extension WeatherService: WeatherProtocol {
@@ -31,13 +80,32 @@ extension WeatherService: WeatherProtocol {
 }
 
 struct WeatherData: Decodable {
-    let weather: [Weather]
-    let main: [String: Double]
-    let wind: [String: Double]
+    let weather: [Weather]?
+    let main: [String: Double]?
+    let wind: [String: Double]?
+    let date: Date?
+
+    private enum CodingKeys: String, CodingKey {
+        case date = "dt"
+        case weather
+        case main
+        case wind
+    }
 }
 
 struct Weather: Decodable {
-    let id: Int
-    let main: String
-    let description: String
+    let weatherID: Int?
+    let main: String?
+    let description: String?
+
+    private enum CodingKeys: String, CodingKey {
+        case weatherID = "id"
+        case main
+        case description
+    }
+}
+
+struct City {
+    let latitude: String
+    let longitude: String
 }
