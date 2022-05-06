@@ -40,9 +40,6 @@ class CurrencyConverterService: CurrencyConverterDelegate {
                 decoderExchange.keyDecodingStrategy = .convertFromSnakeCase
                 decoderExchange.dateDecodingStrategy = .secondsSince1970
                 if let exchangeRates = try? decoderExchange.decode(ExchangeRate.self, from: data) {
-                    print("\(exchangeRates.rates)")
-                    print(exchangeRates.base)
-                    print(exchangeRates.timestamp)
                     completion(exchangeRates, error)
                 } else {
                     completion(nil, nil)
@@ -72,12 +69,10 @@ class CurrencyConverterService: CurrencyConverterDelegate {
 
         guard let euros = euros,
               let eurosHowDouble = Double(euros),
-              !exchangeData.rates.isEmpty,
-              exchangeData.rates[currency.rawValue] != nil
-        else {
+              let value = exchangeData.rates?[currency.rawValue] else {
             return String(conversionResult)
         }
-        conversionResult = eurosHowDouble * exchangeData.rates[currency.rawValue]!
+        conversionResult = eurosHowDouble * value
         return String(conversionResult)
     }
 
@@ -110,8 +105,8 @@ class CurrencyConverterService: CurrencyConverterDelegate {
 }
 
 struct ExchangeRate: Decodable {
-    let success: Bool
-    let timestamp: Date
-    let base: String
-    let rates: [String: Double]
+    let success: Bool?
+    let timestamp: Date?
+    let base: String?
+    let rates: [String: Double]?
 }
