@@ -14,7 +14,6 @@ class CurrencyConverterService: CurrencyConverterDelegate {
     var currency: Currency = .USD
     var moneyToConvert = ""
     private var task: URLSessionDataTask?
-//    private static let exchangeRateURL = URL(string: "http://data.fixer.io/api/latest?access_key=e9ef236194e10da371830069d966cc91&base=EUR&symbols=USD,MXN,JPY,GBP")!
     enum Currency: String {
         case USD
         case MXN
