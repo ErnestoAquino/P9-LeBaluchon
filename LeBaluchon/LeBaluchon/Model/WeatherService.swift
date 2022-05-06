@@ -12,11 +12,11 @@ class WeatherService {
     private let weatherApiKey = Bundle.main.object(forInfoDictionaryKey: "WEATHER_API_KEY")
     private let breval = City(latitude: "48.9455", longitude: "1.5331")
     private let newYork = City(latitude: "40.7143", longitude: "-74.006")
-    private let urlWeather = URL(string: "https://api.openweathermap.org/data/2.5/weather")!
+    private let urlBase = URL(string: "https://api.openweathermap.org/data/2.5/weather")!
 
-    func getWeatherInformation() {
-        let urlWeatherBreval = URL(string: createUrlFor(breval))
-        var request = URLRequest(url: urlWeatherBreval!)
+    private func getWeatherInformation(_ city: City, completionHandler: @escaping (WeatherData?, Error?) -> Void) {
+        let urlWeather = URL(string: createUrlFor(city))
+        var request = URLRequest(url: urlWeather!)
         request.httpMethod = "GET"
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: request) { data, response, error in
@@ -24,17 +24,35 @@ class WeatherService {
                 guard error == nil,
                       let data = data,
                       let response = response as? HTTPURLResponse,
-                      response.statusCode == 200 else { return }
-                print(String(data: data, encoding: .utf8)!)
+                      response.statusCode == 200 else { return  completionHandler(nil, nil)}
                 let decoderWeather = JSONDecoder()
                 decoderWeather.keyDecodingStrategy = .convertFromSnakeCase
                 decoderWeather.dateDecodingStrategy = .secondsSince1970
-                guard let weatherInformation = try? decoderWeather.decode(WeatherData.self, from: data) else { return }
-                self.refreshBrevalTextFieldWith(self.createTextForUpadateInformation(weatherInformation))
+                guard let weatherInformation = try? decoderWeather.decode(WeatherData.self, from: data) else { return completionHandler(nil, nil)}
+                completionHandler(weatherInformation, nil)
                 print(weatherInformation)
             }
         }
         task.resume()
+    }
+
+    func updateWeatherInformation() {
+        getWeatherInformation(breval) { weatherData, error in
+            guard error == nil,
+                  let weatherData = weatherData else {
+                self.warningMessage("Sorry, we have a little problem, please check your internet connection")
+                return
+            }
+            self.refreshBrevalTextFieldWith(self.createTextForUpadateInformation(weatherData))
+        }
+        getWeatherInformation(newYork) { weatherData, error in
+            guard error == nil,
+                  let weatherData = weatherData else {
+                self.warningMessage("Sorry, we have a little problem, please check your internet connection")
+                return
+            }
+            self.refreshNewYorkTextFieldWith(self.createTextForUpadateInformation(weatherData))
+        }
     }
 
     private func createUrlFor(_ city: City) -> String {
