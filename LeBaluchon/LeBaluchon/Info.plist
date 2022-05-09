@@ -6,6 +6,8 @@
 	<string>$(API_KEY)</string>
 	<key>WEATHER_API_KEY</key>
 	<string>$(WEATHER_API_KEY)</string>
+	<key>TRANSLATOR_API_KEY</key>
+	<string>$(TRANSLATOR_API_KEY)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
