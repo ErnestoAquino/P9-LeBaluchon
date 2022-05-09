@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct City {
+    let latitude: String
+    let longitude: String
+}
