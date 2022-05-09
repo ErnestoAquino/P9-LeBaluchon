@@ -79,23 +79,7 @@ class WeatherService {
         return text
     }
 }
-// MARK: - Extensions
-extension WeatherService: WeatherDelegate {
-    func warningMessage(_ message: String) {
-        guard let viewDelegate = viewDelegate else {return}
-        viewDelegate.warningMessage(message)
-    }
 
-    func refreshNewYorkTextFieldWith(_ value: String) {
-        guard let viewDelegate = viewDelegate else {return}
-        viewDelegate.refreshNewYorkTextFieldWith(value)
-    }
-
-    func refreshBrevalTextFieldWith(_ value: String) {
-        guard let viewDelegate = viewDelegate else {return}
-        viewDelegate.refreshBrevalTextFieldWith(value)
-    }
-}
 // MARK: - Structures
 struct WeatherData: Decodable {
     let weather: [Weather]?
