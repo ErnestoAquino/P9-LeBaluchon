@@ -8,7 +8,7 @@
 import Foundation
 
 class WeatherService {
-    weak var viewDelegate: WeatherProtocol?
+    weak var viewDelegate: WeatherDelegate?
     private let weatherApiKey = Bundle.main.object(forInfoDictionaryKey: "WEATHER_API_KEY")
     private let breval = City(latitude: "48.9455", longitude: "1.5331")
     private let newYork = City(latitude: "40.7143", longitude: "-74.006")
@@ -79,8 +79,8 @@ class WeatherService {
         return text
     }
 }
-
-extension WeatherService: WeatherProtocol {
+// MARK: - Extensions
+extension WeatherService: WeatherDelegate {
     func warningMessage(_ message: String) {
         guard let viewDelegate = viewDelegate else {return}
         viewDelegate.warningMessage(message)
@@ -96,7 +96,7 @@ extension WeatherService: WeatherProtocol {
         viewDelegate.refreshBrevalTextFieldWith(value)
     }
 }
-
+// MARK: - Structures
 struct WeatherData: Decodable {
     let weather: [Weather]?
     let main: [String: Double]?
