@@ -8,26 +8,36 @@
 import UIKit
 
 class TranslatorViewController: UIViewController {
+    let translatorService = TranslateService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        translatorService.viewDelegate = self
     }
 
     @IBOutlet weak var frenchTexField: UITextView!
+    @IBOutlet weak var englishTextField: UITextView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     @IBAction func dismissKeyBoard(_ sender: UITapGestureRecognizer) {
         frenchTexField.resignFirstResponder()
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func tappedTranslateButton() {
+        translatorService.doTranslation(textForTranslation: frenchTexField.text)
     }
-    */
 
+}
+
+// MARK: - Extension
+extension TranslatorViewController: TranslatorDelegate {
+    func warningMessage(_ message: String) {
+        let alert: UIAlertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
+
+    func refreshEnglishTextFieldWith(_ translatedTex: String) {
+        englishTextField.text = translatedTex
+    }
 }

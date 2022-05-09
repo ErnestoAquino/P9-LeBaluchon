@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+protocol TranslatorDelegate: AnyObject {
+    func warningMessage(_ message: String)
+    func refreshEnglishTextFieldWith(_ translatedTex: String)
+}

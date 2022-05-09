@@ -28,12 +28,16 @@ class CurrencyConverterViewController: UIViewController, CurrencyConverterDelega
         switch currencySegmentedControl.selectedSegmentIndex {
         case 0:
             currencyConverter.currency = .USD
+            resultTextField.placeholder = "u.s. dollar"
         case 1:
             currencyConverter.currency = .MXN
+            resultTextField.placeholder = "mexican peso"
         case 2:
             currencyConverter.currency = .JPY
+            resultTextField.placeholder = "japanese yen"
         case 3:
             currencyConverter.currency = .GBP
+            resultTextField.placeholder = "british pound"
         default: break
         }
 

@@ -30,7 +30,7 @@ class WeatherViewController: UIViewController {
 
 }
 
-extension WeatherViewController: WeatherProtocol {
+extension WeatherViewController: WeatherDelegate {
     func refreshNewYorkTextFieldWith(_ value: String) {
         newYorkTextField.text = value
     }
