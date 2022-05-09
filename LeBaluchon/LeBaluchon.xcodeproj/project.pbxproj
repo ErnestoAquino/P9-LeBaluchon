@@ -12,11 +12,16 @@
 		94ACE4AA281427C000A505E0 /* CurrencyConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACE4A9281427C000A505E0 /* CurrencyConverterViewController.swift */; };
 		94ACE4AC2814285500A505E0 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACE4AB2814285500A505E0 /* WeatherViewController.swift */; };
 		94ACE4AE2814289D00A505E0 /* TranslatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACE4AD2814289D00A505E0 /* TranslatorViewController.swift */; };
+		94B5FF3F28295A9300A626D9 /* TranslationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5FF3E28295A9300A626D9 /* TranslationResponse.swift */; };
+		94B5FF4128295B1800A626D9 /* TranslateServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5FF4028295B1800A626D9 /* TranslateServiceExtension.swift */; };
 		94DD89B4281036EC002B7C52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD89B3281036EC002B7C52 /* AppDelegate.swift */; };
 		94DD89B6281036EC002B7C52 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DD89B5281036EC002B7C52 /* SceneDelegate.swift */; };
 		94DD89BB281036EC002B7C52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94DD89B9281036EC002B7C52 /* Main.storyboard */; };
 		94DD89BD281036EE002B7C52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94DD89BC281036EE002B7C52 /* Assets.xcassets */; };
 		94DD89C0281036EE002B7C52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94DD89BE281036EE002B7C52 /* LaunchScreen.storyboard */; };
+		94E43720282558B600853B53 /* TranslatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E4371F282558B600853B53 /* TranslatorService.swift */; };
+		94E43722282558D700853B53 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E43721282558D700853B53 /* NetworkManager.swift */; };
+		94E921D428267BEC00494E47 /* TranslatorDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E921D328267BEC00494E47 /* TranslatorDelegateProtocol.swift */; };
 		94F1D5E72820742A00875F61 /* WeatherDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F1D5E62820742A00875F61 /* WeatherDelegateProtocol.swift */; };
 		94F2586328196AB400A480AE /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F2586228196AB400A480AE /* UIButtonExtension.swift */; };
 		94F7DE0A281FD9EF0034CD3F /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F7DE09281FD9EF0034CD3F /* WeatherService.swift */; };
@@ -28,6 +33,8 @@
 		94ACE4A9281427C000A505E0 /* CurrencyConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterViewController.swift; sourceTree = "<group>"; };
 		94ACE4AB2814285500A505E0 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		94ACE4AD2814289D00A505E0 /* TranslatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorViewController.swift; sourceTree = "<group>"; };
+		94B5FF3E28295A9300A626D9 /* TranslationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationResponse.swift; sourceTree = "<group>"; };
+		94B5FF4028295B1800A626D9 /* TranslateServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateServiceExtension.swift; sourceTree = "<group>"; };
 		94C7245B281FB51A00F995AA /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		94DD89B0281036EC002B7C52 /* LeBaluchon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeBaluchon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94DD89B3281036EC002B7C52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +43,9 @@
 		94DD89BC281036EE002B7C52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94DD89BF281036EE002B7C52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94DD89C1281036EE002B7C52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94E4371F282558B600853B53 /* TranslatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorService.swift; sourceTree = "<group>"; };
+		94E43721282558D700853B53 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		94E921D328267BEC00494E47 /* TranslatorDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorDelegateProtocol.swift; sourceTree = "<group>"; };
 		94F1D5E62820742A00875F61 /* WeatherDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDelegateProtocol.swift; sourceTree = "<group>"; };
 		94F2586228196AB400A480AE /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		94F7DE09281FD9EF0034CD3F /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
@@ -57,6 +67,8 @@
 			children = (
 				9468F5E0281687BE00099300 /* CurrencyConverterService.swift */,
 				94F7DE09281FD9EF0034CD3F /* WeatherService.swift */,
+				94E4371F282558B600853B53 /* TranslatorService.swift */,
+				94E43721282558D700853B53 /* NetworkManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -74,13 +86,22 @@
 		9402200028112F2000829961 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				94ACE4A9281427C000A505E0 /* CurrencyConverterViewController.swift */,
-				94ACE4AB2814285500A505E0 /* WeatherViewController.swift */,
-				94ACE4AD2814289D00A505E0 /* TranslatorViewController.swift */,
 				942ABD0F281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift */,
+				94ACE4A9281427C000A505E0 /* CurrencyConverterViewController.swift */,
+				94E921D328267BEC00494E47 /* TranslatorDelegateProtocol.swift */,
+				94ACE4AD2814289D00A505E0 /* TranslatorViewController.swift */,
 				94F1D5E62820742A00875F61 /* WeatherDelegateProtocol.swift */,
+				94ACE4AB2814285500A505E0 /* WeatherViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		94B5FF3D28295A4D00A626D9 /* Structures */ = {
+			isa = PBXGroup;
+			children = (
+				94B5FF3E28295A9300A626D9 /* TranslationResponse.swift */,
+			);
+			path = Structures;
 			sourceTree = "<group>";
 		};
 		94DD89A7281036EC002B7C52 = {
@@ -103,6 +124,7 @@
 		94DD89B2281036EC002B7C52 /* LeBaluchon */ = {
 			isa = PBXGroup;
 			children = (
+				94B5FF3D28295A4D00A626D9 /* Structures */,
 				94F2586128196A8B00A480AE /* Extension */,
 				9402200028112F2000829961 /* Controller */,
 				94021FFF28112E9100829961 /* View */,
@@ -118,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				94F2586228196AB400A480AE /* UIButtonExtension.swift */,
+				94B5FF4028295B1800A626D9 /* TranslateServiceExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -214,15 +237,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94B5FF3F28295A9300A626D9 /* TranslationResponse.swift in Sources */,
+				94E43722282558D700853B53 /* NetworkManager.swift in Sources */,
 				94ACE4AA281427C000A505E0 /* CurrencyConverterViewController.swift in Sources */,
 				94F7DE0A281FD9EF0034CD3F /* WeatherService.swift in Sources */,
 				94ACE4AC2814285500A505E0 /* WeatherViewController.swift in Sources */,
 				942ABD10281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift in Sources */,
 				94DD89B4281036EC002B7C52 /* AppDelegate.swift in Sources */,
 				94F1D5E72820742A00875F61 /* WeatherDelegateProtocol.swift in Sources */,
+				94E43720282558B600853B53 /* TranslatorService.swift in Sources */,
 				94DD89B6281036EC002B7C52 /* SceneDelegate.swift in Sources */,
 				94F2586328196AB400A480AE /* UIButtonExtension.swift in Sources */,
+				94E921D428267BEC00494E47 /* TranslatorDelegateProtocol.swift in Sources */,
 				94ACE4AE2814289D00A505E0 /* TranslatorViewController.swift in Sources */,
+				94B5FF4128295B1800A626D9 /* TranslateServiceExtension.swift in Sources */,
 				9468F5E1281687BE00099300 /* CurrencyConverterService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
