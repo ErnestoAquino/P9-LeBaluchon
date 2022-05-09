@@ -9,7 +9,7 @@ import Foundation
 
 class WeatherService {
     weak var viewDelegate: WeatherDelegate?
-    private let weatherApiKey = Bundle.main.object(forInfoDictionaryKey: "WEATHER_API_KEY")
+    private let weatherApiKey = Bundle.main.object(forInfoDictionaryKey: "WEATHER_API_KEY") as? String
     private let breval = City(latitude: "48.9455", longitude: "1.5331")
     private let newYork = City(latitude: "40.7143", longitude: "-74.006")
     private let urlBase = URL(string: "https://api.openweathermap.org/data/2.5/weather")!
@@ -77,5 +77,30 @@ class WeatherService {
         \(humidity) % Humidity
         """
         return text
+    }
+
+    private func createRequestFor(_ city: City) -> URLRequest? {
+        guard let urlWeather = URL(string: createUrlFor(city)) else {return nil }
+        var request = URLRequest(url: urlWeather)
+        request.httpMethod = "GET"
+
+        return request
+    }
+
+    func test() {
+        guard let requestForBreval = createRequestFor(breval) else {return}
+        let networkManager = NetworkManager<WeatherData>()
+        networkManager.getInformation(request: requestForBreval) { weatherData, error in
+            guard error == nil,
+                  let weatherData = weatherData else { return }
+            self.refreshBrevalTextFieldWith(self.createTextForUpadateInformation(weatherData))
+        }
+        guard let requestForNewYork = createRequestFor(newYork) else {return}
+        let networkManagerTest = NetworkManager<WeatherData>()
+        networkManagerTest.getInformation(request: requestForNewYork) { weatherData, error in
+            guard error == nil,
+                  let weatherDataForNewYork = weatherData else {return}
+            self.refreshNewYorkTextFieldWith(self.createTextForUpadateInformation(weatherDataForNewYork))
+        }
     }
 }
