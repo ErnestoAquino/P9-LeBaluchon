@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+extension CurrencyConverterService: CurrencyConverterDelegate {
+    func warningMessage(_ message: String) {
+        guard let viewDelegate = viewDelegate else { return }
+        viewDelegate.warningMessage(message)
+    }
+
+    func refreshTextViewWithValue(_ value: String) {
+        guard let viewDelegate = viewDelegate else { return }
+        viewDelegate.refreshTextViewWithValue(value)
+    }
+}
