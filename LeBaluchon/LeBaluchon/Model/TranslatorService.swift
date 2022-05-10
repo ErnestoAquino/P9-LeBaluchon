@@ -10,13 +10,12 @@ import Foundation
 class TranslateService {
     weak var viewDelegate: TranslatorDelegate?
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "TRANSLATOR_API_KEY") as? String
-    private var task: URLSessionDataTask?
     private let urlBase = "https://translation.googleapis.com/language/translate/v2"
+    private let netwokManager = NetworkManager<TranslationResponse>()
 
     func doTranslation(textForTranslation: String?) {
         guard let textForTranslation = textForTranslation else { return }
         guard let resquest = createRequest(textForTranslation) else { return }
-        let netwokManager = NetworkManager<TranslationResponse>()
         netwokManager.getInformation(request: resquest) { translationResponse, error in
             guard error == nil,
                   let translatedTex = translationResponse?.data?.translations?[0].translatedText else { return }

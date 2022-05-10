@@ -12,54 +12,13 @@ class WeatherService {
     private let weatherApiKey = Bundle.main.object(forInfoDictionaryKey: "WEATHER_API_KEY") as? String
     private let breval = City(latitude: "48.9455", longitude: "1.5331")
     private let newYork = City(latitude: "40.7143", longitude: "-74.006")
-    private let urlBase = URL(string: "https://api.openweathermap.org/data/2.5/weather")!
-
-    private func getWeatherInformation(_ city: City, completionHandler: @escaping (WeatherData?, Error?) -> Void) {
-        let urlWeather = URL(string: createUrlFor(city))
-        var request = URLRequest(url: urlWeather!)
-        request.httpMethod = "GET"
-        let session = URLSession(configuration: .default)
-        let task = session.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
-                guard error == nil,
-                      let data = data,
-                      let response = response as? HTTPURLResponse,
-                      response.statusCode == 200 else { return  completionHandler(nil, nil)}
-                let decoderWeather = JSONDecoder()
-                decoderWeather.keyDecodingStrategy = .convertFromSnakeCase
-                decoderWeather.dateDecodingStrategy = .secondsSince1970
-                guard let weatherInformation = try? decoderWeather.decode(WeatherData.self, from: data) else { return completionHandler(nil, nil)}
-                completionHandler(weatherInformation, nil)
-                print(weatherInformation)
-            }
-        }
-        task.resume()
-    }
+    private let urlBase = "https://api.openweathermap.org/data/2.5/weather"
+    private var networkManager = NetworkManager<WeatherData>()
+    private let message = "Sorry, we have a little problem please check your internet connection."
 
     func updateWeatherInformation() {
-        getWeatherInformation(breval) { weatherData, error in
-            guard error == nil,
-                  let weatherData = weatherData else {
-                self.warningMessage("Sorry, we have a little problem, please check your internet connection")
-                return
-            }
-            self.refreshBrevalTextFieldWith(self.createTextForUpadateInformation(weatherData))
-        }
-        getWeatherInformation(newYork) { weatherData, error in
-            guard error == nil,
-                  let weatherData = weatherData else {
-                self.warningMessage("Sorry, we have a little problem, please check your internet connection")
-                return
-            }
-            self.refreshNewYorkTextFieldWith(self.createTextForUpadateInformation(weatherData))
-        }
-    }
-
-    private func createUrlFor(_ city: City) -> String {
-        guard let key = weatherApiKey else { return "" }
-        let urlWithKey =
-        "https://api.openweathermap.org/data/2.5/weather?lat=\(city.latitude)&lon=\(city.longitude)&appid=\(key)&units=metric"
-        return urlWithKey
+        updateWatherInformationForBreval()
+        updateWeatherInformationForNewYork()
     }
 
     private func createTextForUpadateInformation(_ weather: WeatherData) -> String {
@@ -79,27 +38,49 @@ class WeatherService {
         return text
     }
 
+    private func createUrlFor(_ city: City) -> String {
+        guard let key = weatherApiKey else { return "" }
+        let urlWithKey =
+        "\(urlBase)?lat=\(city.latitude)&lon=\(city.longitude)&appid=\(key)&units=metric"
+
+        return urlWithKey
+    }
+
     private func createRequestFor(_ city: City) -> URLRequest? {
-        guard let urlWeather = URL(string: createUrlFor(city)) else {return nil }
+        guard let urlWeather = URL(string: createUrlFor(city)) else {return nil}
         var request = URLRequest(url: urlWeather)
         request.httpMethod = "GET"
 
         return request
     }
 
-    func test() {
-        guard let requestForBreval = createRequestFor(breval) else {return}
-        let networkManager = NetworkManager<WeatherData>()
+    private func updateWatherInformationForBreval() {
+        guard let requestForBreval = createRequestFor(breval) else {
+            warningMessage(message)
+            return
+        }
         networkManager.getInformation(request: requestForBreval) { weatherData, error in
             guard error == nil,
-                  let weatherData = weatherData else { return }
+                  let weatherData = weatherData else {
+                self.warningMessage(self.message)
+                return
+            }
             self.refreshBrevalTextFieldWith(self.createTextForUpadateInformation(weatherData))
         }
-        guard let requestForNewYork = createRequestFor(newYork) else {return}
+    }
+
+    private func updateWeatherInformationForNewYork() {
+        guard let requestForNewYork = createRequestFor(newYork) else {
+            warningMessage(message)
+            return
+        }
         let networkManagerTest = NetworkManager<WeatherData>()
         networkManagerTest.getInformation(request: requestForNewYork) { weatherData, error in
             guard error == nil,
-                  let weatherDataForNewYork = weatherData else {return}
+                  let weatherDataForNewYork = weatherData else {
+                self.warningMessage(self.message)
+                return
+            }
             self.refreshNewYorkTextFieldWith(self.createTextForUpadateInformation(weatherDataForNewYork))
         }
     }

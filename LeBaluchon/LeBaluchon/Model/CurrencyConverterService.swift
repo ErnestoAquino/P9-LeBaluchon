@@ -7,22 +7,41 @@
 
 import Foundation
 
-class CurrencyConverterService: CurrencyConverterDelegate {
+class CurrencyConverterService {
 
     weak var viewDelegate: CurrencyConverterDelegate?
-    let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
-    var currency: Currency = .USD
-    var moneyToConvert = ""
+    private let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
+    private let networkManager = NetworkManager<ExchangeRate>()
+    private let exchangeRateTable: [ExchangeRate]? = nil
+    private var moneyToConvert = ""
     private var task: URLSessionDataTask?
+    var currency: Currency = .USD
     enum Currency: String {
         case USD
         case MXN
         case JPY
         case GBP
     }
+    
+    func hacerConversion(cantidad: String?) {
+        if exchangeRateTable == nil {
+            return
+        } else {
+            
+        }
+    }
+    
+    private func createResquest() -> URLRequest? {
+        guard let urlExchangeRate = URL(string: createUrl()) else {return nil}
+        var request = URLRequest(url: urlExchangeRate)
+        request.httpMethod = "GET"
+        
+        return request
+    }
+    
 
      private  func getExchangeRate(completion: @escaping (ExchangeRate?, Error?) -> Void) {
-         let testUrl = URL(string: createUrl(apiKey))
+         let testUrl = URL(string: createUrl())
          var request = URLRequest(url: testUrl!)
         request.httpMethod = "GET"
         let session = URLSession(configuration: .default)
@@ -84,29 +103,9 @@ class CurrencyConverterService: CurrencyConverterDelegate {
         return true
     }
 
-    private func createUrl(_ apiKey: String?) -> String {
-        guard let key = apiKey else {
-            return ""
-        }
+    private func createUrl() -> String {
+        guard let key = apiKey else {return ""}
         let urlWithKey = "http://data.fixer.io/api/latest?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
         return urlWithKey
     }
-
-    func warningMessage(_ message: String) {
-        guard let viewDelegate = viewDelegate else { return }
-        viewDelegate.warningMessage(message)
-    }
-
-    func refreshTextViewWithValue(_ value: String) {
-        guard let viewDelegate = viewDelegate else { return }
-        viewDelegate.refreshTextViewWithValue(value)
-    }
-
-}
-
-struct ExchangeRate: Decodable {
-    let success: Bool?
-    let timestamp: Date?
-    let base: String?
-    let rates: [String: Double]?
 }
