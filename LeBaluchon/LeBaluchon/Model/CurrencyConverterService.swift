@@ -23,6 +23,12 @@ final class CurrencyConverterService {
         case GBP
     }
 
+    /* This function performs the operation requested by the controller.
+     It first verifies that what the user has entered is valid.
+     Second it verifies that there is no local structure with the necessary data to perform the calculation.
+     If there is already data stored in the exchangeRateLocal variable, it will use this data and will not make another call.
+     Third, if there is no information stored in the variable, it will create a URL Request to use the getInformation method of the networManager class.
+     */
     public func doConversion(eurosToBeConverted: String?) {
         guard stringWithEurosIsValid(eurosToBeConverted) else {
             warningMessage("Please enter a valid amount (greater than 0 and less than 1 000 000).")
@@ -32,10 +38,12 @@ final class CurrencyConverterService {
             guard let exchangeRateLocal = exchangeRateLocal else { return }
             let result = calculateConversion(euros: eurosToBeConverted, exchangeData: exchangeRateLocal)
             refreshTextViewWithValue(result)
-            print("Exchange information local")
             return
         }
-        guard let request = createRequest() else {return}
+        guard let request = createRequest() else {
+            warningMessage("We have un little problem, please check your internet connection.")
+            return
+        }
         networkManager.getInformation(request: request) { exchangeRate, error in
             guard error == nil,
                   let exchageInformation = exchangeRate else {
@@ -45,10 +53,10 @@ final class CurrencyConverterService {
             self.exchangeRateLocal = exchageInformation
             let result = self.calculateConversion(euros: eurosToBeConverted, exchangeData: exchageInformation)
             self.refreshTextViewWithValue(result)
-            print("Exchange request informatio")
         }
     }
 
+    // This function performs the conversion calculation.
     private func calculateConversion(euros: String?, exchangeData: ExchangeRate) -> String {
         var conversionResult = -0.0
 
@@ -61,6 +69,7 @@ final class CurrencyConverterService {
         return String(conversionResult)
     }
 
+    // This function verifies the amount entered by the user is valid.
     private func stringWithEurosIsValid(_ value: String?) -> Bool {
         guard let value = value,
               let valueHowDouble = Double(value),
@@ -69,6 +78,7 @@ final class CurrencyConverterService {
         return true
     }
 
+    // This function create a URL Request for URL Session.
     private func createRequest() -> URLRequest? {
         guard let key = apiKey else {return nil}
         let urlWithKey = "\(urlBase)?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
