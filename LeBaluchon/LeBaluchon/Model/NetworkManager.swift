@@ -21,7 +21,6 @@ class NetworkManager<T: Decodable> {
                       let data = data,
                       let response = response as? HTTPURLResponse,
                       response.statusCode == 200 else {return}
-//                print(String(data: data, encoding: .utf8)!)
                 let decoderData = JSONDecoder()
                 decoderData.keyDecodingStrategy = .useDefaultKeys
                 decoderData.dateDecodingStrategy = .secondsSince1970

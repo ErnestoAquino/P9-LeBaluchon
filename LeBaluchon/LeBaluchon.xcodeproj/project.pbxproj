@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94204FC3282C09AD00C1DF99 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94204FC2282C09AD00C1DF99 /* File.swift */; };
 		942ABD10281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942ABD0F281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift */; };
 		944E86E0282AB2A0002B167A /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E86DF282AB2A0002B167A /* ExchangeRate.swift */; };
 		944E86E2282AB381002B167A /* CurrencyConverterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E86E1282AB381002B167A /* CurrencyConverterExtension.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		94204FC2282C09AD00C1DF99 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		942ABD0F281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterDelegateProtocol.swift; sourceTree = "<group>"; };
 		944E86DF282AB2A0002B167A /* ExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
 		944E86E1282AB381002B167A /* CurrencyConverterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterExtension.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				94F7DE09281FD9EF0034CD3F /* WeatherService.swift */,
 				94E4371F282558B600853B53 /* TranslatorService.swift */,
 				94E43721282558D700853B53 /* NetworkManager.swift */,
+				94204FC2282C09AD00C1DF99 /* File.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				94F2586328196AB400A480AE /* UIButtonExtension.swift in Sources */,
 				944E86E2282AB381002B167A /* CurrencyConverterExtension.swift in Sources */,
 				94E921D428267BEC00494E47 /* TranslatorDelegateProtocol.swift in Sources */,
+				94204FC3282C09AD00C1DF99 /* File.swift in Sources */,
 				94B5FF452829AB9D00A626D9 /* WeatherData.swift in Sources */,
 				94ACE4AE2814289D00A505E0 /* TranslatorViewController.swift in Sources */,
 				94B5FF4128295B1800A626D9 /* TranslateServiceExtension.swift in Sources */,

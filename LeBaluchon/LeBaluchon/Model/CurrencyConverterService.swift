@@ -7,14 +7,15 @@
 
 import Foundation
 
-class CurrencyConverterService {
+final class CurrencyConverterService {
 
     weak var viewDelegate: CurrencyConverterDelegate?
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
+    private let urlBase = "http://data.fixer.io/api/latest"
+    private let warningMessage = "We have un little problem, please check your internet connection."
     private let networkManager = NetworkManager<ExchangeRate>()
-    private let exchangeRateTable: [ExchangeRate]? = nil
-    private var moneyToConvert = ""
-    private var task: URLSessionDataTask?
+    private var exchangeRateLocal: ExchangeRate?
+    private var exchangeRateTable = [ExchangeRate]()
     var currency: Currency = .USD
     enum Currency: String {
         case USD
@@ -22,64 +23,31 @@ class CurrencyConverterService {
         case JPY
         case GBP
     }
-    
-    func hacerConversion(cantidad: String?) {
-        if exchangeRateTable == nil {
+
+    public func doConversion(eurosToBeConverted: String?) {
+        guard stringWithEurosIsValid(eurosToBeConverted) else {
+            warningMessage("Please enter a valid amount (greater than 0 and less than 1 000 000).")
             return
-        } else {
-            
         }
-    }
-    
-    private func createResquest() -> URLRequest? {
-        guard let urlExchangeRate = URL(string: createUrl()) else {return nil}
-        var request = URLRequest(url: urlExchangeRate)
-        request.httpMethod = "GET"
-        
-        return request
-    }
-    
-
-     private  func getExchangeRate(completion: @escaping (ExchangeRate?, Error?) -> Void) {
-         let testUrl = URL(string: createUrl())
-         var request = URLRequest(url: testUrl!)
-        request.httpMethod = "GET"
-        let session = URLSession(configuration: .default)
-        task?.cancel()
-        task = session.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
-                guard error == nil,
-                      let data = data,
-                      let response = response as? HTTPURLResponse,
-                      response.statusCode == 200 else {
-                    completion(nil, nil)
-                    return
-                }
-                let decoderExchange = JSONDecoder()
-                decoderExchange.keyDecodingStrategy = .convertFromSnakeCase
-                decoderExchange.dateDecodingStrategy = .secondsSince1970
-                if let exchangeRates = try? decoderExchange.decode(ExchangeRate.self, from: data) {
-                    completion(exchangeRates, error)
-                } else {
-                    completion(nil, nil)
-                }
+        guard exchangeRateTable.isEmpty else {
+            if exchangeRateTable.count > 0 {
+                let exchangeInformation = exchangeRateTable[0]
+                let result = calculateConversion(euros: eurosToBeConverted, exchangeData: exchangeInformation)
+                refreshTextViewWithValue(result)
+                print("Data of table")
             }
+            return
         }
-        task?.resume()
-    }
-
-    func doConversion(value: String?) {
-        guard stringWithEurosIsValid(value) else {
-        warningMessage("Please enter a valid amount (greater than 0 and less than 1 000 000).")
-        return }
-        getExchangeRate { exchangeRate, error in
+        guard let request = createRequest() else {return}
+        networkManager.getInformation(request: request) { exchangeRate, error in
             guard error == nil,
-                  let exchangeRate = exchangeRate else {
+                  let exchageInformation = exchangeRate else {
                 self.warningMessage("We have un little problem, please check your internet connection.")
                 return
             }
-            let resulat = self.calculateConversion(euros: value, exchangeData: exchangeRate)
-            self.refreshTextViewWithValue("\(resulat)")
+            self.exchangeRateTable.append(exchageInformation)
+            let result = self.calculateConversion(euros: eurosToBeConverted, exchangeData: exchageInformation)
+            self.refreshTextViewWithValue(result)
         }
     }
 
@@ -105,7 +73,16 @@ class CurrencyConverterService {
 
     private func createUrl() -> String {
         guard let key = apiKey else {return ""}
-        let urlWithKey = "http://data.fixer.io/api/latest?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
+        let urlWithKey = "\(urlBase)?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
         return urlWithKey
     }
+
+    private func createRequest() -> URLRequest? {
+        guard let urlExchangeRate = URL(string: createUrl()) else {return nil}
+        var request = URLRequest(url: urlExchangeRate)
+        request.httpMethod = "GET"
+
+        return request
+    }
+// Crear una funcion que cree la reques y suprimir la funcion de crear una url
 }
