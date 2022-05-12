@@ -15,8 +15,7 @@ final class CurrencyConverterService {
     private let warningMessage = "We have un little problem, please check your internet connection."
     private let networkManager = NetworkManager<ExchangeRate>()
     private var exchangeRateLocal: ExchangeRate?
-    private var exchangeRateTable = [ExchangeRate]()
-    var currency: Currency = .USD
+    public var currency: Currency = .USD
     enum Currency: String {
         case USD
         case MXN
@@ -29,13 +28,11 @@ final class CurrencyConverterService {
             warningMessage("Please enter a valid amount (greater than 0 and less than 1 000 000).")
             return
         }
-        guard exchangeRateTable.isEmpty else {
-            if exchangeRateTable.count > 0 {
-                let exchangeInformation = exchangeRateTable[0]
-                let result = calculateConversion(euros: eurosToBeConverted, exchangeData: exchangeInformation)
-                refreshTextViewWithValue(result)
-                print("Data of table")
-            }
+        guard exchangeRateLocal == nil else {
+            guard let exchangeRateLocal = exchangeRateLocal else { return }
+            let result = calculateConversion(euros: eurosToBeConverted, exchangeData: exchangeRateLocal)
+            refreshTextViewWithValue(result)
+            print("Exchange information local")
             return
         }
         guard let request = createRequest() else {return}
@@ -45,9 +42,10 @@ final class CurrencyConverterService {
                 self.warningMessage("We have un little problem, please check your internet connection.")
                 return
             }
-            self.exchangeRateTable.append(exchageInformation)
+            self.exchangeRateLocal = exchageInformation
             let result = self.calculateConversion(euros: eurosToBeConverted, exchangeData: exchageInformation)
             self.refreshTextViewWithValue(result)
+            print("Exchange request informatio")
         }
     }
 
@@ -71,18 +69,13 @@ final class CurrencyConverterService {
         return true
     }
 
-    private func createUrl() -> String {
-        guard let key = apiKey else {return ""}
-        let urlWithKey = "\(urlBase)?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
-        return urlWithKey
-    }
-
     private func createRequest() -> URLRequest? {
-        guard let urlExchangeRate = URL(string: createUrl()) else {return nil}
+        guard let key = apiKey else {return nil}
+        let urlWithKey = "\(urlBase)?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
+        guard let urlExchangeRate = URL(string: urlWithKey) else {return nil}
         var request = URLRequest(url: urlExchangeRate)
         request.httpMethod = "GET"
 
         return request
     }
-// Crear una funcion que cree la reques y suprimir la funcion de crear una url
 }
