@@ -24,8 +24,8 @@ class NetworkManager<T: Decodable> {
                 let decoderData = JSONDecoder()
                 decoderData.keyDecodingStrategy = .useDefaultKeys
                 decoderData.dateDecodingStrategy = .secondsSince1970
-                guard let translation = try? decoderData.decode(T?.self, from: data) else {return}
-                completionHandler(translation, error)
+                guard let informationObtained = try? decoderData.decode(T?.self, from: data) else {return}
+                completionHandler(informationObtained, error)
             }
         })
         task?.resume()
