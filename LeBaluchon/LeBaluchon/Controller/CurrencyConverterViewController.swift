@@ -49,7 +49,7 @@ class CurrencyConverterViewController: UIViewController, CurrencyConverterDelega
 
     @IBAction func tappedConvertButton() {
         toogleActivityIndicator(shown: true)
-        currencyConverter.doConversion(value: euroTextField.text)
+        currencyConverter.doConversion(eurosToBeConverted: euroTextField.text)
         toogleActivityIndicator(shown: false)
     }
 
