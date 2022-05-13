@@ -24,7 +24,7 @@ class TranslateService {
             self.refreshEnglishTextFieldWith(translatedTex)
         }
     }
-    
+
     // This function create a URL Request for URL Session.
     // Receives as a parameter the text to be translated and adds it to the request body.
      private func createRequest(_ textForTranslation: String) -> URLRequest? {
