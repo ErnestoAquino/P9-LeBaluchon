@@ -25,9 +25,15 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var activityindicator: UIActivityIndicatorView!
 
     @IBAction func tappedUdateButton() {
+        toogleActivityIndicator(shown: true)
         weather.updateWeatherInformation()
+        toogleActivityIndicator(shown: false)
     }
 
+    private func toogleActivityIndicator(shown: Bool) {
+        updateButton.isHidden = shown
+        activityindicator.isHidden = !shown
+    }
 }
 
 extension WeatherViewController: WeatherDelegate {
