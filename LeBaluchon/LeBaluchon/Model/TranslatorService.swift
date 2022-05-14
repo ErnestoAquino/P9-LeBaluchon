@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TranslateService {
+final class TranslateService {
     weak var viewDelegate: TranslatorDelegate?
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "TRANSLATOR_API_KEY") as? String
     private let urlBase = "https://translation.googleapis.com/language/translate/v2"
