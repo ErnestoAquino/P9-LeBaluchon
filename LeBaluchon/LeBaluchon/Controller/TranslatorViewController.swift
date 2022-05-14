@@ -12,20 +12,30 @@ class TranslatorViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        translateButton.round()
+        activityIndicator.isHidden = true
         translatorService.viewDelegate = self
     }
 
     @IBOutlet weak var frenchTexField: UITextView!
     @IBOutlet weak var englishTextField: UITextView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var translateButton: UIButton!
 
     @IBAction func dismissKeyBoard(_ sender: UITapGestureRecognizer) {
         frenchTexField.resignFirstResponder()
     }
+
     @IBAction func tappedTranslateButton() {
+        toogleActivityIndicator(shown: true)
         translatorService.doTranslation(textForTranslation: frenchTexField.text)
+        toogleActivityIndicator(shown: false)
     }
 
+    private func toogleActivityIndicator(shown: Bool) {
+        translateButton.isHidden = shown
+        activityIndicator.isHidden = !shown
+    }
 }
 
 // MARK: - Extension

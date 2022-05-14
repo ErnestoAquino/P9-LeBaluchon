@@ -323,6 +323,7 @@
                         <outlet property="activityIndicator" destination="ACi-GJ-nvJ" id="IZZ-Ya-OLP"/>
                         <outlet property="englishTextField" destination="j4E-67-opJ" id="wO9-aw-sad"/>
                         <outlet property="frenchTexField" destination="NNP-qv-0QX" id="VEO-QE-2kD"/>
+                        <outlet property="translateButton" destination="v8Z-jf-muX" id="BtE-z3-6b2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P47-YJ-h64" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
