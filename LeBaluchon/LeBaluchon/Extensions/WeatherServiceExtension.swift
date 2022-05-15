@@ -22,4 +22,9 @@ extension WeatherService: WeatherDelegate {
         guard let viewDelegate = viewDelegate else {return}
         viewDelegate.refreshBrevalTextFieldWith(value)
     }
+
+    func toogleActivityIndicator(shown: Bool) {
+        guard let viewDelegate = viewDelegate else { return }
+        viewDelegate.toogleActivityIndicator(shown: shown)
+    }
 }

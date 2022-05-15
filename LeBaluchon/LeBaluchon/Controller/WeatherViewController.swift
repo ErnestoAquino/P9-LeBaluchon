@@ -29,11 +29,6 @@ class WeatherViewController: UIViewController {
         weather.updateWeatherInformation()
         toogleActivityIndicator(shown: false)
     }
-
-    private func toogleActivityIndicator(shown: Bool) {
-        updateButton.isHidden = shown
-        activityindicator.isHidden = !shown
-    }
 }
 
 extension WeatherViewController: WeatherDelegate {
@@ -49,5 +44,10 @@ extension WeatherViewController: WeatherDelegate {
         let action = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(action)
         present(alert, animated: true)
+    }
+
+     func toogleActivityIndicator(shown: Bool) {
+        updateButton.isHidden = shown
+        activityindicator.isHidden = !shown
     }
 }
