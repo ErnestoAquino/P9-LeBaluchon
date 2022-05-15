@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WeatherService {
+final class WeatherService {
     weak var viewDelegate: WeatherDelegate?
     private let weatherApiKey = Bundle.main.object(forInfoDictionaryKey: "WEATHER_API_KEY") as? String
     private let breval = City(latitude: "48.9455", longitude: "1.5331")
@@ -49,11 +49,12 @@ class WeatherService {
     // This function retrives wether information for two cities, Breval and NewYork.
     // It creates a request for each one. Using the method of the network manager class
     // it retrives the information.
-    func updateWeatherInformation() {
+    public func updateWeatherInformation() {
         guard let requestForBreval = createRequestFor(breval),
               let requestForNewYork = createRequestFor(newYork) else {return}
         toogleActivityIndicator(shown: true)
         networkManager.getInformation(request: requestForBreval) { weatherBreval, error in
+            self.toogleActivityIndicator(shown: false)
             guard error == nil,
                   let weatherBreval = weatherBreval else {
                 self.warningMessage(self.message)
@@ -61,7 +62,6 @@ class WeatherService {
             }
             self.refreshBrevalTextFieldWith(self.createTextForUpadateInformation(weatherBreval))
             self.networkManager.getInformation(request: requestForNewYork) { weatherNewYork, error in
-                self.toogleActivityIndicator(shown: false)
                 guard error == nil,
                       let weatherNewYork = weatherNewYork else {
                     self.warningMessage(self.message)
