@@ -15,7 +15,7 @@ final class TranslateService {
 
     // This function does the translation, it uses the getInformation method  of the
     // network manager class to request the translation, and retrives the translated text.
-    func doTranslation(textForTranslation: String?) {
+    public func doTranslation(textForTranslation: String?) {
         guard let textForTranslation = textForTranslation else { return }
         guard let resquest = createRequest(textForTranslation) else { return }
         toogleActivityIndicator(shown: true)
