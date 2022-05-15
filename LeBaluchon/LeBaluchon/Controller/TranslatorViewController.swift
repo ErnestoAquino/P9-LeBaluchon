@@ -27,14 +27,7 @@ class TranslatorViewController: UIViewController {
     }
 
     @IBAction func tappedTranslateButton() {
-        toogleActivityIndicator(shown: true)
         translatorService.doTranslation(textForTranslation: frenchTexField.text)
-        toogleActivityIndicator(shown: false)
-    }
-
-    private func toogleActivityIndicator(shown: Bool) {
-        translateButton.isHidden = shown
-        activityIndicator.isHidden = !shown
     }
 }
 
@@ -49,5 +42,10 @@ extension TranslatorViewController: TranslatorDelegate {
 
     func refreshEnglishTextFieldWith(_ translatedTex: String) {
         englishTextField.text = translatedTex
+    }
+
+     func toogleActivityIndicator(shown: Bool) {
+        translateButton.isHidden = shown
+        activityIndicator.isHidden = !shown
     }
 }

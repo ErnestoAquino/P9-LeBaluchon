@@ -17,4 +17,9 @@ extension TranslateService: TranslatorDelegate {
         guard let viewDelegate = viewDelegate else { return }
         viewDelegate.refreshEnglishTextFieldWith(translatedTex)
     }
+
+    func toogleActivityIndicator(shown: Bool) {
+        guard let viewDelegare = viewDelegate else { return }
+        viewDelegare.toogleActivityIndicator(shown: shown)
+    }
 }

@@ -18,7 +18,9 @@ final class TranslateService {
     func doTranslation(textForTranslation: String?) {
         guard let textForTranslation = textForTranslation else { return }
         guard let resquest = createRequest(textForTranslation) else { return }
+        toogleActivityIndicator(shown: true)
         netwokManager.getInformation(request: resquest) { translationResponse, error in
+            self.toogleActivityIndicator(shown: false)
             guard error == nil,
                   let translatedTex = translationResponse?.data?.translations?[0].translatedText else { return }
             self.refreshEnglishTextFieldWith(translatedTex)
