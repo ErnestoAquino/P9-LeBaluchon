@@ -32,7 +32,7 @@ class NetworkManager<T: Decodable> {
     }
 
 }
-
+//comentarios 
 class TestNM<T: Decodable> {
     var shared = TestNM<T>()
     private init () {}
