@@ -7,13 +7,15 @@
 
 import Foundation
 
-class CurrencyConverterService: CurrencyConverterDelegate {
+final class CurrencyConverterService {
 
     weak var viewDelegate: CurrencyConverterDelegate?
-    let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
-    var currency: Currency = .USD
-    var moneyToConvert = ""
-    private var task: URLSessionDataTask?
+    private let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
+    private let urlBase = "http://data.fixer.io/api/latest"
+    private let warningMessage = "We have un little problem, please check your internet connection."
+    private let networkManager = NetworkManager<ExchangeRate>()
+    private var exchangeRateLocal: ExchangeRate?
+    public var currency: Currency = .USD
     enum Currency: String {
         case USD
         case MXN
@@ -21,49 +23,42 @@ class CurrencyConverterService: CurrencyConverterDelegate {
         case GBP
     }
 
-     private  func getExchangeRate(completion: @escaping (ExchangeRate?, Error?) -> Void) {
-         let testUrl = URL(string: createUrl(apiKey))
-         var request = URLRequest(url: testUrl!)
-        request.httpMethod = "GET"
-        let session = URLSession(configuration: .default)
-        task?.cancel()
-        task = session.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
-                guard error == nil,
-                      let data = data,
-                      let response = response as? HTTPURLResponse,
-                      response.statusCode == 200 else {
-                    completion(nil, nil)
-                    return
-                }
-                let decoderExchange = JSONDecoder()
-                decoderExchange.keyDecodingStrategy = .convertFromSnakeCase
-                decoderExchange.dateDecodingStrategy = .secondsSince1970
-                if let exchangeRates = try? decoderExchange.decode(ExchangeRate.self, from: data) {
-                    completion(exchangeRates, error)
-                } else {
-                    completion(nil, nil)
-                }
-            }
+    /* This function performs the operation requested by the controller.
+     It first verifies that what the user has entered is valid.
+     Second it verifies that there is no local structure with the necessary data to perform the calculation.
+     If there is already data stored in the exchangeRateLocal variable, it will use this data and will not make another call.
+     Third, if there is no information stored in the variable, it will create a URL Request to use the getInformation method of the networManager class.
+     */
+    public func doConversion(eurosToBeConverted: String?) {
+        guard stringWithEurosIsValid(eurosToBeConverted) else {
+            warningMessage("Please enter a valid amount (greater than 0 and less than 1 000 000).")
+            return
         }
-        task?.resume()
-    }
-
-    func doConversion(value: String?) {
-        guard stringWithEurosIsValid(value) else {
-        warningMessage("Please enter a valid amount (greater than 0 and less than 1 000 000).")
-        return }
-        getExchangeRate { exchangeRate, error in
+        guard exchangeRateLocal == nil else {
+            guard let exchangeRateLocal = exchangeRateLocal else { return }
+            let result = calculateConversion(euros: eurosToBeConverted, exchangeData: exchangeRateLocal)
+            refreshTextViewWithValue(result)
+            return
+        }
+        guard let request = createRequest() else {
+            warningMessage("We have un little problem, please check your internet connection.")
+            return
+        }
+        toogleActivityIndicator(shown: true)
+        networkManager.getInformation(request: request) { exchangeRate, error in
+            self.toogleActivityIndicator(shown: false)
             guard error == nil,
-                  let exchangeRate = exchangeRate else {
+                  let exchageInformation = exchangeRate else {
                 self.warningMessage("We have un little problem, please check your internet connection.")
                 return
             }
-            let resulat = self.calculateConversion(euros: value, exchangeData: exchangeRate)
-            self.refreshTextViewWithValue("\(resulat)")
+            self.exchangeRateLocal = exchageInformation
+            let result = self.calculateConversion(euros: eurosToBeConverted, exchangeData: exchageInformation)
+            self.refreshTextViewWithValue(result)
         }
     }
 
+    // This function performs the conversion calculation.
     private func calculateConversion(euros: String?, exchangeData: ExchangeRate) -> String {
         var conversionResult = -0.0
 
@@ -76,6 +71,7 @@ class CurrencyConverterService: CurrencyConverterDelegate {
         return String(conversionResult)
     }
 
+    // This function verifies the amount entered by the user is valid.
     private func stringWithEurosIsValid(_ value: String?) -> Bool {
         guard let value = value,
               let valueHowDouble = Double(value),
@@ -84,29 +80,14 @@ class CurrencyConverterService: CurrencyConverterDelegate {
         return true
     }
 
-    private func createUrl(_ apiKey: String?) -> String {
-        guard let key = apiKey else {
-            return ""
-        }
-        let urlWithKey = "http://data.fixer.io/api/latest?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
-        return urlWithKey
+    // This function create a URL Request for URL Session.
+    private func createRequest() -> URLRequest? {
+        guard let key = apiKey else {return nil}
+        let urlWithKey = "\(urlBase)?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
+        guard let urlExchangeRate = URL(string: urlWithKey) else {return nil}
+        var request = URLRequest(url: urlExchangeRate)
+        request.httpMethod = "GET"
+
+        return request
     }
-
-    func warningMessage(_ message: String) {
-        guard let viewDelegate = viewDelegate else { return }
-        viewDelegate.warningMessage(message)
-    }
-
-    func refreshTextViewWithValue(_ value: String) {
-        guard let viewDelegate = viewDelegate else { return }
-        viewDelegate.refreshTextViewWithValue(value)
-    }
-
-}
-
-struct ExchangeRate: Decodable {
-    let success: Bool?
-    let timestamp: Date?
-    let base: String?
-    let rates: [String: Double]?
 }

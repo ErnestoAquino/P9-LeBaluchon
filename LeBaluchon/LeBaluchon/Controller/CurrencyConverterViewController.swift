@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CurrencyConverterViewController: UIViewController, CurrencyConverterDelegate {
+class CurrencyConverterViewController: UIViewController {
 
     let currencyConverter = CurrencyConverterService()
 
@@ -28,12 +28,16 @@ class CurrencyConverterViewController: UIViewController, CurrencyConverterDelega
         switch currencySegmentedControl.selectedSegmentIndex {
         case 0:
             currencyConverter.currency = .USD
+            resultTextField.placeholder = "u.s. dollar"
         case 1:
             currencyConverter.currency = .MXN
+            resultTextField.placeholder = "mexican peso"
         case 2:
             currencyConverter.currency = .JPY
+            resultTextField.placeholder = "japanese yen"
         case 3:
             currencyConverter.currency = .GBP
+            resultTextField.placeholder = "british pound"
         default: break
         }
 
@@ -44,16 +48,12 @@ class CurrencyConverterViewController: UIViewController, CurrencyConverterDelega
     }
 
     @IBAction func tappedConvertButton() {
-        toogleActivityIndicator(shown: true)
-        currencyConverter.doConversion(value: euroTextField.text)
-        toogleActivityIndicator(shown: false)
+        currencyConverter.doConversion(eurosToBeConverted: euroTextField.text)
     }
 
-    private func toogleActivityIndicator(shown: Bool) {
-        buttonConvert.isHidden = shown
-        activityIndicator.isHidden = !shown
-    }
+}
 
+extension CurrencyConverterViewController: CurrencyConverterDelegate {
     func warningMessage(_ message: String) {
         let alert: UIAlertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel)
@@ -63,5 +63,10 @@ class CurrencyConverterViewController: UIViewController, CurrencyConverterDelega
 
     func refreshTextViewWithValue(_ value: String) {
         resultTextField.text = value
+    }
+
+     func toogleActivityIndicator(shown: Bool) {
+        buttonConvert.isHidden = shown
+        activityIndicator.isHidden = !shown
     }
 }

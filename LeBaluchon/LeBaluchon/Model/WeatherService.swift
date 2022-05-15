@@ -7,61 +7,17 @@
 
 import Foundation
 
-class WeatherService {
-    weak var viewDelegate: WeatherProtocol?
-    private let weatherApiKey = Bundle.main.object(forInfoDictionaryKey: "WEATHER_API_KEY")
+final class WeatherService {
+    weak var viewDelegate: WeatherDelegate?
+    private let weatherApiKey = Bundle.main.object(forInfoDictionaryKey: "WEATHER_API_KEY") as? String
     private let breval = City(latitude: "48.9455", longitude: "1.5331")
     private let newYork = City(latitude: "40.7143", longitude: "-74.006")
-    private let urlBase = URL(string: "https://api.openweathermap.org/data/2.5/weather")!
+    private let urlBase = "https://api.openweathermap.org/data/2.5/weather"
+    private var networkManager = NetworkManager<WeatherData>()
+    private let message = "Sorry, we have a little problem please check your internet connection."
 
-    private func getWeatherInformation(_ city: City, completionHandler: @escaping (WeatherData?, Error?) -> Void) {
-        let urlWeather = URL(string: createUrlFor(city))
-        var request = URLRequest(url: urlWeather!)
-        request.httpMethod = "GET"
-        let session = URLSession(configuration: .default)
-        let task = session.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
-                guard error == nil,
-                      let data = data,
-                      let response = response as? HTTPURLResponse,
-                      response.statusCode == 200 else { return  completionHandler(nil, nil)}
-                let decoderWeather = JSONDecoder()
-                decoderWeather.keyDecodingStrategy = .convertFromSnakeCase
-                decoderWeather.dateDecodingStrategy = .secondsSince1970
-                guard let weatherInformation = try? decoderWeather.decode(WeatherData.self, from: data) else { return completionHandler(nil, nil)}
-                completionHandler(weatherInformation, nil)
-                print(weatherInformation)
-            }
-        }
-        task.resume()
-    }
-
-    func updateWeatherInformation() {
-        getWeatherInformation(breval) { weatherData, error in
-            guard error == nil,
-                  let weatherData = weatherData else {
-                self.warningMessage("Sorry, we have a little problem, please check your internet connection")
-                return
-            }
-            self.refreshBrevalTextFieldWith(self.createTextForUpadateInformation(weatherData))
-        }
-        getWeatherInformation(newYork) { weatherData, error in
-            guard error == nil,
-                  let weatherData = weatherData else {
-                self.warningMessage("Sorry, we have a little problem, please check your internet connection")
-                return
-            }
-            self.refreshNewYorkTextFieldWith(self.createTextForUpadateInformation(weatherData))
-        }
-    }
-
-    private func createUrlFor(_ city: City) -> String {
-        guard let key = weatherApiKey else { return "" }
-        let urlWithKey =
-        "https://api.openweathermap.org/data/2.5/weather?lat=\(city.latitude)&lon=\(city.longitude)&appid=\(key)&units=metric"
-        return urlWithKey
-    }
-
+    // This function retrives the information to be displayed to the user from a Weather Data
+    // structure and stores it ini a string.
     private func createTextForUpadateInformation(_ weather: WeatherData) -> String {
         var text = "Sorry, we have a little problem."
         guard let description = weather.weather?[0].description,
@@ -72,58 +28,47 @@ class WeatherService {
 
         text = """
         \(description.uppercased())
-        \(temperatureMin) °C - \(temperatureMax) °C
+        \(temperatureMin) °C min - \(temperatureMax) °C max
         \(windSpeed) Km/h
         \(humidity) % Humidity
         """
         return text
     }
-}
+    // This function create a URL Request for URL Session.
+    // Receives as parameter the city from which you want to
+    // obtain the weather information.
+    private func createRequestFor(_ city: City) -> URLRequest? {
+        guard let key = weatherApiKey else {return nil}
+        let urlWithKey = "\(urlBase)?lat=\(city.latitude)&lon=\(city.longitude)&appid=\(key)&units=metric"
+        guard let urlWeather = URL(string: urlWithKey) else {return nil}
+        var request = URLRequest(url: urlWeather)
+        request.httpMethod = "GET"
 
-extension WeatherService: WeatherProtocol {
-    func warningMessage(_ message: String) {
-        guard let viewDelegate = viewDelegate else {return}
-        viewDelegate.warningMessage(message)
+        return request
     }
-
-    func refreshNewYorkTextFieldWith(_ value: String) {
-        guard let viewDelegate = viewDelegate else {return}
-        viewDelegate.refreshNewYorkTextFieldWith(value)
+    // This function retrives wether information for two cities, Breval and NewYork.
+    // It creates a request for each one. Using the method of the network manager class
+    // it retrives the information.
+    public func updateWeatherInformation() {
+        guard let requestForBreval = createRequestFor(breval),
+              let requestForNewYork = createRequestFor(newYork) else {return}
+        toogleActivityIndicator(shown: true)
+        networkManager.getInformation(request: requestForBreval) { weatherBreval, error in
+            self.toogleActivityIndicator(shown: false)
+            guard error == nil,
+                  let weatherBreval = weatherBreval else {
+                self.warningMessage(self.message)
+                return
+            }
+            self.refreshBrevalTextFieldWith(self.createTextForUpadateInformation(weatherBreval))
+            self.networkManager.getInformation(request: requestForNewYork) { weatherNewYork, error in
+                guard error == nil,
+                      let weatherNewYork = weatherNewYork else {
+                    self.warningMessage(self.message)
+                    return
+                }
+                self.refreshNewYorkTextFieldWith(self.createTextForUpadateInformation(weatherNewYork))
+            }
+        }
     }
-
-    func refreshBrevalTextFieldWith(_ value: String) {
-        guard let viewDelegate = viewDelegate else {return}
-        viewDelegate.refreshBrevalTextFieldWith(value)
-    }
-}
-
-struct WeatherData: Decodable {
-    let weather: [Weather]?
-    let main: [String: Double]?
-    let wind: [String: Double]?
-    let date: Date?
-
-    private enum CodingKeys: String, CodingKey {
-        case date = "dt"
-        case weather
-        case main
-        case wind
-    }
-}
-
-struct Weather: Decodable {
-    let weatherID: Int?
-    let main: String?
-    let description: String?
-
-    private enum CodingKeys: String, CodingKey {
-        case weatherID = "id"
-        case main
-        case description
-    }
-}
-
-struct City {
-    let latitude: String
-    let longitude: String
 }

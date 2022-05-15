@@ -174,7 +174,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fJF-HU-Dei">
                                         <rect key="frame" x="0.0" y="221.33333333333331" width="388" height="34"/>
                                         <subviews>
-                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CE5-U0-lK7">
+                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="u.s. dollar" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CE5-U0-lK7">
                                                 <rect key="frame" x="0.0" y="0.0" width="388" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -259,16 +259,15 @@
                                         <color key="textColor" red="0.31384962799999999" green="0.05028162152" blue="0.2470723987" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNP-qv-0QX">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Pour traduire, appuyez sur le bouton &quot;Translate&quot;" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="NNP-qv-0QX">
                                         <rect key="frame" x="0.0" y="96.333333333333343" width="388" height="114"/>
-                                        <color key="backgroundColor" red="0.94515699149999999" green="0.94141882659999998" blue="0.91764307020000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.80401503975722854" green="0.79684179384275766" blue="0.79262606823419735" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="NNP-qv-0QX" secondAttribute="height" multiplier="17:5" id="SqC-M9-Dl8"/>
                                         </constraints>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" red="0.31384962799999999" green="0.05028162152" blue="0.2470723987" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7w-cO-uyX">
                                         <rect key="frame" x="0.0" y="230.33333333333331" width="388" height="20.333333333333343"/>
@@ -278,23 +277,25 @@
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="j4E-67-opJ">
                                         <rect key="frame" x="0.0" y="270.66666666666669" width="388" height="114.33333333333331"/>
-                                        <color key="backgroundColor" red="0.94515699149999999" green="0.94141882659999998" blue="0.91764307020000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.8040150398" green="0.79684179379999998" blue="0.79262606820000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="j4E-67-opJ" secondAttribute="height" multiplier="17:5" id="2Zq-Xa-HPf"/>
                                         </constraints>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" red="0.22756475209999999" green="0.028866715729999999" blue="0.1647150517" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8Z-jf-muX">
                                         <rect key="frame" x="0.0" y="405" width="388" height="39.333333333333314"/>
-                                        <color key="backgroundColor" red="0.87922078370000001" green="0.315066874" blue="0.2391568422" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.87922114129999995" green="0.36628371479999999" blue="0.23914638160000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="tintColor" red="0.22756475209999999" green="0.028866715729999999" blue="0.1647150517" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Translate">
                                             <fontDescription key="titleFontDescription" type="system" weight="heavy" pointSize="21"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="tappedTranslateButton" destination="DJf-bI-L0d" eventType="touchUpInside" id="x5H-2a-GW1"/>
+                                        </connections>
                                     </button>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="ACi-GJ-nvJ">
                                         <rect key="frame" x="0.0" y="464.33333333333337" width="388" height="20"/>
@@ -317,7 +318,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Translator" image="Translator" id="VjF-RB-50n"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="ACi-GJ-nvJ" id="IZZ-Ya-OLP"/>
+                        <outlet property="englishTextField" destination="j4E-67-opJ" id="wO9-aw-sad"/>
                         <outlet property="frenchTexField" destination="NNP-qv-0QX" id="VEO-QE-2kD"/>
+                        <outlet property="translateButton" destination="v8Z-jf-muX" id="BtE-z3-6b2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P47-YJ-h64" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

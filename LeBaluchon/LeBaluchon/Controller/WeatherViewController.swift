@@ -25,12 +25,13 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var activityindicator: UIActivityIndicatorView!
 
     @IBAction func tappedUdateButton() {
+        toogleActivityIndicator(shown: true)
         weather.updateWeatherInformation()
+        toogleActivityIndicator(shown: false)
     }
-
 }
 
-extension WeatherViewController: WeatherProtocol {
+extension WeatherViewController: WeatherDelegate {
     func refreshNewYorkTextFieldWith(_ value: String) {
         newYorkTextField.text = value
     }
@@ -43,5 +44,10 @@ extension WeatherViewController: WeatherProtocol {
         let action = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(action)
         present(alert, animated: true)
+    }
+
+     func toogleActivityIndicator(shown: Bool) {
+        updateButton.isHidden = shown
+        activityindicator.isHidden = !shown
     }
 }
