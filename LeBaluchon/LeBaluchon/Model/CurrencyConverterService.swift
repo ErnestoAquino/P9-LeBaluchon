@@ -44,7 +44,9 @@ final class CurrencyConverterService {
             warningMessage("We have un little problem, please check your internet connection.")
             return
         }
+        toogleActivityIndicator(shown: true)
         networkManager.getInformation(request: request) { exchangeRate, error in
+            self.toogleActivityIndicator(shown: false)
             guard error == nil,
                   let exchageInformation = exchangeRate else {
                 self.warningMessage("We have un little problem, please check your internet connection.")

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CurrencyConverterViewController: UIViewController, CurrencyConverterDelegate {
+class CurrencyConverterViewController: UIViewController {
 
     let currencyConverter = CurrencyConverterService()
 
@@ -48,16 +48,12 @@ class CurrencyConverterViewController: UIViewController, CurrencyConverterDelega
     }
 
     @IBAction func tappedConvertButton() {
-        toogleActivityIndicator(shown: true)
         currencyConverter.doConversion(eurosToBeConverted: euroTextField.text)
-        toogleActivityIndicator(shown: false)
     }
 
-    private func toogleActivityIndicator(shown: Bool) {
-        buttonConvert.isHidden = shown
-        activityIndicator.isHidden = !shown
-    }
+}
 
+extension CurrencyConverterViewController: CurrencyConverterDelegate {
     func warningMessage(_ message: String) {
         let alert: UIAlertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel)
@@ -67,5 +63,10 @@ class CurrencyConverterViewController: UIViewController, CurrencyConverterDelega
 
     func refreshTextViewWithValue(_ value: String) {
         resultTextField.text = value
+    }
+
+     func toogleActivityIndicator(shown: Bool) {
+        buttonConvert.isHidden = shown
+        activityIndicator.isHidden = !shown
     }
 }

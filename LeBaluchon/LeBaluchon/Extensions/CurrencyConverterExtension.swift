@@ -17,4 +17,9 @@ extension CurrencyConverterService: CurrencyConverterDelegate {
         guard let viewDelegate = viewDelegate else { return }
         viewDelegate.refreshTextViewWithValue(value)
     }
+
+    func toogleActivityIndicator(shown: Bool) {
+        guard let viewDelegate = viewDelegate else { return }
+        viewDelegate.toogleActivityIndicator(shown: shown)
+    }
 }
