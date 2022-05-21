@@ -7,35 +7,7 @@
 
 import Foundation
 
-class NetworkManager<T: Decodable> {
-
-    private var task: URLSessionDataTask?
-    var session = URLSession(configuration: .default)
-
-    func getInformation(request: URLRequest?, completionHandler: @escaping (T?, Error?) -> Void) {
-        guard let request = request else {return}
-
-        task?.cancel()
-        task = session.dataTask(with: request, completionHandler: { data, response, error in
-            DispatchQueue.main.async {
-                guard error == nil,
-                      let data = data,
-                      let response = response as? HTTPURLResponse,
-                      response.statusCode == 200 else {return}
-                let decoderData = JSONDecoder()
-                decoderData.keyDecodingStrategy = .useDefaultKeys
-                decoderData.dateDecodingStrategy = .secondsSince1970
-                guard let informationObtained = try? decoderData.decode(T?.self, from: data) else {return}
-                completionHandler(informationObtained, error)
-            }
-        })
-        task?.resume()
-    }
-
-}
-// MARK: - Ambiente de pruebas
-
-public final class TestNetworkManager<T: Decodable> {
+public final class NetworkManager<T: Decodable> {
 
     private var task: URLSessionDataTaskProtocol?
     private var session: URLSessionProtocol
