@@ -25,11 +25,11 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var activityindicator: UIActivityIndicatorView!
 
     @IBAction func tappedUdateButton() {
-        toogleActivityIndicator(shown: true)
         weather.updateWeatherInformation()
-        toogleActivityIndicator(shown: false)
     }
 }
+
+// MARK: - Extension
 
 extension WeatherViewController: WeatherDelegate {
     func refreshNewYorkTextFieldWith(_ value: String) {
