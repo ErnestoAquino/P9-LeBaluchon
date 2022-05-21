@@ -55,7 +55,6 @@ final class WeatherService {
               let requestForNewYork = createRequestFor(newYork) else {return}
         toogleActivityIndicator(shown: true)
         networkManager.getInformation(request: requestForBreval) { weatherBreval, error in
-            self.toogleActivityIndicator(shown: false)
             guard error == nil,
                   let weatherBreval = weatherBreval else {
                 self.warningMessage(self.message)
@@ -63,6 +62,7 @@ final class WeatherService {
             }
             self.refreshBrevalTextFieldWith(self.createTextForUpadateInformation(weatherBreval))
             self.networkManager.getInformation(request: requestForNewYork) { weatherNewYork, error in
+                self.toogleActivityIndicator(shown: false)
                 guard error == nil,
                       let weatherNewYork = weatherNewYork else {
                     self.warningMessage(self.message)
