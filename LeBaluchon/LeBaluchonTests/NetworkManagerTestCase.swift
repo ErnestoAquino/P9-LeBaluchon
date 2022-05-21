@@ -34,7 +34,7 @@ class NetworkManagerTestCase: XCTestCase {
     func testGivenErrorInResponse_WhenLaunchGetInformation_ThenShouldHaveAnError() {
         // Given
         let sessionFake = URLSessionFake(data: FakeResponse.translationCorrectData, response: FakeResponse.responseOK, error: FakeResponse.anError)
-        let fakeNetworkManager = TestNetworkManager<TranslationResponse>(networkManagerSession: sessionFake)
+        let fakeNetworkManager = NetworkManager<TranslationResponse>(networkManagerSession: sessionFake)
         let request = createRequestForTest()
         // When
         fakeNetworkManager.getInformation(request: request) { translation, error in
@@ -49,7 +49,7 @@ class NetworkManagerTestCase: XCTestCase {
     func testGivenEmptyRequest_WhenLaunchGetInformation_ThenCompletionHandlerShouldBeNilAndNil() {
         // Given
         let sessionFake = URLSessionFake(data: FakeResponse.translationCorrectData, response: FakeResponse.responseOK, error: nil)
-        let fakeNetworkManager = TestNetworkManager<TranslationResponse>(networkManagerSession: sessionFake)
+        let fakeNetworkManager = NetworkManager<TranslationResponse>(networkManagerSession: sessionFake)
 
         // When
         fakeNetworkManager.getInformation(request: FakeResponse.emptyRequest) { translation, error in
@@ -62,7 +62,7 @@ class NetworkManagerTestCase: XCTestCase {
     func testGivenNoDataInResponse_WhenLaunchGetInformation_ThenComplationHandlerShouldBeNilAndNil() {
         // Given
         let sessionFake = URLSessionFake(data: nil, response: FakeResponse.responseOK, error: nil)
-        let fakeNetworkManager = TestNetworkManager<TranslationResponse>(networkManagerSession: sessionFake)
+        let fakeNetworkManager = NetworkManager<TranslationResponse>(networkManagerSession: sessionFake)
         let request = createRequestForTest()
         // When
         fakeNetworkManager.getInformation(request: request) { tranalation, error in
@@ -77,7 +77,7 @@ class NetworkManagerTestCase: XCTestCase {
     func testGivenWrongStatusCode_WhenGetInformation_ThenCompletionHandlerShouldBeNil() {
         // Given
         let sessionFake = URLSessionFake(data: FakeResponse.translationCorrectData, response: FakeResponse.responseFail, error: nil)
-        let fakeNetworkManager = TestNetworkManager<TranslationResponse>(networkManagerSession: sessionFake)
+        let fakeNetworkManager = NetworkManager<TranslationResponse>(networkManagerSession: sessionFake)
         let request = createRequestForTest()
         // When
         fakeNetworkManager.getInformation(request: request) { translation, error in
@@ -92,7 +92,7 @@ class NetworkManagerTestCase: XCTestCase {
     func testGivenIncorretDataReceived_WhenGetInformation_ThenCompletionHandlerShouldBeNilAsdNil() {
         // Given
         let sessionFake = URLSessionFake(data: FakeResponse.incorretData, response: FakeResponse.responseOK, error: nil)
-        let fakeNetworkManager = TestNetworkManager<TranslationResponse>(networkManagerSession: sessionFake)
+        let fakeNetworkManager = NetworkManager<TranslationResponse>(networkManagerSession: sessionFake)
         let request = createRequestForTest()
         // When
         fakeNetworkManager.getInformation(request: request) { translation, error in
@@ -107,7 +107,7 @@ class NetworkManagerTestCase: XCTestCase {
     func testGivenCorrectResponseTranslation_WhenGetInformation_ThenShouldHaveCorrectTextTranslated() {
         // Given
         let sessionFake = URLSessionFake(data: FakeResponse.translationCorrectData, response: FakeResponse.responseOK, error: nil)
-        let fakeNetworkManager = TestNetworkManager<TranslationResponse>(networkManagerSession: sessionFake)
+        let fakeNetworkManager = NetworkManager<TranslationResponse>(networkManagerSession: sessionFake)
         let request = createRequestForTest()
         // When
         fakeNetworkManager.getInformation(request: request) { translation, error in
@@ -125,7 +125,7 @@ class NetworkManagerTestCase: XCTestCase {
     func testGivenCorrectResponseWeather_WhenGetInformation_ThenShouldHaveCorrectInformation() {
         // Given
         let sessionFake = URLSessionFake(data: FakeResponse.WeatherCorrectData, response: FakeResponse.responseOK, error: nil)
-        let fakeNetWorkManager = TestNetworkManager<WeatherData>(networkManagerSession: sessionFake)
+        let fakeNetWorkManager = NetworkManager<WeatherData>(networkManagerSession: sessionFake)
         let request = createRequestForTest()
         // When
         fakeNetWorkManager.getInformation(request: request) { weather, error in
@@ -143,7 +143,7 @@ class NetworkManagerTestCase: XCTestCase {
     func testGivenCorrectResponseExchangeRate_WhenGetInformation_ThenShouldHaveCorrectInformation() {
         // Given
         let sessionFake = URLSessionFake(data: FakeResponse.ExchangeRateCorrectData, response: FakeResponse.responseOK, error: nil)
-        let fakeNetworkManager = TestNetworkManager<ExchangeRate>(networkManagerSession: sessionFake)
+        let fakeNetworkManager = NetworkManager<ExchangeRate>(networkManagerSession: sessionFake)
         let request = createRequestForTest()
         // When
         fakeNetworkManager.getInformation(request: request) { exchangeRate, error in
