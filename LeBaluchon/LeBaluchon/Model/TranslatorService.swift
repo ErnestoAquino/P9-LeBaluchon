@@ -18,23 +18,14 @@ final class TranslateService {
     public func doTranslation(textForTranslation: String?) {
         guard let textForTranslation = textForTranslation else { return }
         guard let resquest = createRequest(textForTranslation) else { return }
-//        let session = URLSession(configuration: .default)
-        let testNetworkManager = TestNetworkManager<TranslationResponse>(networkManagerSession: session)
+        let networkManager = NetworkManager<TranslationResponse>(networkManagerSession: session)
         toogleActivityIndicator(shown: true)
-        testNetworkManager.getInformation(request: resquest) { translationResponse, error in
+        networkManager.getInformation(request: resquest) { translationResponse, error in
             self.toogleActivityIndicator(shown: false)
             guard error == nil,
                   let translatedText = translationResponse?.data?.translations?[0].translatedText else { return }
             self.refreshEnglishTextFieldWith(translatedText)
         }
-
-//        toogleActivityIndicator(shown: true)
-//        netwokManager.getInformation(request: resquest) { translationResponse, error in
-//            self.toogleActivityIndicator(shown: false)
-//            guard error == nil,
-//                  let translatedTex = translationResponse?.data?.translations?[0].translatedText else { return }
-//            self.refreshEnglishTextFieldWith(translatedTex)
-//        }
     }
 
     // This function create a URL Request for URL Session.
@@ -48,10 +39,5 @@ final class TranslateService {
         request.httpBody = body.data(using: .utf8)
 
         return request
-    }
-
-    private func createSession() -> URLSession {
-        let session = URLSession(configuration: .default)
-        return session
     }
 }

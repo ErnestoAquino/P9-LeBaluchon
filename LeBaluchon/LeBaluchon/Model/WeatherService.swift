@@ -13,7 +13,8 @@ final class WeatherService {
     private let breval = City(latitude: "48.9455", longitude: "1.5331")
     private let newYork = City(latitude: "40.7143", longitude: "-74.006")
     private let urlBase = "https://api.openweathermap.org/data/2.5/weather"
-    private var networkManager = NetworkManager<WeatherData>()
+    private let session = URLSession.shared
+    private var networkManager = NetworkManager<WeatherData>(networkManagerSession: URLSession.shared)
     private let message = "Sorry, we have a little problem please check your internet connection."
 
     // This function retrives the information to be displayed to the user from a Weather Data
