@@ -13,7 +13,6 @@ final class WeatherService {
     private let breval = City(latitude: "48.9455", longitude: "1.5331")
     private let newYork = City(latitude: "40.7143", longitude: "-74.006")
     private let urlBase = "https://api.openweathermap.org/data/2.5/weather"
-    private let session = URLSession.shared
     private var networkManager = NetworkManager<WeatherData>(networkManagerSession: URLSession.shared)
     private let message = "Sorry, we have a little problem please check your internet connection."
 
@@ -48,7 +47,7 @@ final class WeatherService {
         return request
     }
     // This function retrives wether information for two cities, Breval and NewYork.
-    // It creates a request for each one. Using the method of the network manager class
+    // It creates a request for each one. Using the method getInformation of the network manager class
     // it retrives the information.
     public func updateWeatherInformation() {
         guard let requestForBreval = createRequestFor(breval),
