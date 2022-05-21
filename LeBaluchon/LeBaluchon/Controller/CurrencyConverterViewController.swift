@@ -53,6 +53,8 @@ class CurrencyConverterViewController: UIViewController {
 
 }
 
+// MARK: - Extansion
+
 extension CurrencyConverterViewController: CurrencyConverterDelegate {
     func warningMessage(_ message: String) {
         let alert: UIAlertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
