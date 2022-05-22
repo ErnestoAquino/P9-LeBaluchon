@@ -12,3 +12,4 @@ protocol CurrencyConverterDelegate: AnyObject {
     func refreshTextViewWithValue(_ value: String)
     func toogleActivityIndicator(shown: Bool)
 }
+
