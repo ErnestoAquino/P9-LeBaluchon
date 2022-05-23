@@ -13,7 +13,7 @@ final class CurrencyConverterService {
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
     private let urlBase = "http://data.fixer.io/api/latest"
     private let warningMessage = "We have un little problem, please check your internet connection."
-    private let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: URLSession.shared)
+    let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: URLSession.shared)
     private var exchangeRateLocal: ExchangeRate?
     public var currency: Currency = .USD
 
@@ -23,7 +23,6 @@ final class CurrencyConverterService {
         case JPY
         case GBP
     }
-
     /* This function performs the operation requested by the controller.
      It first verifies that what the user has entered is valid.
      Second it verifies that there is no local structure with the necessary data to perform the calculation.
