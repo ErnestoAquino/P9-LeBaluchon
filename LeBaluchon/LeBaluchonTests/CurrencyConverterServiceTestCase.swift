@@ -10,6 +10,15 @@ import XCTest
 
 class CurrencyConverterServiceTestCase: XCTestCase {
 
+    var mockDelegate: CurrencyConverterMockDelegate!
+    var currencyConverter: CurrencyConverterService!
+
+    override func setUp() {
+        currencyConverter = CurrencyConverterService()
+        mockDelegate = CurrencyConverterMockDelegate()
+        currencyConverter?.viewDelegate = mockDelegate
+    }
+
     func testGivenCurrencyIsUsd_WhenIselectMnx_ThenCurencyIsMnx() {
         let currencyConverterService =  CurrencyConverterService()
         // Given
@@ -21,16 +30,11 @@ class CurrencyConverterServiceTestCase: XCTestCase {
     }
 
     func testGivenAnInvaidAmount_WhenLaunchDoConversion_ThenWarningMessageIsCalled() {
-        let mockDelegate = CurrencyConverterMockDelegate()
-        let currencyConverterService =  CurrencyConverterService()
-        currencyConverterService.viewDelegate = mockDelegate
-
         // Given
         let wrongAmount = "I am a wrong amout"
         // When
-        currencyConverterService.doConversion(eurosToBeConverted: wrongAmount)
+        currencyConverter.doConversion(eurosToBeConverted: wrongAmount)
         // Then
         XCTAssertTrue(mockDelegate.warningMessageIsCalled)
     }
-
 }

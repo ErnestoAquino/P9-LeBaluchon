@@ -13,7 +13,7 @@ final class CurrencyConverterService {
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
     private let urlBase = "http://data.fixer.io/api/latest"
     private let warningMessage = "We have un little problem, please check your internet connection."
-    let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: URLSession.shared)
+    private let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: URLSession.shared)
     private var exchangeRateLocal: ExchangeRate?
     public var currency: Currency = .USD
 

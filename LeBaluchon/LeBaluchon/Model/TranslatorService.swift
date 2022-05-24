@@ -11,11 +11,17 @@ final class TranslateService {
     weak var viewDelegate: TranslatorDelegate?
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "TRANSLATOR_API_KEY") as? String
     private let urlBase = "https://translation.googleapis.com/language/translate/v2"
-    private let networkManager = NetworkManager<TranslationResponse>(networkManagerSession: URLSession.shared)
+//    private let networkManager = NetworkManager<TranslationResponse>(networkManagerSession: URLSession.shared)
+    private let session: URLSessionProtocol
+
+    init(session: URLSessionProtocol) {
+        self.session = session
+    }
 
     // This function does the translation, it uses the getInformation method  of the
     // network manager class to request the translation, and retrives the translated text.
     public func doTranslation(textForTranslation: String?) {
+        let networkManager = NetworkManager<TranslationResponse>(networkManagerSession: session)
         guard let textForTranslation = textForTranslation else { return }
         guard let resquest = createRequest(textForTranslation) else { return }
         toogleActivityIndicator(shown: true)

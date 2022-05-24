@@ -64,6 +64,7 @@ class TranslatorMockDelegate: TranslatorDelegate {
 
     func refreshEnglishTextFieldWith(_ translatedTex: String) {
         refreshEnglishTextFieldWithIsCalled = true
+        print(translatedTex)
     }
 
     func toogleActivityIndicator(shown: Bool) {
