@@ -8,7 +8,7 @@
 import UIKit
 
 class TranslatorViewController: UIViewController {
-    let translatorService = TranslateService(session: URLSession.shared)
+    let translatorService = TranslateService(URLSession.shared)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class TranslatorViewController: UIViewController {
     }
 
     @IBAction func tappedTranslateButton() {
-        translatorService.doTranslation(textForTranslation: frenchTexField.text)
+        translatorService.doTranslation(textForTranslation: frenchTexField.text) { _ in }
     }
 }
 

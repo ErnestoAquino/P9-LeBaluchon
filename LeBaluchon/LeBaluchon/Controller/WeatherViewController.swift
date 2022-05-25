@@ -9,14 +9,14 @@ import UIKit
 
 class WeatherViewController: UIViewController {
 
-    let weather = WeatherService()
+    let weather = WeatherService(URLSession.shared)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         activityindicator.isHidden = true
         updateButton.round()
         weather.viewDelegate = self
-        weather.updateWeatherInformation()
+        weather.updateWeatherInformation { _ in }
     }
 
     @IBOutlet weak var newYorkTextField: UITextView!
@@ -25,7 +25,7 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var activityindicator: UIActivityIndicatorView!
 
     @IBAction func tappedUdateButton() {
-        weather.updateWeatherInformation()
+        weather.updateWeatherInformation { _ in }
     }
 }
 

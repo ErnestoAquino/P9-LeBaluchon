@@ -9,7 +9,7 @@ import UIKit
 
 class CurrencyConverterViewController: UIViewController {
 
-    let currencyConverter = CurrencyConverterService()
+    let currencyConverter = CurrencyConverterService(URLSession.shared)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class CurrencyConverterViewController: UIViewController {
     }
 
     @IBAction func tappedConvertButton() {
-        currencyConverter.doConversion(eurosToBeConverted: euroTextField.text)
+        currencyConverter.doConversion(eurosToBeConverted: euroTextField.text) { _ in }
     }
 
 }

@@ -2,7 +2,7 @@
 //  CurrencyConverterServiceTestCase.swift
 //  LeBaluchonTests
 //
-//  Created by Ernesto Elias on 22/05/2022.
+//  Created by Ernesto Elias Aquino Cifuentes on 25/05/2022.
 //
 
 import XCTest
@@ -10,31 +10,27 @@ import XCTest
 
 class CurrencyConverterServiceTestCase: XCTestCase {
 
-    var mockDelegate: CurrencyConverterMockDelegate!
-    var currencyConverter: CurrencyConverterService!
-
-    override func setUp() {
-        currencyConverter = CurrencyConverterService()
-        mockDelegate = CurrencyConverterMockDelegate()
-        currencyConverter?.viewDelegate = mockDelegate
+    override func setUpWithError() throws {
+        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
-    func testGivenCurrencyIsUsd_WhenIselectMnx_ThenCurencyIsMnx() {
-        let currencyConverterService =  CurrencyConverterService()
-        // Given
-        currencyConverterService.currency = .USD
-        // When
-        currencyConverterService.currency = .MXN
-        // Then
-        XCTAssertTrue(currencyConverterService.currency == .MXN)
+    override func tearDownWithError() throws {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testGivenAnInvaidAmount_WhenLaunchDoConversion_ThenWarningMessageIsCalled() {
-        // Given
-        let wrongAmount = "I am a wrong amout"
-        // When
-        currencyConverter.doConversion(eurosToBeConverted: wrongAmount)
-        // Then
-        XCTAssertTrue(mockDelegate.warningMessageIsCalled)
+    func testExample() throws {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // Any test you write for XCTest can be annotated as throws and async.
+        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
+        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
     }
+
+    func testPerformanceExample() throws {
+        // This is an example of a performance test case.
+        self.measure {
+            // Put the code you want to measure the time of here.
+        }
+    }
+
 }

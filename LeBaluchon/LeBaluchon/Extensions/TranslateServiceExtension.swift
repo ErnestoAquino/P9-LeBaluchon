@@ -9,7 +9,9 @@ import Foundation
 
 extension TranslateService: TranslatorDelegate {
     func warningMessage(_ message: String) {
-        guard let viewDelegate = viewDelegate else { return }
+        guard let viewDelegate = viewDelegate else {
+            return
+        }
         viewDelegate.warningMessage(message)
     }
 

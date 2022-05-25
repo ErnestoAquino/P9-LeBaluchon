@@ -15,6 +15,11 @@ final class WeatherService {
     private let urlBase = "https://api.openweathermap.org/data/2.5/weather"
     private var networkManager = NetworkManager<WeatherData>(networkManagerSession: URLSession.shared)
     private let message = "Sorry, we have a little problem please check your internet connection."
+    private let session: URLSessionProtocol
+
+    init(_ session: URLSessionProtocol) {
+        self.session = session
+    }
 
     // This function retrives the information to be displayed to the user from a Weather Data
     // structure and stores it ini a string.
@@ -34,6 +39,7 @@ final class WeatherService {
         """
         return text
     }
+
     // This function create a URL Request for URL Session.
     // Receives as parameter the city from which you want to
     // obtain the weather information.
@@ -46,21 +52,27 @@ final class WeatherService {
 
         return request
     }
+
     // This function retrives wether information for two cities, Breval and NewYork.
     // It creates a request for each one. Using the method getInformation of the network manager class
     // it retrives the information.
-    public func updateWeatherInformation() {
+    public func updateWeatherInformation(completion: @escaping (Bool) -> Void) {
+        let networkManager = NetworkManager<WeatherData>(networkManagerSession: session)
         guard let requestForBreval = createRequestFor(breval),
-              let requestForNewYork = createRequestFor(newYork) else {return}
+              let requestForNewYork = createRequestFor(newYork) else {
+            warningMessage(message)
+            completion(false)
+            return}
         toogleActivityIndicator(shown: true)
         networkManager.getInformation(request: requestForBreval) { weatherBreval, error in
             guard error == nil,
                   let weatherBreval = weatherBreval else {
                 self.warningMessage(self.message)
+                completion(false)
                 return
             }
             self.refreshBrevalTextFieldWith(self.createTextForUpadateInformation(weatherBreval))
-            self.networkManager.getInformation(request: requestForNewYork) { weatherNewYork, error in
+            networkManager.getInformation(request: requestForNewYork) { weatherNewYork, error in
                 self.toogleActivityIndicator(shown: false)
                 guard error == nil,
                       let weatherNewYork = weatherNewYork else {
@@ -68,6 +80,7 @@ final class WeatherService {
                     return
                 }
                 self.refreshNewYorkTextFieldWith(self.createTextForUpadateInformation(weatherNewYork))
+                completion(true)
             }
         }
     }

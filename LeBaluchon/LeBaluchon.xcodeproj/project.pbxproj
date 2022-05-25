@@ -10,6 +10,7 @@
 		94063BDF283BDB0200611B61 /* WeatherServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94063BDE283BDB0200611B61 /* WeatherServiceTestCase.swift */; };
 		94063BE1283C216100611B61 /* TranslatorServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94063BE0283C216100611B61 /* TranslatorServiceTestCase.swift */; };
 		942ABD10281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942ABD0F281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift */; };
+		94403808283E776900092B24 /* CurrencyConverterServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94403807283E776900092B24 /* CurrencyConverterServiceTestCase.swift */; };
 		944E86E0282AB2A0002B167A /* ExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E86DF282AB2A0002B167A /* ExchangeRate.swift */; };
 		944E86E2282AB381002B167A /* CurrencyConverterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E86E1282AB381002B167A /* CurrencyConverterExtension.swift */; };
 		9468F5E1281687BE00099300 /* CurrencyConverterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9468F5E0281687BE00099300 /* CurrencyConverterService.swift */; };
@@ -38,7 +39,6 @@
 		94E921D428267BEC00494E47 /* TranslatorDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E921D328267BEC00494E47 /* TranslatorDelegateProtocol.swift */; };
 		94F1D5E72820742A00875F61 /* WeatherDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F1D5E62820742A00875F61 /* WeatherDelegateProtocol.swift */; };
 		94F2586328196AB400A480AE /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F2586228196AB400A480AE /* UIButtonExtension.swift */; };
-		94F4D13E283A536D009E4EB3 /* CurrencyConverterServiceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F4D13D283A536D009E4EB3 /* CurrencyConverterServiceTestCase.swift */; };
 		94F4D140283A56BC009E4EB3 /* MocksDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F4D13F283A56BC009E4EB3 /* MocksDelegates.swift */; };
 		94F7DE0A281FD9EF0034CD3F /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F7DE09281FD9EF0034CD3F /* WeatherService.swift */; };
 /* End PBXBuildFile section */
@@ -57,6 +57,7 @@
 		94063BDE283BDB0200611B61 /* WeatherServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceTestCase.swift; sourceTree = "<group>"; };
 		94063BE0283C216100611B61 /* TranslatorServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorServiceTestCase.swift; sourceTree = "<group>"; };
 		942ABD0F281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterDelegateProtocol.swift; sourceTree = "<group>"; };
+		94403807283E776900092B24 /* CurrencyConverterServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterServiceTestCase.swift; sourceTree = "<group>"; };
 		944E86DF282AB2A0002B167A /* ExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRate.swift; sourceTree = "<group>"; };
 		944E86E1282AB381002B167A /* CurrencyConverterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterExtension.swift; sourceTree = "<group>"; };
 		9468F5E0281687BE00099300 /* CurrencyConverterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterService.swift; sourceTree = "<group>"; };
@@ -89,7 +90,6 @@
 		94E921D328267BEC00494E47 /* TranslatorDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorDelegateProtocol.swift; sourceTree = "<group>"; };
 		94F1D5E62820742A00875F61 /* WeatherDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDelegateProtocol.swift; sourceTree = "<group>"; };
 		94F2586228196AB400A480AE /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
-		94F4D13D283A536D009E4EB3 /* CurrencyConverterServiceTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterServiceTestCase.swift; sourceTree = "<group>"; };
 		94F4D13F283A56BC009E4EB3 /* MocksDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MocksDelegates.swift; sourceTree = "<group>"; };
 		94F7DE09281FD9EF0034CD3F /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,10 +137,10 @@
 			isa = PBXGroup;
 			children = (
 				942ABD0F281AB93D00D677F6 /* CurrencyConverterDelegateProtocol.swift */,
-				94ACE4A9281427C000A505E0 /* CurrencyConverterViewController.swift */,
 				94E921D328267BEC00494E47 /* TranslatorDelegateProtocol.swift */,
-				94ACE4AD2814289D00A505E0 /* TranslatorViewController.swift */,
 				94F1D5E62820742A00875F61 /* WeatherDelegateProtocol.swift */,
+				94ACE4A9281427C000A505E0 /* CurrencyConverterViewController.swift */,
+				94ACE4AD2814289D00A505E0 /* TranslatorViewController.swift */,
 				94ACE4AB2814285500A505E0 /* WeatherViewController.swift */,
 			);
 			path = Controller;
@@ -149,7 +149,7 @@
 		947296B52831956800DE62B9 /* LeBaluchonTests */ = {
 			isa = PBXGroup;
 			children = (
-				94F4D13D283A536D009E4EB3 /* CurrencyConverterServiceTestCase.swift */,
+				94403807283E776900092B24 /* CurrencyConverterServiceTestCase.swift */,
 				94063BDE283BDB0200611B61 /* WeatherServiceTestCase.swift */,
 				94063BE0283C216100611B61 /* TranslatorServiceTestCase.swift */,
 				947296BD2831960F00DE62B9 /* NetworkManagerTestCase.swift */,
@@ -348,8 +348,8 @@
 			files = (
 				94063BE1283C216100611B61 /* TranslatorServiceTestCase.swift in Sources */,
 				94063BDF283BDB0200611B61 /* WeatherServiceTestCase.swift in Sources */,
+				94403808283E776900092B24 /* CurrencyConverterServiceTestCase.swift in Sources */,
 				947296BE2831960F00DE62B9 /* NetworkManagerTestCase.swift in Sources */,
-				94F4D13E283A536D009E4EB3 /* CurrencyConverterServiceTestCase.swift in Sources */,
 				947296C62832DC9500DE62B9 /* FakeResponseTranslationData.swift in Sources */,
 				947296C82833DDD100DE62B9 /* UrlSessionFake.swift in Sources */,
 				94F4D140283A56BC009E4EB3 /* MocksDelegates.swift in Sources */,

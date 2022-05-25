@@ -13,9 +13,10 @@ final class CurrencyConverterService {
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
     private let urlBase = "http://data.fixer.io/api/latest"
     private let warningMessage = "We have un little problem, please check your internet connection."
-    private let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: URLSession.shared)
+//    private let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: URLSession.shared)
     private var exchangeRateLocal: ExchangeRate?
     public var currency: Currency = .USD
+    private let session: URLSessionProtocol
 
     enum Currency: String {
         case USD
@@ -23,15 +24,21 @@ final class CurrencyConverterService {
         case JPY
         case GBP
     }
+
+    init(_ session: URLSessionProtocol) {
+        self.session = session
+    }
     /* This function performs the operation requested by the controller.
      It first verifies that what the user has entered is valid.
      Second it verifies that there is no local structure with the necessary data to perform the calculation.
      If there is already data stored in the exchangeRateLocal variable, it will use this data and will not make another call.
      Third, if there is no information stored in the variable, it will create a URL Request to use the getInformation method of the networManager class.
      */
-    public func doConversion(eurosToBeConverted: String?) {
+    public func doConversion(eurosToBeConverted: String?, completion: @escaping (Bool) -> Void) {
+        let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: session)
         guard stringWithEurosIsValid(eurosToBeConverted) else {
             warningMessage("Please enter a valid amount (greater than 0 and less than 1 000 000).")
+            completion(false)
             return
         }
         guard exchangeRateLocal == nil else {
