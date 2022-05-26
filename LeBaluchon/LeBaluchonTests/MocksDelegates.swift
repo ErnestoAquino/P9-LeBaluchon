@@ -59,18 +59,14 @@ class TranslatorMockDelegate: TranslatorDelegate {
     var toogleActivityIndicatorIsCalled = false
 
     func warningMessage(_ message: String) {
-        print("warning message is called")
         warningMessageIsCalled = true
-        print(message)
     }
 
     func refreshEnglishTextFieldWith(_ translatedTex: String) {
-        print("refresh message is called")
         refreshEnglishTextFieldWithIsCalled = true
     }
 
     func toogleActivityIndicator(shown: Bool) {
-        print("toogle activity has been called")
         toogleActivityIndicatorIsCalled = true
     }
 }
