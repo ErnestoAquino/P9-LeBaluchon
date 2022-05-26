@@ -27,7 +27,7 @@ class TranslatorViewController: UIViewController {
     }
 
     @IBAction func tappedTranslateButton() {
-        translatorService.doTranslation(textForTranslation: frenchTexField.text) { _ in }
+        translatorService.doTranslation(textToTranslate: frenchTexField.text)
     }
 }
 
