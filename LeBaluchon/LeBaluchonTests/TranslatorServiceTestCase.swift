@@ -16,76 +16,66 @@ class TranslatorServiceTestCase: XCTestCase {
         mockDelegate = TranslatorMockDelegate()
     }
 
-    func testGivenAnotValidString_WhenDoTranslation_ThenSuccessShouldBeFalse() {
-        guard let mockDelegate = mockDelegate else {
-            return
-        }
-        let expectation = expectation(description: "Wait for queue change.")
+    func testGivenAnotValidString_WhenDoTranslation_ThenWarningMessageShouldBeCalled() {
+        guard let mockDelegate = mockDelegate else { return }
+
         let session = URLSessionFake(data: FakeResponse.translationCorrectData, response: FakeResponse.responseOK, error: nil)
         let translatorService = TranslateService(session)
         translatorService.viewDelegate = mockDelegate
         // Given
         let stringNil: String? = nil
         // When
-        translatorService.doTranslation(textForTranslation: stringNil) { success in
+        translatorService.doTranslation(textToTranslate: stringNil)
             // Then
-            XCTAssertFalse(success)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 0.01)
+        XCTAssertTrue(mockDelegate.warningMessageIsCalled)
     }
 
-    func testGivenAnErrorInResponse_WhenDoTranslation_ThenSuccessShouldBeFalse() {
-        guard let mockDelegate = mockDelegate else {
-            return
-        }
-        let expectation = expectation(description: "Wait for queue change.")
-        // Given
-        let session = URLSessionFake(data: FakeResponse.translationCorrectData, response: FakeResponse.responseOK, error: FakeResponse.anError)
+    func testGivenAvalidString_WhenDoTranslation_ThenRefreshEnglishTextFieldShouldBeCalled() async {
+        guard let mockDelegate = mockDelegate else { return }
+        let exp = expectation(description: "Wait to the function to terminate")
+        let session = URLSessionFake(data: FakeResponse.translationCorrectData, response: FakeResponse.responseOK, error: nil)
         let translatorService = TranslateService(session)
         translatorService.viewDelegate = mockDelegate
+        // Given
+        let validString = "Bonjour"
         // When
-        translatorService.doTranslation(textForTranslation: "Bonjour") { success in
-            // Then
-            XCTAssertFalse(success)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 0.01)
+        translatorService.doTranslation(textToTranslate: validString)
+        exp.fulfill()
+        await waitForExpectations(timeout: 1)
+        // Then
+        XCTAssert(mockDelegate.refreshEnglishTextFieldWithIsCalled)
     }
 
-    func testGivenWrongDataInResponse_WhenDoTranslation_ThenSuccessShouldBeFalse() {
-        guard let mockDelegate = mockDelegate else {
-            return
-        }
-        let expectation = expectation(description: "Wait for queue change.")
+    func testGivenCorrectResponse_WhenDoTranslation_ThenShouldGetTheExpectedTranslation() async {
+        guard let mockDelegate = mockDelegate else { return }
+        let exp = expectation(description: "Wait to the function to terminate")
+        // Given
+        let session = URLSessionFake(data: FakeResponse.translationCorrectData, response: FakeResponse.responseOK, error: nil)
+        let translatorService = TranslateService(session)
+        translatorService.viewDelegate = mockDelegate
+
+        let expectedTranslation = "Hello, this is a test message for tests."
+        // When
+        translatorService.doTranslation(textToTranslate: "Bonjour, ceci est un message de test pour les tests.")
+        exp.fulfill()
+        await waitForExpectations(timeout: 1)
+        // Then
+        XCTAssertEqual(expectedTranslation, translatorService.translatedTex)
+    }
+
+    func testGivenWrongDataInResponse_WhenDoTranslation_ThenWarningMessageShoulBeCalled() async {
+        guard let mockDelegate = mockDelegate else { return }
+        let exp = expectation(description: "Wait to the function to terminate")
         // Given
         let session = URLSessionFake(data: FakeResponse.incorretData, response: FakeResponse.responseOK, error: nil)
         let translatorService = TranslateService(session)
         translatorService.viewDelegate = mockDelegate
         // When
-        translatorService.doTranslation(textForTranslation: "Bonjour") { success in
+        translatorService.doTranslation(textToTranslate: "Valide String")
+        exp.fulfill()
+        await waitForExpectations(timeout: 1)
             // Then
-            XCTAssertFalse(success)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 0.01)
+        XCTAssertTrue(mockDelegate.warningMessageIsCalled)
     }
 
-    func testGivenCorrectResponse_WhenDoTranslation_ThenSuccessShouldBeTrue() {
-        guard let mockDelegate = mockDelegate else {
-            return
-        }
-        let expectation = expectation(description: "Wait for queue change.")
-        // Given
-        let session = URLSessionFake(data: FakeResponse.translationCorrectData, response: FakeResponse.responseOK, error: nil)
-        let translatorService = TranslateService(session)
-        translatorService.viewDelegate = mockDelegate
-        // When
-        translatorService.doTranslation(textForTranslation: "Bonjour") { success in
-            // Then
-            XCTAssertTrue(success)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 0.01)
-    }
 }
