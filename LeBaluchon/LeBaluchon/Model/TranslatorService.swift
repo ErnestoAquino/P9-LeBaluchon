@@ -12,6 +12,7 @@ final class TranslateService {
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "TRANSLATOR_API_KEY") as? String
     private let urlBase = "https://translation.googleapis.com/language/translate/v2"
     private let session: URLSessionProtocol
+    private (set) var translatedTex: String?
 
     init(_ session: URLSessionProtocol) {
         self.session = session
