@@ -36,7 +36,7 @@ final class WeatherService {
             self.brevalWeatherInformation = brevalInformation
             self.refreshBrevalTextFieldWith(brevalInformation)
         }
-        obtainWheatherInformationFor(newYork) { newYorkInformation, succes in
+        self.obtainWheatherInformationFor(self.newYork) { newYorkInformation, succes in
             guard succes == true,
                   let newYorkInformation = newYorkInformation else {
                 self.warningMessage(self.message)
