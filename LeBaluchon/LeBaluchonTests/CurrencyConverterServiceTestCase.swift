@@ -9,28 +9,105 @@ import XCTest
 @testable import LeBaluchon
 
 class CurrencyConverterServiceTestCase: XCTestCase {
+    var mockDelegate: CurrencyConverterMockDelegate?
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    override func setUp() {
+        mockDelegate = CurrencyConverterMockDelegate()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testGivenANotValidAmount_WhenDoConversion_ThenWarningMessageShoulBeCalled() {
+        guard let mockDelegate = mockDelegate else { return }
+        let session = URLSessionFake(data: FakeResponse.ExchangeRateCorrectData, response: FakeResponse.responseOK, error: nil)
+        let currencyService = CurrencyConverterService(session)
+        currencyService.viewDelegate = mockDelegate
+
+        // Given
+        let stringNoValide: String? = nil
+        // When
+        currencyService.doConversion(eurosToBeConverted: stringNoValide)
+        // Then
+        XCTAssert(mockDelegate.warningMessageIsCalled)
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testGivenErrorInResponse_WhenDoConversion_ThenWarningMessageShouldBeCalled() async {
+        guard let mockDelegate = mockDelegate else { return }
+        let exp = expectation(description: "Wait to the function to terminate")
+        // Given
+        let session = URLSessionFake(data: FakeResponse.ExchangeRateCorrectData, response: FakeResponse.responseOK, error: FakeResponse.anError)
+        let currencyService = CurrencyConverterService(session)
+        currencyService.viewDelegate = mockDelegate
+        let stringValide = "10"
+        // When
+        currencyService.doConversion(eurosToBeConverted: stringValide)
+        exp.fulfill()
+        await waitForExpectations(timeout: 1)
+        // Then
+        XCTAssert(mockDelegate.warningMessageIsCalled)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testGivenWrongStatusCodeInResponse_WhenDoConversion_ThenWarningMessageShouldBeCalled() async {
+        guard let mockDelegate = mockDelegate else { return }
+        let exp = expectation(description: "Wait to the function to terminate")
+        // Given
+        let session = URLSessionFake(data: FakeResponse.ExchangeRateCorrectData, response: FakeResponse.responseFail, error: nil)
+        let currencyService = CurrencyConverterService(session)
+        currencyService.viewDelegate = mockDelegate
+        let stringValide = "10"
+        // When
+        currencyService.doConversion(eurosToBeConverted: stringValide)
+        exp.fulfill()
+        await waitForExpectations(timeout: 1)
+        // Then
+        XCTAssert(mockDelegate.warningMessageIsCalled)
     }
 
+    func testGivenWrongDataInResponse_WhenDoConversion_ThenWarningMessageShouldBeCalled() async {
+        guard let mockDelegate = mockDelegate else { return }
+        let exp = expectation(description: "Wait to the function to terminate")
+        // Given
+        let session = URLSessionFake(data: FakeResponse.incorretData, response: FakeResponse.responseFail, error: nil)
+        let currencyService = CurrencyConverterService(session)
+        currencyService.viewDelegate = mockDelegate
+        let stringValide = "10"
+        // When
+        currencyService.doConversion(eurosToBeConverted: stringValide)
+        exp.fulfill()
+        await waitForExpectations(timeout: 1)
+        // Then
+        XCTAssert(mockDelegate.warningMessageIsCalled)
+    }
+
+    func testGivenCorrectResponseAndAmount_WhenDoConversion_ThenShouldGetTheExpectedResult() async {
+        guard let mockDelegate = mockDelegate else { return }
+        let exp = expectation(description: "Wait to the function to terminate")
+        let session = URLSessionFake(data: FakeResponse.ExchangeRateCorrectData, response: FakeResponse.responseOK, error: nil)
+        let currencyService = CurrencyConverterService(session)
+        currencyService.viewDelegate = mockDelegate
+        // Given
+        let expectedResult = "10.4346"
+        // When
+        currencyService.doConversion(eurosToBeConverted: "10")
+        exp.fulfill()
+        await waitForExpectations(timeout: 1)
+        // Then
+        XCTAssertEqual(expectedResult, currencyService.checkResult)
+    }
+
+    func testGivenCurrencyChanged_WhenDoConversion_ThenShouldGetTheExpectedResult() async {
+        guard let mockDelegate = mockDelegate else { return }
+        let exp = expectation(description: "Wait to the function to terminate")
+        let session = URLSessionFake(data: FakeResponse.ExchangeRateCorrectData, response: FakeResponse.responseOK, error: nil)
+        let currencyService = CurrencyConverterService(session)
+        currencyService.viewDelegate = mockDelegate
+        // Given
+        currencyService.currency = .MXN
+        let expectedMxn = "62.749764"
+        // When
+        currencyService.doConversion(eurosToBeConverted: "10")
+        exp.fulfill()
+        await waitForExpectations(timeout: 1)
+        currencyService.doConversion(eurosToBeConverted: "3")
+        // Then
+        XCTAssertEqual(expectedMxn, currencyService.checkResult)
+    }
 }
