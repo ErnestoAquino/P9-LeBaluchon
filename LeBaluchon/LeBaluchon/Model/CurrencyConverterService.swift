@@ -12,9 +12,9 @@ final class CurrencyConverterService {
     weak var viewDelegate: CurrencyConverterDelegate?
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
     private let urlBase = "http://data.fixer.io/api/latest"
-    private let warningMessage = "We have un little problem, please check your internet connection."
-//    private let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: URLSession.shared)
+    private let message = "We have un little problem, please check your internet connection."
     private var exchangeRateLocal: ExchangeRate?
+    private var euros: String?
     public var currency: Currency = .USD
     private let session: URLSessionProtocol
 
@@ -28,57 +28,69 @@ final class CurrencyConverterService {
     init(_ session: URLSessionProtocol) {
         self.session = session
     }
-    /* This function performs the operation requested by the controller.
-     It first verifies that what the user has entered is valid.
-     Second it verifies that there is no local structure with the necessary data to perform the calculation.
-     If there is already data stored in the exchangeRateLocal variable, it will use this data and will not make another call.
-     Third, if there is no information stored in the variable, it will create a URL Request to use the getInformation method of the networManager class.
-     */
-    public func doConversion(eurosToBeConverted: String?, completion: @escaping (Bool) -> Void) {
-        let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: session)
+
+    public func doConversion(eurosToBeConverted: String?) {
         guard stringWithEurosIsValid(eurosToBeConverted) else {
             warningMessage("Please enter a valid amount (greater than 0 and less than 1 000 000).")
-            completion(false)
             return
         }
-        guard exchangeRateLocal == nil else {
-            guard let exchangeRateLocal = exchangeRateLocal else { return }
-            let result = calculateConversion(euros: eurosToBeConverted, exchangeData: exchangeRateLocal)
-            refreshTextViewWithValue(result)
+        euros = eurosToBeConverted
+        guard exchangeRateLocal != nil else {
+            obtainExchangeRate()
             return
         }
-        guard let request = createRequest() else {
-            warningMessage("We have un little problem, please check your internet connection.")
-            return
-        }
+        let result = calculateConversion(euros: eurosToBeConverted, exchangeData: exchangeRateLocal)
+        refreshTextViewWithValue(result)
+    }
+
+    /**
+     This function retrieves the current exchange rate information from API FIXER
+     and stores it in the variable "exchangeRateLocal".
+     */
+    private func obtainExchangeRate() {
+        let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: session)
+        let request = createRequest()
         toogleActivityIndicator(shown: true)
         networkManager.getInformation(request: request) { exchangeRate, error in
             self.toogleActivityIndicator(shown: false)
             guard error == nil,
-                  let exchageInformation = exchangeRate else {
-                self.warningMessage("We have un little problem, please check your internet connection.")
+                  let exchangeRate = exchangeRate else {
+                self.warningMessage(self.message)
                 return
             }
-            self.exchangeRateLocal = exchageInformation
-            let result = self.calculateConversion(euros: eurosToBeConverted, exchangeData: exchageInformation)
+            self.exchangeRateLocal = exchangeRate
+            let result = self.calculateConversion(euros: self.euros, exchangeData: exchangeRate)
             self.refreshTextViewWithValue(result)
         }
     }
 
-    // This function performs the conversion calculation.
-    private func calculateConversion(euros: String?, exchangeData: ExchangeRate) -> String {
+    /**
+     This function does the conversion calculation. It recovers the value of euros and the value of the currency selected in the "currency" variable.
+     
+     - parameter euros:        Optional string with the euros to convert
+     - parameter exchangeData: Structure with the exchange rate.
+     
+     - returns: Returns the result of the conversion as a string
+     */
+    private func calculateConversion(euros: String?, exchangeData: ExchangeRate?) -> String {
         var conversionResult = -0.0
-
+//        guard exchangeRate = exchangeData else { return }
         guard let euros = euros,
               let eurosHowDouble = Double(euros),
-              let value = exchangeData.rates?[currency.rawValue] else {
+              let value = exchangeData?.rates?[currency.rawValue] else {
             return String(conversionResult)
         }
         conversionResult = eurosHowDouble * value
         return String(conversionResult)
     }
 
-    // This function verifies the amount entered by the user is valid.
+    /**
+     This function receives an optional string as a parameter and checks if it can be converted to a double type.
+     
+     - parameter value: The optional string to be verified.
+     
+     - returns: If value can be converted to double and if it is between 1 - 999 999 returns true.
+     */
     private func stringWithEurosIsValid(_ value: String?) -> Bool {
         guard let value = value,
               let valueHowDouble = Double(value),
@@ -87,14 +99,42 @@ final class CurrencyConverterService {
         return true
     }
 
-    // This function create a URL Request for URL Session.
-    private func createRequest() -> URLRequest? {
-        guard let key = apiKey else {return nil}
-        let urlWithKey = "\(urlBase)?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
-        guard let urlExchangeRate = URL(string: urlWithKey) else {return nil}
-        var request = URLRequest(url: urlExchangeRate)
+    /**
+     This function recovers the url generated by the createURL() function, and builds an instance of URL Request.
+     
+     - returns: Returns an instance of URL Request with GET method.
+     */
+    private func createRequest() -> URLRequest {
+        let url = createURL()
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
 
         return request
+    }
+
+    /**
+     This function constructs a url using the API key.
+     
+     - returns: Returns a non-optional url.
+     */
+    private func createURL() -> URL {
+        let key = getApiKey()
+        let urlWithKey = "\(urlBase)?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
+        guard let url = URL(string: urlWithKey) else {
+            return URL(string: "")!
+        }
+        return url
+    }
+
+    /**
+     This function retrieves the key for the API Currency Service.
+     
+     - returns: Returns the unwrapped key as String.
+     */
+    private func getApiKey() -> String {
+        guard let apiKey = apiKey else {
+            return ""
+        }
+        return apiKey
     }
 }
