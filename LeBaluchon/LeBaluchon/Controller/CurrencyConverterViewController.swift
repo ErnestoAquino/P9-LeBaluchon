@@ -48,7 +48,7 @@ class CurrencyConverterViewController: UIViewController {
     }
 
     @IBAction func tappedConvertButton() {
-        currencyConverter.doConversion(eurosToBeConverted: euroTextField.text) { _ in }
+        currencyConverter.doConversion(eurosToBeConverted: euroTextField.text)
     }
 
 }
