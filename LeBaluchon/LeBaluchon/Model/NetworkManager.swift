@@ -16,6 +16,12 @@ public final class NetworkManager<T: Decodable> {
         self.session = networkManagerSession
     }
 
+    /**
+     description
+     
+     - parameter request:           <#request#>
+     - parameter completionHandler: <#completionHandler#>
+     */
     func getInformation(request: URLRequest?, completionHandler: @escaping (T?, Error?) -> Void) {
         guard let request = request else {
             completionHandler(nil, nil)
