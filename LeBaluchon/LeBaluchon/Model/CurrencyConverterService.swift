@@ -32,7 +32,7 @@ final class CurrencyConverterService {
 
     /**
      This function performs the conversion.
-     It indicates the result to the controller using the function refreshTextView.
+     It indicates the result to the controller using the method refreshTextView.
      
      - parameter eurosToBeConverted: Optional string with the euros to be converted.
      */
