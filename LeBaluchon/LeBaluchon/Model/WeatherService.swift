@@ -13,7 +13,6 @@ final class WeatherService {
     private let breval = City(latitude: "48.9455", longitude: "1.5331")
     private let newYork = City(latitude: "40.7143", longitude: "-74.006")
     private let urlBase = "https://api.openweathermap.org/data/2.5/weather"
-    private var networkManager = NetworkManager<WeatherData>(networkManagerSession: URLSession.shared)
     private let message = "Sorry, we have a little problem please check your internet connection."
     private let session: URLSessionProtocol
     private (set) var brevalWeatherInformation = ""
@@ -23,9 +22,9 @@ final class WeatherService {
         self.session = session
     }
 
-    // This function retrives wether information for two cities, Breval and NewYork.
-    // It creates a request for each one. Using the method getInformation of the network manager class
-    // it retrives the information.
+    /**
+     This function retrieves weather information for Breval and New York and presents it to the user.
+     */
     public func updateWeatherInformation() {
         obtainWheatherInformationFor(breval) { brevalInformation, success in
             guard success == true,
@@ -47,6 +46,12 @@ final class WeatherService {
         }
     }
 
+    /**
+     This function retrieves weather information using the networkManger class.
+     
+     - parameter city:       City for which you want to obtain the weather information.
+     - parameter completion: returns the retrieved weather information and a true boolean to indicate its success.
+     */
     private func obtainWheatherInformationFor(_ city: City, completion: @escaping (String?, Bool) -> Void) {
         let networkManager = NetworkManager<WeatherData>(networkManagerSession: session)
         let request = createRequestFor(city)
@@ -64,8 +69,13 @@ final class WeatherService {
         }
     }
 
-    // This function retrives the information to be displayed to the user from a Weather Data
-    // structure and stores it ini a string.
+    /**
+     This function prepares the information to be displayed to the user.
+     
+     - parameter weather: Structure with weather information.
+     
+     - returns: Returns a string ready to be displayed to user.
+     */
     private func createTextForUpadateInformation(_ weather: WeatherData) -> String {
         var text = "Sorry, we have a little problem."
         guard let description = weather.weather?[0].description,
@@ -83,9 +93,13 @@ final class WeatherService {
         return text
     }
 
-    // This function create a URL Request for URL Session.
-    // Receives as parameter the city from which you want to
-    // obtain the weather information.
+    /**
+     This function creates a URL Reques with method " GET".
+     
+     - parameter city: City to create the reques
+     
+     - returns: Returns a URL Reques for the city received in parameter.
+     */
     private func createRequestFor(_ city: City) -> URLRequest {
         let url = createURL(city)
         var request = URLRequest(url: url)
@@ -93,6 +107,14 @@ final class WeatherService {
 
         return request
     }
+
+    /**
+     This function creates a url for a city.
+     
+     - parameter city: City structure to create the url.
+     
+     - returns: returns a non-optional url.
+     */
     private func createURL(_ city: City) -> URL {
         let key = getApiKey()
         let url = "\(urlBase)?lat=\(city.latitude)&lon=\(city.longitude)&appid=\(key)&units=metric"
@@ -102,6 +124,11 @@ final class WeatherService {
         return urlWithKey
     }
 
+    /**
+     This function retrieves the key for the API Weather Service
+     
+     - returns: Returns the unwrapped key as String.
+     */
     private func getApiKey() -> String {
         guard let key = weatherApiKey  else {
             return ""
