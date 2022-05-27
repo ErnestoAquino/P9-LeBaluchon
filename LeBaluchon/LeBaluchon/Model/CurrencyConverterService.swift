@@ -13,7 +13,8 @@ final class CurrencyConverterService {
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
     private let urlBase = "http://data.fixer.io/api/latest"
     private let message = "We have un little problem, please check your internet connection."
-    private var exchangeRateLocal: ExchangeRate?
+    private (set) var exchangeRateLocal: ExchangeRate?
+    private (set) var checkResult = ""
     private var euros: String?
     public var currency: Currency = .USD
     private let session: URLSessionProtocol
@@ -29,6 +30,12 @@ final class CurrencyConverterService {
         self.session = session
     }
 
+    /**
+     This function performs the conversion.
+     It indicates the result to the controller using the function refreshTextView.
+     
+     - parameter eurosToBeConverted: Optional string with the euros to be converted.
+     */
     public func doConversion(eurosToBeConverted: String?) {
         guard stringWithEurosIsValid(eurosToBeConverted) else {
             warningMessage("Please enter a valid amount (greater than 0 and less than 1 000 000).")
@@ -36,18 +43,18 @@ final class CurrencyConverterService {
         }
         euros = eurosToBeConverted
         guard exchangeRateLocal != nil else {
-            obtainExchangeRate()
+            obtainExchangeRateForFirstTime()
             return
         }
         let result = calculateConversion(euros: eurosToBeConverted, exchangeData: exchangeRateLocal)
+        checkResult = result
         refreshTextViewWithValue(result)
     }
 
     /**
-     This function retrieves the current exchange rate information from API FIXER
-     and stores it in the variable "exchangeRateLocal".
+     This function retrieves the current exchange rate information from the FIXER API and stores it in the variable "exchangeRateLocal " if it is empty.
      */
-    private func obtainExchangeRate() {
+    private func obtainExchangeRateForFirstTime() {
         let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: session)
         let request = createRequest()
         toogleActivityIndicator(shown: true)
@@ -60,6 +67,7 @@ final class CurrencyConverterService {
             }
             self.exchangeRateLocal = exchangeRate
             let result = self.calculateConversion(euros: self.euros, exchangeData: exchangeRate)
+            self.checkResult = result
             self.refreshTextViewWithValue(result)
         }
     }
