@@ -52,7 +52,7 @@ final class CurrencyConverterService {
     }
 
     /**
-     This function retrieves the current exchange rate information from the FIXER API and stores it in the variable "exchangeRateLocal " if it is empty.
+     This function retrieves the current exchange rate information from the FIXER API and stores it in the variable "exchangeRateLocal ".
      */
     private func obtainExchangeRateForFirstTime() {
         let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: session)

@@ -17,10 +17,11 @@ public final class NetworkManager<T: Decodable> {
     }
 
     /**
-     description
+     This function retrieves the contents of a URL based on the specified URL request object, and calls a handler upon completion.
      
-     - parameter request:           <#request#>
-     - parameter completionHandler: <#completionHandler#>
+     - parameter request:           A URL request object that provides the URL, request type, body data or body stream, and so on.
+     - parameter completionHandler: This completion handler takes the following parameters: T? : The data returned by the server like a structure decodable type. Error? :
+      An error object that indicates why the request failed, or nil if the request was successful.
      */
     func getInformation(request: URLRequest?, completionHandler: @escaping (T?, Error?) -> Void) {
         guard let request = request else {

@@ -18,6 +18,11 @@ final class TranslateService {
         self.session = session
     }
 
+    /**
+     This function translates the text it receives into a parameter. If for some reason it fails to perform the task, it displays an error message to the user.
+     
+     - parameter textToTranslate: Optional string with the text to be translated.
+     */
     public func doTranslation(textToTranslate: String?) {
         obtainTranslation(textToTranslate) { textTranslated, succes in
             guard succes == true,
@@ -30,6 +35,15 @@ final class TranslateService {
         }
     }
 
+    /**
+     This function retrieves the translation from the Google Translator API using the network manager class.
+     
+     - parameter textToTranslate: Optional string with the text to be translated.
+     - parameter completion:      This completion handler takes the following parameters:
+                                String? : Google translator API response.
+                                Bool?: False that indicates  the request failed or True
+                                if the request was successful
+     */
     private func obtainTranslation(_ textToTranslate: String?, completion: @escaping (String?, Bool?) -> Void) {
         let networkManager = NetworkManager<TranslationResponse>(networkManagerSession: session)
         guard let textToTranslate = textToTranslate else {
@@ -51,6 +65,13 @@ final class TranslateService {
         }
     }
 
+    /**
+     This function creates a URL Request with method " POST ".
+     
+     - parameter textForTranslation: String with the text to be translated.
+     
+     - returns: Returns a URL Request for the text to be translated.
+     */
     private func creteRequest(_ textForTranslation: String) -> URLRequest {
         let url =  createURL()
         let key = createKey()
@@ -62,6 +83,11 @@ final class TranslateService {
         return request
     }
 
+    /**
+     This function creates a URL
+     
+     - returns: Returns a non-optional URL.
+     */
     private func createURL() -> URL {
         guard let urlTranslation = URL(string: urlBase) else {
             return  URL(string: " ")!
@@ -69,6 +95,11 @@ final class TranslateService {
         return urlTranslation
     }
 
+    /**
+     This function recovers the key for API Google Transistor.
+     
+     - returns: Returns the key as a non-optional string.
+     */
     private func createKey() -> String {
         guard let key = apiKey else {
             return " "
