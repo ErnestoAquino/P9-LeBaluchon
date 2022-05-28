@@ -7,6 +7,11 @@
 
 import Foundation
 
+/**
+ * WeatherData:
+ *
+ * Structure to retrieve the response from the OPENWEATHER API.
+ */
 struct WeatherData: Decodable {
     let weather: [Weather]?
     let main: [String: Double]?
