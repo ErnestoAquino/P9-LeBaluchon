@@ -23,7 +23,7 @@ public final class NetworkManager<T: Decodable> {
      - parameter completionHandler: This completion handler takes the following parameters: T? : The data returned by the server like a structure decodable type. Error? :
       An error object that indicates why the request failed, or nil if the request was successful.
      */
-    func getInformation(request: URLRequest?, completionHandler: @escaping (T?, Error?) -> Void) {
+    public func getInformation(request: URLRequest?, completionHandler: @escaping (T?, Error?) -> Void) {
         guard let request = request else {
             completionHandler(nil, nil)
             return
