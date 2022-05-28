@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 @testable import LeBaluchon
 
+/**
+ * URLSessionFake:
+ *
+ * This class is a mock of the URL Session class, it is initialized with the necessary information to make the tests.
+ */
 class URLSessionFake: URLSessionProtocol {
 
     var data: Data?
@@ -28,6 +33,11 @@ class URLSessionFake: URLSessionProtocol {
     }
 }
 
+/**
+ * URLSessionDataTaskFake:
+ *
+ *This class is a mock of the  URLSessionDataTask. The resume() method only resends the information that has been entered at the time of initialization.
+ */
 class URLSessionDataTaskFake: URLSessionDataTaskProtocol {
 
     var completionHandler: ((Data?, URLResponse?, Error?) -> Void)?

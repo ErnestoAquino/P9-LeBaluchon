@@ -8,6 +8,11 @@
 import XCTest
 @testable import LeBaluchon
 
+/**
+ * CurrencyConverterServiceTestCase:
+ *
+ * Tests created for the Currency Converter Service
+ */
 class CurrencyConverterServiceTestCase: XCTestCase {
     var mockDelegate: CurrencyConverterMockDelegate?
 

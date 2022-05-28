@@ -8,6 +8,11 @@
 import XCTest
 @testable import LeBaluchon
 
+/**
+ * NetworkManagerTestCase:
+ *
+ * Tests created for the Network Manager.
+ */
 class NetworkManagerTestCase: XCTestCase {
 
     var expectation: XCTestExpectation!

@@ -7,6 +7,11 @@
 
 import Foundation
 
+/**
+ * FakeResponse
+ *
+ * This class contains the necessary information to be able to test the classes: Currency converter service, Translator service and Weather Service.
+ */
 class FakeResponse {
     static var emptyRequest: URLRequest?
 

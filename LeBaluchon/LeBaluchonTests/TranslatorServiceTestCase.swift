@@ -8,6 +8,11 @@
 import XCTest
 @testable import LeBaluchon
 
+/**
+ * TranslatorServiceTestCase:
+ *
+ * Tests created for the Translator Service.
+ */
 class TranslatorServiceTestCase: XCTestCase {
 
     var mockDelegate: TranslatorMockDelegate?

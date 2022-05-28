@@ -8,6 +8,11 @@
 import XCTest
 @testable import LeBaluchon
 
+/**
+ * WeatherServiceTestCase:
+ *
+ * Tests created for the Weather Service.
+ */
 class WeatherServiceTestCase: XCTestCase {
 
     var mockDelegate: WeatherMockDelegate?
