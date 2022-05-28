@@ -28,16 +28,16 @@ class CurrencyConverterViewController: UIViewController {
         switch currencySegmentedControl.selectedSegmentIndex {
         case 0:
             currencyConverter.currency = .USD
-            resultTextField.placeholder = "u.s. dollar"
+            resultTextField.placeholder = "U.S. Dollar"
         case 1:
             currencyConverter.currency = .MXN
-            resultTextField.placeholder = "mexican peso"
+            resultTextField.placeholder = "Mexican peso"
         case 2:
             currencyConverter.currency = .JPY
-            resultTextField.placeholder = "japanese yen"
+            resultTextField.placeholder = "Japanese yen"
         case 3:
             currencyConverter.currency = .GBP
-            resultTextField.placeholder = "british pound"
+            resultTextField.placeholder = "British pound"
         default: break
         }
 
@@ -56,6 +56,11 @@ class CurrencyConverterViewController: UIViewController {
 // MARK: - Extansion
 
 extension CurrencyConverterViewController: CurrencyConverterDelegate {
+    /**
+     This function displays an alert to the user.
+     
+     - parameter message: String with the message to be displayed in the alert.
+     */
     func warningMessage(_ message: String) {
         let alert: UIAlertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel)
@@ -63,10 +68,20 @@ extension CurrencyConverterViewController: CurrencyConverterDelegate {
         present(alert, animated: true)
     }
 
+    /**
+     This function refreshes the resultTextField  with a message.
+     
+     - parameter value: String with the message to be displayed.
+     */
     func refreshTextViewWithValue(_ value: String) {
         resultTextField.text = value
     }
 
+     /**
+      This function hides or displays the Convert button and the activity indicator.
+      
+      - parameter shown: True to show or False to hide.
+      */
      func toogleActivityIndicator(shown: Bool) {
         buttonConvert.isHidden = shown
         activityIndicator.isHidden = !shown

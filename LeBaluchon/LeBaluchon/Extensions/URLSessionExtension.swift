@@ -7,6 +7,8 @@
 
 import Foundation
 
+// URL Session protocol adn URL Session protocol allow to make the classes testable. Allowing the injection of dependencies.
+
 extension URLSession: URLSessionProtocol {
     func dataTaskWithRequest(_ request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol {
         dataTask(with: request, completionHandler: completion) as URLSessionDataTaskProtocol
@@ -17,8 +19,6 @@ extension URLSessionDataTask: URLSessionDataTaskProtocol {
         resume()
     }
 }
-
-// typealias DataTaskResult = (Data?, URLResponse?, Error?) -> Void
 
 protocol URLSessionProtocol {
     func dataTaskWithRequest(_ request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol
