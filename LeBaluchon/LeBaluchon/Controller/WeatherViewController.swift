@@ -9,7 +9,7 @@ import UIKit
 
 class WeatherViewController: UIViewController {
 
-    let weather = WeatherService()
+    let weather = WeatherService(URLSession.shared)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,20 +25,37 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var activityindicator: UIActivityIndicatorView!
 
     @IBAction func tappedUdateButton() {
-        toogleActivityIndicator(shown: true)
         weather.updateWeatherInformation()
-        toogleActivityIndicator(shown: false)
     }
 }
 
+// MARK: - Extension
+
 extension WeatherViewController: WeatherDelegate {
+
+    /**
+     This function refreshes the New York Text Field  with a message.
+     
+     - parameter value: String with the message to be displayed.
+     */
     func refreshNewYorkTextFieldWith(_ value: String) {
         newYorkTextField.text = value
     }
 
+    /**
+     This function refreshes the Breval Text Field  with a message.
+     
+     - parameter value: String with the message to be displayed.
+     */
     func refreshBrevalTextFieldWith(_ value: String) {
         brevalTextField.text = value
     }
+
+    /**
+     This function displays an alert to the user.
+     
+     - parameter message: String with the message to be displayed in the alert.
+     */
     func warningMessage(_ message: String) {
         let alert: UIAlertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel)
@@ -46,6 +63,11 @@ extension WeatherViewController: WeatherDelegate {
         present(alert, animated: true)
     }
 
+     /**
+      This function hides or displays the Update button and the activity indicator.
+      
+      - parameter shown: True to show or False to hide.
+      */
      func toogleActivityIndicator(shown: Bool) {
         updateButton.isHidden = shown
         activityindicator.isHidden = !shown

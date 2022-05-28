@@ -7,6 +7,11 @@
 
 import Foundation
 
+/**
+ * ExchangeRate:
+ *
+ * Structure for retrieving the response from the FIXER API
+ */
 struct ExchangeRate: Decodable {
     let success: Bool?
     let timestamp: Date?

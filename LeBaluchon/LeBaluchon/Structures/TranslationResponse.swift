@@ -7,6 +7,11 @@
 
 import Foundation
 
+/**
+ * TranslationResponse:
+ *
+ * Structure to retrieve the response from the GOOGLE TRADUCTOR API.
+ */
 struct TranslationResponse: Decodable {
     let data: Translations?
     struct Translations: Decodable {

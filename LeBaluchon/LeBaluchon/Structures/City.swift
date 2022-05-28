@@ -7,6 +7,11 @@
 
 import Foundation
 
+/**
+ * City
+ *
+ * Structure to create a city by using its longitude and altitude as string
+ */
 struct City {
     let latitude: String
     let longitude: String

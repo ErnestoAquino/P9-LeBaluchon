@@ -7,54 +7,50 @@
 
 import Foundation
 
-class NetworkManager<T: Decodable> {
+public final class NetworkManager<T: Decodable> {
 
-    private var task: URLSessionDataTask?
+    private var task: URLSessionDataTaskProtocol?
+    private var session: URLSessionProtocol
 
-    func getInformation(request: URLRequest?, completionHandler: @escaping (T?, Error?) -> Void) {
-        guard let request = request else {return}
-        let session = URLSession(configuration: .default)
-        task?.cancel()
-        task = session.dataTask(with: request, completionHandler: { data, response, error in
-            DispatchQueue.main.async {
-                guard error == nil,
-                      let data = data,
-                      let response = response as? HTTPURLResponse,
-                      response.statusCode == 200 else {return}
-                let decoderData = JSONDecoder()
-                decoderData.keyDecodingStrategy = .useDefaultKeys
-                decoderData.dateDecodingStrategy = .secondsSince1970
-                guard let informationObtained = try? decoderData.decode(T?.self, from: data) else {return}
-                completionHandler(informationObtained, error)
-            }
-        })
-        task?.resume()
+    init (networkManagerSession: URLSessionProtocol) {
+        self.session = networkManagerSession
     }
 
-}
-
-class TestNM<T: Decodable> {
-    var shared = TestNM<T>()
-    private init () {}
-    private var task: URLSessionDataTask?
-
-    func getInformation(request: URLRequest?, completionHandler: @escaping (T?, Error?) -> Void) {
-        guard let request = request else {return}
-        let session = URLSession(configuration: .default)
+    /**
+     This function retrieves the contents of a URL based on the specified URL request object, and calls a handler upon completion.
+     
+     - parameter request:           A URL request object that provides the URL, request type, body data or body stream, and so on.
+     - parameter completionHandler: This completion handler takes the following parameters: T? : The data returned by the server like a structure decodable type. Error? :
+      An error object that indicates why the request failed, or nil if the request was successful.
+     */
+    public func getInformation(request: URLRequest?, completionHandler: @escaping (T?, Error?) -> Void) {
+        guard let request = request else {
+            completionHandler(nil, nil)
+            return
+        }
         task?.cancel()
-        task = session.dataTask(with: request, completionHandler: { data, response, error in
+        task = session.dataTaskWithRequest(request, completion: { data, response, error in
             DispatchQueue.main.async {
-                guard error == nil,
-                      let data = data,
+                guard error == nil else {
+                    completionHandler(nil, error)
+                    return
+                }
+                guard let data = data,
                       let response = response as? HTTPURLResponse,
-                      response.statusCode == 200 else {return}
+                      response.statusCode == 200 else {
+                    completionHandler(nil, nil)
+                    return
+                }
                 let decoderData = JSONDecoder()
                 decoderData.keyDecodingStrategy = .useDefaultKeys
                 decoderData.dateDecodingStrategy = .secondsSince1970
-                guard let informationObtained = try? decoderData.decode(T?.self, from: data) else {return}
+                guard let informationObtained = try? decoderData.decode(T?.self, from: data) else {
+                    completionHandler(nil, nil)
+                    return
+                }
                 completionHandler(informationObtained, error)
             }
         })
-        task?.resume()
+        task?.resumeWithRequest()
     }
 }
