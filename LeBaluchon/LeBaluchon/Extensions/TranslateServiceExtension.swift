@@ -14,10 +14,7 @@ extension TranslateService: TranslatorDelegate {
      - parameter message: String with the message to be displayed in the alert.
      */
     func warningMessage(_ message: String) {
-        guard let viewDelegate = viewDelegate else {
-            return
-        }
-        viewDelegate.warningMessage(message)
+        viewDelegate?.warningMessage(message)
     }
 
     /**
@@ -26,8 +23,7 @@ extension TranslateService: TranslatorDelegate {
      - parameter translatedTex: String with the message to be displayed.
      */
     func refreshEnglishTextFieldWith(_ translatedTex: String) {
-        guard let viewDelegate = viewDelegate else { return }
-        viewDelegate.refreshEnglishTextFieldWith(translatedTex)
+        viewDelegate?.refreshEnglishTextFieldWith(translatedTex)
     }
 
     /**
@@ -36,7 +32,6 @@ extension TranslateService: TranslatorDelegate {
      - parameter shown: True to show or False to hide.
      */
     func toogleActivityIndicator(shown: Bool) {
-        guard let viewDelegare = viewDelegate else { return }
-        viewDelegare.toogleActivityIndicator(shown: shown)
+        viewDelegate?.toogleActivityIndicator(shown: shown)
     }
 }

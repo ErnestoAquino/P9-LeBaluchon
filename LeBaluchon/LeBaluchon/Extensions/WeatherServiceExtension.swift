@@ -14,8 +14,7 @@ extension WeatherService: WeatherDelegate {
      - parameter message: String with the message to be displayed in the alert.
      */
     func warningMessage(_ message: String) {
-        guard let viewDelegate = viewDelegate else {return}
-        viewDelegate.warningMessage(message)
+        viewDelegate?.warningMessage(message)
     }
 
     /**
@@ -24,8 +23,7 @@ extension WeatherService: WeatherDelegate {
      - parameter value: String with the message to be displayed.
      */
     func refreshNewYorkTextFieldWith(_ value: String) {
-        guard let viewDelegate = viewDelegate else {return}
-        viewDelegate.refreshNewYorkTextFieldWith(value)
+        viewDelegate?.refreshNewYorkTextFieldWith(value)
     }
 
     /**
@@ -34,8 +32,7 @@ extension WeatherService: WeatherDelegate {
      - parameter value: String with message to be displayed.
      */
     func refreshBrevalTextFieldWith(_ value: String) {
-        guard let viewDelegate = viewDelegate else {return}
-        viewDelegate.refreshBrevalTextFieldWith(value)
+        viewDelegate?.refreshBrevalTextFieldWith(value)
     }
 
     /**
@@ -44,7 +41,6 @@ extension WeatherService: WeatherDelegate {
      - parameter shown: True to show or False to hide.
      */
     func toogleActivityIndicator(shown: Bool) {
-        guard let viewDelegate = viewDelegate else { return }
-        viewDelegate.toogleActivityIndicator(shown: shown)
+        viewDelegate?.toogleActivityIndicator(shown: shown)
     }
 }
