@@ -26,7 +26,7 @@ final class CurrencyConverterService {
         case GBP
     }
 
-    init(_ session: URLSessionProtocol) {
+    init(_ session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
 

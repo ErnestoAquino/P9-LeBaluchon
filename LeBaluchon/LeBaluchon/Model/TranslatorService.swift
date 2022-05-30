@@ -14,7 +14,7 @@ final class TranslateService {
     private let session: URLSessionProtocol
     private (set) var translatedTex = ""
 
-    init(_ session: URLSessionProtocol) {
+    init(_ session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
 

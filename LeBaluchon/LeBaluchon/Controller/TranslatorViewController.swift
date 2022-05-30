@@ -8,7 +8,7 @@
 import UIKit
 
 class TranslatorViewController: UIViewController {
-    let translatorService = TranslateService(URLSession.shared)
+    let translatorService = TranslateService()
 
     override func viewDidLoad() {
         super.viewDidLoad()

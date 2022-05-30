@@ -9,7 +9,7 @@ import UIKit
 
 class CurrencyConverterViewController: UIViewController {
 
-    let currencyConverter = CurrencyConverterService(URLSession.shared)
+    let currencyConverter = CurrencyConverterService()
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -18,7 +18,7 @@ final class WeatherService {
     private (set) var brevalWeatherInformation = ""
     private (set) var newyorkWeatherInformation = ""
 
-    init(_ session: URLSessionProtocol) {
+    init(_ session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
 

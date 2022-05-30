@@ -9,7 +9,7 @@ import UIKit
 
 class WeatherViewController: UIViewController {
 
-    let weather = WeatherService(URLSession.shared)
+    let weather = WeatherService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
