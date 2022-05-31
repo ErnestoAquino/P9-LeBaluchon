@@ -66,14 +66,14 @@ final class TranslateService {
     }
 
     /**
-     This function creates a URL Request with method " POST ".
+     This function creates an optional URL Request with method " POST ".
      
      - parameter textForTranslation: String with the text to be translated.
      
      - returns: Returns a URL Request for the text to be translated.
      */
     private func creteRequest(_ textForTranslation: String) -> URLRequest? {
-        guard let url =  createURL() else {
+        guard let url = URL(string: urlBase) else {
             return nil
         }
         var request = URLRequest(url: url)
@@ -82,17 +82,5 @@ final class TranslateService {
         request.httpBody = body.data(using: .utf8)
 
         return request
-    }
-
-    /**
-     This function creates a URL
-     
-     - returns: Returns a non-optional URL.
-     */
-    private func createURL() -> URL? {
-        guard let urlTranslation = URL(string: urlBase) else {
-            return  nil
-        }
-        return urlTranslation
     }
 }

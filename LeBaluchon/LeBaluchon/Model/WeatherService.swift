@@ -100,8 +100,10 @@ final class WeatherService {
      
      - returns: Returns a URL Reques for the city received in parameter.
      */
-    private func createRequestFor(_ city: City) -> URLRequest {
-        let url = createURL(city)
+    private func createRequestFor(_ city: City) -> URLRequest? {
+        guard let url = createURL(city) else {
+            return nil
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
 
@@ -115,10 +117,10 @@ final class WeatherService {
      
      - returns: returns a non-optional url.
      */
-    private func createURL(_ city: City) -> URL {
+    private func createURL(_ city: City) -> URL? {
         let url = "\(urlBase)?lat=\(city.latitude)&lon=\(city.longitude)&appid=\(weatherApiKey ?? "")&units=metric"
         guard let urlWithKey = URL(string: url) else {
-            return URL(string: " ")!
+            return nil
         }
         return urlWithKey
     }
