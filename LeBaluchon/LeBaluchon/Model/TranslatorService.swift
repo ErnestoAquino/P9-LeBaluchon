@@ -52,9 +52,9 @@ final class TranslateService {
             return
         }
         let request = creteRequest(textToTranslate)
-        toogleActivityIndicator(shown: true)
+        showActivityIndicator(true)
         networkManager.getInformation(request: request) { translationResponse, error in
-            self.toogleActivityIndicator(shown: false)
+            self.showActivityIndicator(false)
             guard error == nil,
                   let translatedText = translationResponse?.data?.translations?[0].translatedText else {
                 self.warningMessage("Sorry, we have a little problem")

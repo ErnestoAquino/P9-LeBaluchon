@@ -55,9 +55,9 @@ final class WeatherService {
     private func obtainWheatherInformationFor(_ city: City, completion: @escaping (String?, Bool) -> Void) {
         let networkManager = NetworkManager<WeatherData>(networkManagerSession: session)
         let request = createRequestFor(city)
-        toogleActivityIndicator(shown: true)
+        showActivityIndicator(true)
         networkManager.getInformation(request: request) { weatherInformation, error in
-            self.toogleActivityIndicator(shown: false)
+            self.showActivityIndicator(false)
             guard error ==  nil,
                   let weatherInformation = weatherInformation else {
                 self.warningMessage(self.message)

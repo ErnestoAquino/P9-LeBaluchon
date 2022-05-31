@@ -13,7 +13,7 @@ class WeatherMockDelegate: WeatherDelegate {
     var warningMessageIsCalled = false
     var refreshNewYorkTextFieldWithIsCalled = false
     var refreshBrevalTextFieldIsCalled = false
-    var toogleActivityIndicatorIsCalled = false
+    var showActivityIndicator = false
 
     func warningMessage(_ message: String) {
         warningMessageIsCalled = true
@@ -27,7 +27,7 @@ class WeatherMockDelegate: WeatherDelegate {
         refreshNewYorkTextFieldWithIsCalled = true
     }
 
-    func toogleActivityIndicator(shown: Bool) {
-        toogleActivityIndicatorIsCalled = true
+    func showActivityIndicator(_ value: Bool) {
+        showActivityIndicator = true
     }
 }

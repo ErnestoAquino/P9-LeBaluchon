@@ -80,10 +80,10 @@ extension CurrencyConverterViewController: CurrencyConverterDelegate {
      /**
       This function hides or displays the Convert button and the activity indicator.
       
-      - parameter shown: True to show or False to hide.
+      - parameter value: True to show or False to hide.
       */
-     func toogleActivityIndicator(shown: Bool) {
-        buttonConvert.isHidden = shown
-        activityIndicator.isHidden = !shown
+     func showActivityIndicator(_ value: Bool) {
+        buttonConvert.isHidden = value
+        activityIndicator.isHidden = !value
     }
 }

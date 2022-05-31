@@ -57,9 +57,9 @@ final class CurrencyConverterService {
     private func obtainExchangeRateForFirstTime() {
         let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: session)
         let request = createRequest()
-        toogleActivityIndicator(shown: true)
+        showActivityIndicator(true)
         networkManager.getInformation(request: request) { exchangeRate, error in
-            self.toogleActivityIndicator(shown: false)
+            self.showActivityIndicator(false)
             guard error == nil,
                   let exchangeRate = exchangeRate else {
                 self.warningMessage(self.message)
@@ -81,14 +81,12 @@ final class CurrencyConverterService {
      - returns: Returns the result of the conversion as a string
      */
     private func calculateConversion(euros: String?, exchangeData: ExchangeRate?) -> String {
-        var conversionResult = -0.0
-//        guard exchangeRate = exchangeData else { return }
         guard let euros = euros,
               let eurosHowDouble = Double(euros),
               let value = exchangeData?.rates?[currency.rawValue] else {
-            return String(conversionResult)
+            return "oops! please try again"
         }
-        conversionResult = eurosHowDouble * value
+        let  conversionResult = eurosHowDouble * value
         return String(conversionResult)
     }
 

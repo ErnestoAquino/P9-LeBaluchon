@@ -10,5 +10,5 @@ import Foundation
 protocol TranslatorDelegate: AnyObject {
     func warningMessage(_ message: String)
     func refreshEnglishTextFieldWith(_ translatedTex: String)
-    func toogleActivityIndicator(shown: Bool)
+    func showActivityIndicator(_ value: Bool)
 }

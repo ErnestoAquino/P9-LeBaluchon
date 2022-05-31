@@ -13,7 +13,7 @@ class CurrencyConverterMockDelegate: CurrencyConverterDelegate {
 
     var warningMessageIsCalled = false
     var refreshTextViewWithValueIsCalled = false
-    var toogledActivityIndicatorIsCalled = false
+    var showActivityIndicator = false
 
     func warningMessage(_ message: String) {
         warningMessageIsCalled = true
@@ -23,7 +23,7 @@ class CurrencyConverterMockDelegate: CurrencyConverterDelegate {
         refreshTextViewWithValueIsCalled = true
     }
 
-    func toogleActivityIndicator(shown: Bool) {
-        toogledActivityIndicatorIsCalled = true
+    func showActivityIndicator(_ value: Bool) {
+        showActivityIndicator = true
     }
 }

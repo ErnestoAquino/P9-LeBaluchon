@@ -10,5 +10,5 @@ import Foundation
 protocol CurrencyConverterDelegate: AnyObject {
     func warningMessage(_ message: String)
     func refreshTextViewWithValue(_ value: String)
-    func toogleActivityIndicator(shown: Bool)
+    func showActivityIndicator(_ value: Bool)
 }

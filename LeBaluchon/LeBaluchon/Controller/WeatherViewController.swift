@@ -66,10 +66,10 @@ extension WeatherViewController: WeatherDelegate {
      /**
       This function hides or displays the Update button and the activity indicator.
       
-      - parameter shown: True to show or False to hide.
+      - parameter value: True to show or False to hide.
       */
-     func toogleActivityIndicator(shown: Bool) {
-        updateButton.isHidden = shown
-        activityindicator.isHidden = !shown
+     func showActivityIndicator(_ value: Bool) {
+        updateButton.isHidden = value
+        activityindicator.isHidden = !value
     }
 }

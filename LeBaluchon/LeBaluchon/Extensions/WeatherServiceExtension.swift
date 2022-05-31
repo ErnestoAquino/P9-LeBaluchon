@@ -38,9 +38,9 @@ extension WeatherService: WeatherDelegate {
     /**
      This function hides or displays the Update button and the activity indicator.
      
-     - parameter shown: True to show or False to hide.
+     - parameter value: True to show or False to hide.
      */
-    func toogleActivityIndicator(shown: Bool) {
-        viewDelegate?.toogleActivityIndicator(shown: shown)
+    func showActivityIndicator(_ value: Bool) {
+        viewDelegate?.showActivityIndicator(value)
     }
 }

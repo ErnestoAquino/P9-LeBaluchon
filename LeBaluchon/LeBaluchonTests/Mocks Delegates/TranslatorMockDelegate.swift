@@ -12,7 +12,7 @@ import Foundation
 class TranslatorMockDelegate: TranslatorDelegate {
     var warningMessageIsCalled = false
     var refreshEnglishTextFieldWithIsCalled = false
-    var toogleActivityIndicatorIsCalled = false
+    var showActivityIndicator = false
 
     func warningMessage(_ message: String) {
         warningMessageIsCalled = true
@@ -22,7 +22,7 @@ class TranslatorMockDelegate: TranslatorDelegate {
         refreshEnglishTextFieldWithIsCalled = true
     }
 
-    func toogleActivityIndicator(shown: Bool) {
-        toogleActivityIndicatorIsCalled = true
+    func showActivityIndicator(_ value: Bool) {
+        showActivityIndicator = true
     }
 }
