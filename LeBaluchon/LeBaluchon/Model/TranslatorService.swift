@@ -72,12 +72,13 @@ final class TranslateService {
      
      - returns: Returns a URL Request for the text to be translated.
      */
-    private func creteRequest(_ textForTranslation: String) -> URLRequest {
-        let url =  createURL()
-        let key = createKey()
+    private func creteRequest(_ textForTranslation: String) -> URLRequest? {
+        guard let url =  createURL() else {
+            return nil
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let body = "key=\(key)&q=\(textForTranslation)&source=fr&target=en&format=text"
+        let body = "key=\(apiKey ?? "")&q=\(textForTranslation)&source=fr&target=en&format=text"
         request.httpBody = body.data(using: .utf8)
 
         return request
@@ -88,22 +89,10 @@ final class TranslateService {
      
      - returns: Returns a non-optional URL.
      */
-    private func createURL() -> URL {
+    private func createURL() -> URL? {
         guard let urlTranslation = URL(string: urlBase) else {
-            return  URL(string: " ")!
+            return  nil
         }
         return urlTranslation
-    }
-
-    /**
-     This function recovers the key for API Google Transistor.
-     
-     - returns: Returns the key as a non-optional string.
-     */
-    private func createKey() -> String {
-        guard let key = apiKey else {
-            return " "
-        }
-        return key
     }
 }
