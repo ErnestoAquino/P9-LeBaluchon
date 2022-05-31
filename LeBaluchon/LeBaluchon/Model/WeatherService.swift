@@ -116,23 +116,10 @@ final class WeatherService {
      - returns: returns a non-optional url.
      */
     private func createURL(_ city: City) -> URL {
-        let key = getApiKey()
-        let url = "\(urlBase)?lat=\(city.latitude)&lon=\(city.longitude)&appid=\(key)&units=metric"
+        let url = "\(urlBase)?lat=\(city.latitude)&lon=\(city.longitude)&appid=\(weatherApiKey ?? "")&units=metric"
         guard let urlWithKey = URL(string: url) else {
             return URL(string: " ")!
         }
         return urlWithKey
-    }
-
-    /**
-     This function retrieves the key for the API Weather Service
-     
-     - returns: Returns the unwrapped key as String.
-     */
-    private func getApiKey() -> String {
-        guard let key = weatherApiKey  else {
-            return ""
-        }
-        return key
     }
 }
