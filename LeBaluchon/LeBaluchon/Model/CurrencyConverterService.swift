@@ -128,23 +128,10 @@ final class CurrencyConverterService {
      - returns: Returns an optional url.
      */
     private func createURL() -> URL? {
-        let key = getApiKey()
-        let urlWithKey = "\(urlBase)?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
+        let urlWithKey = "\(urlBase)?access_key=\(apiKey ?? "")&base=EUR&symbols=USD,MXN,JPY,GBP"
         guard let url = URL(string: urlWithKey) else {
             return nil
         }
         return url
-    }
-
-    /**
-     This function retrieves the key for the API Currency Service.
-     
-     - returns: Returns the unwrapped key as String.
-     */
-    private func getApiKey() -> String {
-        guard let apiKey = apiKey else {
-            return ""
-        }
-        return apiKey
     }
 }
