@@ -112,8 +112,10 @@ final class CurrencyConverterService {
      
      - returns: Returns an instance of URL Request with GET method.
      */
-    private func createRequest() -> URLRequest {
-        let url = createURL()
+    private func createRequest() -> URLRequest? {
+        guard let url = createURL() else {
+            return nil
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
 
@@ -123,13 +125,13 @@ final class CurrencyConverterService {
     /**
      This function constructs a url using the API key.
      
-     - returns: Returns a non-optional url.
+     - returns: Returns an optional url.
      */
-    private func createURL() -> URL {
+    private func createURL() -> URL? {
         let key = getApiKey()
         let urlWithKey = "\(urlBase)?access_key=\(key)&base=EUR&symbols=USD,MXN,JPY,GBP"
         guard let url = URL(string: urlWithKey) else {
-            return URL(string: "")!
+            return nil
         }
         return url
     }
