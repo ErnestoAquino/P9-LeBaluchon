@@ -15,8 +15,7 @@ final class CurrencyConverterService {
     private let message = "We have un little problem, please check your internet connection."
     private (set) var exchangeRateLocal: ExchangeRate?
     private (set) var checkResult = ""
-    private var euros: String?
-    private var eurosDeTest = 0.0
+    private var euros = 0.0
     public var currency: Currency = .USD
     private let session: URLSessionProtocol
 
@@ -46,7 +45,6 @@ final class CurrencyConverterService {
             obtainExchangeRateForFirstTime()
             return
         }
-//        let result = calculateConversion(euros: euros, exchangeData: exchangeRateLocal)
         let result = calculateCoversion()
         checkResult = result
         refreshTextViewWithValue(result)
@@ -74,28 +72,15 @@ final class CurrencyConverterService {
     }
 
     /**
-     This function does the conversion calculation. It recovers the value of euros and the value of the currency selected in the "currency" variable.
-     
-     - parameter euros:        Optional string with the euros to convert
-     - parameter exchangeData: Structure with the exchange rate.
+     This function makes the conversion using the variable "euros" and the value of the currency selected in "currency".
      
      - returns: Returns the result of the conversion as a string
      */
-//    private func calculateConversion(euros: String?, exchangeData: ExchangeRate?) -> String {
-//        guard let euros = euros,
-//              let eurosHowDouble = Double(euros),
-//              let value = exchangeData?.rates?[currency.rawValue] else {
-//            return "oops! please try again"
-//        }
-//        let  conversionResult = eurosHowDouble * value
-//        return String(conversionResult)
-//    }
-
     func calculateCoversion() -> String {
         guard let value = exchangeRateLocal?.rates?[currency.rawValue] else {
-            return "something is wrong, please try again"
+            return "please try again"
         }
-        let result = eurosDeTest * value
+        let result = euros * value
         return String(result)
     }
     /**
@@ -110,7 +95,7 @@ final class CurrencyConverterService {
               let valueHowDouble = Double(value),
               valueHowDouble > 0,
               valueHowDouble < 1000000 else {return false}
-        eurosDeTest = valueHowDouble
+        euros = valueHowDouble
         return true
     }
 
