@@ -10,6 +10,7 @@ import Foundation
 
 // Mock delegate created to test the TranslationService class.
 class TranslatorMockDelegate: TranslatorDelegate {
+
     var warningMessageIsCalled = false
     var refreshEnglishTextFieldWithIsCalled = false
     var showActivityIndicator = false
