@@ -42,18 +42,32 @@ final class CurrencyConverterService {
             return
         }
         guard exchangeRateLocal != nil else {
-            obtainExchangeRateForFirstTime()
+            obtainExchangeRate()
             return
         }
-        let result = calculateCoversion()
-        checkResult = result
-        refreshTextViewWithValue(result)
+        if exchageRateHasExpired() {
+            obtainExchangeRate()
+        } else {
+            let result = calculateCoversion()
+            checkResult = result
+            refreshTextViewWithValue(result)
+        }
+//
+//
+//
+//        guard !exchageRateHasExpired() else {
+//            obtainExchangeRate()
+//            return
+//        }
+//        let result = calculateCoversion()
+//        checkResult = result
+//        refreshTextViewWithValue(result)
     }
 
     /**
      This function retrieves the current exchange rate information from the FIXER API and stores it in the variable "exchangeRateLocal ".
      */
-    private func obtainExchangeRateForFirstTime() {
+    private func obtainExchangeRate() {
         let networkManager = NetworkManager<ExchangeRate>(networkManagerSession: session)
         let request = createRequest()
         showActivityIndicator(true)
@@ -97,6 +111,18 @@ final class CurrencyConverterService {
               valueHowDouble < 1000000 else {return false}
         euros = valueHowDouble
         return true
+    }
+
+    private func exchageRateHasExpired() -> Bool {
+        let aDayInSeconds = -86400.0
+        guard let dateOfExchange = exchangeRateLocal?.timestamp else {
+            return false
+        }
+        let interval = dateOfExchange.timeIntervalSinceNow
+        if interval < aDayInSeconds {
+            return true
+        }
+        return false
     }
 
     /**

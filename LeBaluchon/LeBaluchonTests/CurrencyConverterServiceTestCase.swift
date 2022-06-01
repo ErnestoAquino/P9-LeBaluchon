@@ -105,13 +105,16 @@ class CurrencyConverterServiceTestCase: XCTestCase {
         let currencyService = CurrencyConverterService(session)
         currencyService.viewDelegate = mockDelegate
         // Given
-        currencyService.currency = .MXN
+        currencyService.currency = .USD
         let expectedMxn = "62.749764"
         // When
         currencyService.doConversion(eurosToBeConverted: "10")
+        
+        currencyService.currency = .MXN
+        currencyService.doConversion(eurosToBeConverted: "3")
         exp.fulfill()
         await waitForExpectations(timeout: 1)
-        currencyService.doConversion(eurosToBeConverted: "3")
+//        currencyService.doConversion(eurosToBeConverted: "3")
         // Then
         XCTAssertEqual(expectedMxn, currencyService.checkResult)
     }
