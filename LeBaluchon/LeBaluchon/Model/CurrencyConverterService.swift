@@ -16,6 +16,7 @@ final class CurrencyConverterService {
     private (set) var exchangeRateLocal: ExchangeRate?
     private (set) var checkResult = ""
     private var euros: String?
+    private var eurosDeTest = 0.0
     public var currency: Currency = .USD
     private let session: URLSessionProtocol
 
@@ -41,12 +42,12 @@ final class CurrencyConverterService {
             warningMessage("Please enter a valid amount (greater than 0 and less than 1 000 000).")
             return
         }
-        euros = eurosToBeConverted
         guard exchangeRateLocal != nil else {
             obtainExchangeRateForFirstTime()
             return
         }
-        let result = calculateConversion(euros: eurosToBeConverted, exchangeData: exchangeRateLocal)
+//        let result = calculateConversion(euros: euros, exchangeData: exchangeRateLocal)
+        let result = calculateCoversion()
         checkResult = result
         refreshTextViewWithValue(result)
     }
@@ -66,7 +67,7 @@ final class CurrencyConverterService {
                 return
             }
             self.exchangeRateLocal = exchangeRate
-            let result = self.calculateConversion(euros: self.euros, exchangeData: exchangeRate)
+            let result = self.calculateCoversion()
             self.checkResult = result
             self.refreshTextViewWithValue(result)
         }
@@ -80,16 +81,23 @@ final class CurrencyConverterService {
      
      - returns: Returns the result of the conversion as a string
      */
-    private func calculateConversion(euros: String?, exchangeData: ExchangeRate?) -> String {
-        guard let euros = euros,
-              let eurosHowDouble = Double(euros),
-              let value = exchangeData?.rates?[currency.rawValue] else {
-            return "oops! please try again"
-        }
-        let  conversionResult = eurosHowDouble * value
-        return String(conversionResult)
-    }
+//    private func calculateConversion(euros: String?, exchangeData: ExchangeRate?) -> String {
+//        guard let euros = euros,
+//              let eurosHowDouble = Double(euros),
+//              let value = exchangeData?.rates?[currency.rawValue] else {
+//            return "oops! please try again"
+//        }
+//        let  conversionResult = eurosHowDouble * value
+//        return String(conversionResult)
+//    }
 
+    func calculateCoversion() -> String {
+        guard let value = exchangeRateLocal?.rates?[currency.rawValue] else {
+            return "something is wrong, please try again"
+        }
+        let result = eurosDeTest * value
+        return String(result)
+    }
     /**
      This function receives an optional string as a parameter and checks if it can be converted to a double type.
      
@@ -102,6 +110,7 @@ final class CurrencyConverterService {
               let valueHowDouble = Double(value),
               valueHowDouble > 0,
               valueHowDouble < 1000000 else {return false}
+        eurosDeTest = valueHowDouble
         return true
     }
 
