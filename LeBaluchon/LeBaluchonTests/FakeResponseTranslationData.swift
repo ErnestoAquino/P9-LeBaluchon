@@ -62,4 +62,6 @@ class FakeResponse {
 
     class FakeResponseError: Error {}
     static var anError = FakeResponseError()
+
+// MARK: EDITABLE
 }

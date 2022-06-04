@@ -15,6 +15,7 @@ final class CurrencyConverterService {
     private let message = "We have un little problem, please check your internet connection."
     private (set) var exchangeRateLocal: ExchangeRate?
     private (set) var checkResult = ""
+    private (set) var exchangeInformationIsExpired = false
     private var euros = 0.0
     public var currency: Currency = .USD
     private let session: URLSessionProtocol
@@ -45,23 +46,13 @@ final class CurrencyConverterService {
             obtainExchangeRate()
             return
         }
-        if exchageRateHasExpired() {
+        guard !exchageRateHasExpired() else {
             obtainExchangeRate()
-        } else {
-            let result = calculateCoversion()
-            checkResult = result
-            refreshTextViewWithValue(result)
+            return
         }
-//
-//
-//
-//        guard !exchageRateHasExpired() else {
-//            obtainExchangeRate()
-//            return
-//        }
-//        let result = calculateCoversion()
-//        checkResult = result
-//        refreshTextViewWithValue(result)
+        let result = calculateCoversion()
+        checkResult = result
+        refreshTextViewWithValue(result)
     }
 
     /**
@@ -123,6 +114,12 @@ final class CurrencyConverterService {
             return true
         }
         return false
+    }
+    
+    private func test() -> Bool {
+        let aDayinSeconds = -86400.0
+        guard let dateOfExchangeInformation = exchangeRateLocal?.timestamp,
+              let interval = dateOfExchangeInformation.timeIntervalSinceNow
     }
 
     /**
