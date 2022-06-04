@@ -104,22 +104,20 @@ final class CurrencyConverterService {
         return true
     }
 
+    /**
+     This function checks if the currency exchange rate information is expired. The information is expired if more than 24 hours have passed since it was obtained.
+     
+     - returns: A Bolean. True if the information has expired or false otherwise.
+     */
     private func exchageRateHasExpired() -> Bool {
-        let aDayInSeconds = -86400.0
-        guard let dateOfExchange = exchangeRateLocal?.timestamp else {
+        let aDayinSeconds = -86400.0
+        guard let dateOfExchangeInformation = exchangeRateLocal?.timestamp?.timeIntervalSinceNow,
+              dateOfExchangeInformation < aDayinSeconds  else {
+            exchangeInformationIsExpired = false
             return false
         }
-        let interval = dateOfExchange.timeIntervalSinceNow
-        if interval < aDayInSeconds {
-            return true
-        }
-        return false
-    }
-    
-    private func test() -> Bool {
-        let aDayinSeconds = -86400.0
-        guard let dateOfExchangeInformation = exchangeRateLocal?.timestamp,
-              let interval = dateOfExchangeInformation.timeIntervalSinceNow
+        exchangeInformationIsExpired = true
+        return true
     }
 
     /**
