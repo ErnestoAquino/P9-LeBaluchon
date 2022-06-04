@@ -110,9 +110,9 @@ final class CurrencyConverterService {
      - returns: A Bolean. True if the information has expired or false otherwise.
      */
     private func exchageRateHasExpired() -> Bool {
-        let aDayinSeconds = -86400.0
+        let aDayInSeconds = -86400.0
         guard let dateOfExchangeInformation = exchangeRateLocal?.timestamp?.timeIntervalSinceNow,
-              dateOfExchangeInformation < aDayinSeconds  else {
+              dateOfExchangeInformation < aDayInSeconds  else {
             exchangeInformationIsExpired = false
             return false
         }
