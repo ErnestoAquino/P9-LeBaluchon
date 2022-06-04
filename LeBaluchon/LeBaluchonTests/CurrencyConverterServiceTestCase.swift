@@ -136,7 +136,7 @@ class CurrencyConverterServiceTestCase: XCTestCase {
         """
 {
     "success": true,
-    "timestamp": 1654357838,
+    "timestamp": 1654621371,
     "base": "EUR",
     "date": "2022-05-16",
     "rates": {
