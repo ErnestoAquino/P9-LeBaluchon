@@ -65,7 +65,6 @@ class CurrencyConverterServiceTestCase: XCTestCase {
         // Then
         XCTAssert(mockDelegate.warningMessageIsCalled)
     }
-
     func testGivenWrongDataInResponse_WhenDoConversion_ThenWarningMessageShouldBeCalled() async {
         guard let mockDelegate = mockDelegate else { return }
         let exp = expectation(description: "Wait to the function to terminate")
