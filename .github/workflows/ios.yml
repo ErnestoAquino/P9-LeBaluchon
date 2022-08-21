@@ -16,5 +16,5 @@ jobs:
         run: sudo xcode-select -switch /Applications/Xcode_13.2.1.app
       - name: Build and tests
         working-directory: LeBaluchon
-        run:  xcodebuild clean test -project LeBaluchon.xcodeproj -scheme "LeBaluchon" -destination "platform=iOS Simulator, id=B0C88ACE-FAA3-4CEE-8BCE-53B259C84773, OS=15.2, name=iPhone 8 Plus"
+        run:  xcodebuild clean test -project LeBaluchon.xcodeproj -scheme "LeBaluchon" -destination "name=iPhone 8 Plus,OS=15.2"
 
