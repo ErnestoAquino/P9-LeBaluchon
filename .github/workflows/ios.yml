@@ -15,5 +15,5 @@ jobs:
       - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_13.2.1.app
       - name: Build and tests
-        run:  xcodebuild clean test -project LeBaluchon.xcodeproj -scheme "LeBaluchon" -destination "name=iPhone 8 Plus,OS=15.0"
+        run:  xcodebuild clean test -project LeBaluchon.xcodeproj -scheme "LeBaluchon/" -destination "name=iPhone 8 Plus,OS=15.0"
 
