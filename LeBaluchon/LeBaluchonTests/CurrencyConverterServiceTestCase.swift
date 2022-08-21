@@ -157,6 +157,6 @@ class CurrencyConverterServiceTestCase: XCTestCase {
         await waitForExpectations(timeout: 1)
         currencyService.doConversion(eurosToBeConverted: "15")
         // Then
-        XCTAssertFalse(currencyService.exchangeInformationIsExpired)
+        XCTAssertTrue(currencyService.exchangeInformationIsExpired)
     }
 }
