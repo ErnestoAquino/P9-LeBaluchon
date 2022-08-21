@@ -13,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Select Xcode
-        run: sudo xcode-select -switch /Applications/Xcode_13.4.1.app
+        run: sudo xcode-select -switch /Applications/Xcode_13.2.1.app
       - name: Build and tests
-        run: swift test -v
+        run:  xcodebuild clean test -project LeBaluchon.xcodeproj -scheme "LeBaluchon" -destination "name=iPhone 8 Plus,OS=15.0"
+
