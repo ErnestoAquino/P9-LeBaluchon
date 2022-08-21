@@ -48,7 +48,7 @@ class NetworkManagerTestCase: XCTestCase {
             XCTAssertNotNil(error)
             self.expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testGivenEmptyRequest_WhenLaunchGetInformation_ThenCompletionHandlerShouldBeNilAndNil() {
@@ -76,7 +76,7 @@ class NetworkManagerTestCase: XCTestCase {
             XCTAssertNil(error)
             self.expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testGivenWrongStatusCode_WhenGetInformation_ThenCompletionHandlerShouldBeNil() {
@@ -91,7 +91,7 @@ class NetworkManagerTestCase: XCTestCase {
             XCTAssertNil(error)
             self.expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testGivenIncorretDataReceived_WhenGetInformation_ThenCompletionHandlerShouldBeNilAsdNil() {
@@ -106,7 +106,7 @@ class NetworkManagerTestCase: XCTestCase {
             XCTAssertNil(error)
             self.expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testGivenCorrectResponseTranslation_WhenGetInformation_ThenShouldHaveCorrectTextTranslated() {
@@ -124,7 +124,7 @@ class NetworkManagerTestCase: XCTestCase {
             XCTAssertEqual(textTranslated, translation!.data!.translations![0].translatedText!)
             self.expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testGivenCorrectResponseWeather_WhenGetInformation_ThenShouldHaveCorrectInformation() {
@@ -142,7 +142,7 @@ class NetworkManagerTestCase: XCTestCase {
             XCTAssertEqual(description, weather!.weather![0].description!)
             self.expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testGivenCorrectResponseExchangeRate_WhenGetInformation_ThenShouldHaveCorrectInformation() {
@@ -167,6 +167,6 @@ class NetworkManagerTestCase: XCTestCase {
 
             self.expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 }
