@@ -1,4 +1,4 @@
-[![forthebadge](https://forthebadge.com/images/badges/made-with-swift.svg)](https://forthebadge.com)
+
 # P9 - LeBaluchon
 
 ##### Is part of project number 9 of the training: OpenClassroom iOS developer
